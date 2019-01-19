@@ -6,10 +6,14 @@ public class PlayerControlScript : MonoBehaviour {
 
     [SerializeField]
     private float playerSpeed;
+    [SerializeField]
+    private Transform cameraTransform;
     float playerX;
     float playerZ;
     Transform thisTransform;
     Rigidbody thisRigidbody;
+    Vector3 camForward;
+    Vector3 camRight;
 
     
 	// Use this for initialization
@@ -35,6 +39,17 @@ public class PlayerControlScript : MonoBehaviour {
     
     void UpdatePosition()
     {
-        thisRigidbody.velocity = new Vector3(playerX * playerSpeed, 0, playerZ* playerSpeed);
+        camForward = cameraTransform.forward;
+        camRight = cameraTransform.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        //thisRigidbody.velocity = new Vector3(playerX * playerSpeed, 0, playerZ* playerSpeed);
+        thisRigidbody.velocity = camForward*playerZ* playerSpeed+ camRight*playerX* playerSpeed;
+
     }
 }
