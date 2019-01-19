@@ -4,22 +4,40 @@ using UnityEngine;
 
 public class PlayerControlScript : MonoBehaviour {
 
-    [SerializeField]
-    private float playerSpeed;
-    [SerializeField]
-    private Transform cameraTransform;
+    [SerializeField] private float playerSpeed;
+    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private BoxCollider thisCollider;
+    [SerializeField] private float standingHeight;
+    [SerializeField] private float crouchingHeight;
+    [SerializeField] private LayerMask ignorePlayer;
     float playerX;
     float playerZ;
     Transform thisTransform;
     Rigidbody thisRigidbody;
     Vector3 camForward;
     Vector3 camRight;
-
     
-	// Use this for initialization
-	void Start () {
+
+    Transform colliderTransform;
+    bool crouching = false;
+    bool crouchInput = false;
+    RaycastHit ceilingTest;
+
+
+    bool jumping = false;
+    bool jumpInput = false;
+    bool justJumped = false;
+
+    bool pouncing = false;
+    private float currenHitDistance;
+
+
+    // Use this for initialization
+    void Start () {
         thisTransform = gameObject.transform;
         thisRigidbody = gameObject.GetComponent<Rigidbody>();
+        thisCollider = gameObject.GetComponent<BoxCollider>();
+        colliderTransform = thisCollider.transform;
 	}
 	
 	// Update is called once per frame
@@ -27,6 +45,8 @@ public class PlayerControlScript : MonoBehaviour {
 
         UpdateInput();
         UpdatePosition();
+        Crouch();
+        
 
 	}
 
@@ -35,8 +55,82 @@ public class PlayerControlScript : MonoBehaviour {
         playerX = Input.GetAxis("Horizontal");
         playerZ = Input.GetAxis("Vertical");
 
+        if (Input.GetAxisRaw("Crouch") == 1)
+        {
+            crouchInput = true;
+        }
+        else
+        {
+            crouchInput = false;
+        }
+
+        if (Input.GetAxisRaw("Jump") == 1)
+        {
+            jumpInput = true;
+        }
+        else
+        {
+            jumpInput = false;
+        }
+
     }
-    
+
+    void Crouch()
+    {
+        if(crouchInput && !jumping) 
+        {
+            crouching = true;
+            //set collidor to be shorter and change color(for now)
+            thisCollider.size = new Vector3(colliderTransform.localScale.x, crouchingHeight, colliderTransform.localScale.z);
+            thisCollider.center = new Vector3( 0, -0.5f, 0 );
+            
+        }
+        else if(!crouchInput)
+        {
+            //check if there is anything above and dont stand up if there is
+            //otherwise standup if just crouched
+
+            if (crouching /*&& is something above me */)
+            {
+                if (Physics.SphereCast(transform.position, 0.5f, transform.up, out ceilingTest, 2f, ignorePlayer))
+                {
+                    Debug.Log("Hit");
+                    currenHitDistance = ceilingTest.distance;
+                    return;
+
+                }
+                thisCollider.size = new Vector3(colliderTransform.localScale.x, standingHeight, colliderTransform.localScale.z);
+                thisCollider.center = new Vector3(0, 0, 0);
+                    
+            }
+
+            crouching = false;
+                        
+        }
+
+
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position + transform.up * currenHitDistance, 0.5f);
+    }
+
+    void Jump()
+    {
+
+    }
+
+    void Pounce()
+    {
+        if (crouchInput && jumpInput)
+        {
+            if (true)
+            { }
+        }
+    }
+
     void UpdatePosition()
     {
         camForward = cameraTransform.forward;
