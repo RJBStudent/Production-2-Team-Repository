@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControlScript : MonoBehaviour {
+public class PlayerControlScript : MonoBehaviour
+{
 
     [SerializeField] private float playerSpeed;
     [SerializeField] private Transform cameraTransform;
@@ -10,13 +11,15 @@ public class PlayerControlScript : MonoBehaviour {
     [SerializeField] private float standingHeight;
     [SerializeField] private float crouchingHeight;
     [SerializeField] private LayerMask ignorePlayer;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform groundCheck;
     float playerX;
     float playerZ;
     Transform thisTransform;
     Rigidbody thisRigidbody;
     Vector3 camForward;
     Vector3 camRight;
-    
+
 
     Transform colliderTransform;
     bool crouching = false;
@@ -33,22 +36,24 @@ public class PlayerControlScript : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         thisTransform = gameObject.transform;
         thisRigidbody = gameObject.GetComponent<Rigidbody>();
         thisCollider = gameObject.GetComponent<BoxCollider>();
         colliderTransform = thisCollider.transform;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         UpdateInput();
         UpdatePosition();
         Crouch();
-        
+        Jump();
 
-	}
+    }
 
     void UpdateInput()
     {
@@ -77,15 +82,15 @@ public class PlayerControlScript : MonoBehaviour {
 
     void Crouch()
     {
-        if(crouchInput && !jumping) 
+        if (crouchInput && !jumping)
         {
             crouching = true;
             //set collidor to be shorter and change color(for now)
             thisCollider.size = new Vector3(colliderTransform.localScale.x, crouchingHeight, colliderTransform.localScale.z);
-            thisCollider.center = new Vector3( 0, -0.5f, 0 );
-            
+            thisCollider.center = new Vector3(0, -0.5f, 0);
+
         }
-        else if(!crouchInput)
+        else if (!crouchInput)
         {
             //check if there is anything above and dont stand up if there is
             //otherwise standup if just crouched
@@ -94,18 +99,17 @@ public class PlayerControlScript : MonoBehaviour {
             {
                 if (Physics.SphereCast(transform.position, 0.5f, transform.up, out ceilingTest, 2f, ignorePlayer))
                 {
-                    Debug.Log("Hit");
                     currenHitDistance = ceilingTest.distance;
                     return;
 
                 }
                 thisCollider.size = new Vector3(colliderTransform.localScale.x, standingHeight, colliderTransform.localScale.z);
                 thisCollider.center = new Vector3(0, 0, 0);
-                    
+
             }
 
             crouching = false;
-                        
+
         }
 
 
@@ -114,12 +118,26 @@ public class PlayerControlScript : MonoBehaviour {
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position + transform.up * currenHitDistance, 0.5f);
+        Gizmos.DrawSphere(groundCheck.position, 0.2f);
+
     }
 
     void Jump()
     {
 
+        if (jumpInput && !jumping)
+        {
+            thisRigidbody.velocity = thisRigidbody.velocity + (transform.up * 5);
+
+            jumping = true;
+        }
+        else if (jumping)
+        {
+            if (Physics.SphereCast(groundCheck.position, .2f, transform.forward, out ceilingTest,0f, groundLayer))
+            {
+                jumping = false;
+            }
+        }
     }
 
     void Pounce()
@@ -143,7 +161,7 @@ public class PlayerControlScript : MonoBehaviour {
         camRight.Normalize();
 
         //thisRigidbody.velocity = new Vector3(playerX * playerSpeed, 0, playerZ* playerSpeed);
-        thisRigidbody.velocity = camForward*playerZ* playerSpeed+ camRight*playerX* playerSpeed;
+        thisRigidbody.velocity = camForward * playerZ * playerSpeed + camRight * playerX * playerSpeed;
 
     }
 }
