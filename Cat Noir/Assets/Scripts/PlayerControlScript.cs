@@ -13,6 +13,9 @@ public class PlayerControlScript : MonoBehaviour
     [SerializeField] private LayerMask ignorePlayer;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private float gravity;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float shortHopForce;
     float playerX;
     float playerZ;
     Transform thisTransform;
@@ -28,12 +31,14 @@ public class PlayerControlScript : MonoBehaviour
 
 
     bool jumping = false;
+    bool falling = false;
     bool jumpInput = false;
     bool justJumped = false;
+    float currentJumpTime = 0;
 
     bool pouncing = false;
     private float currenHitDistance;
-
+    Vector3 down;
 
     // Use this for initialization
     void Start()
@@ -42,16 +47,18 @@ public class PlayerControlScript : MonoBehaviour
         thisRigidbody = gameObject.GetComponent<Rigidbody>();
         thisCollider = gameObject.GetComponent<BoxCollider>();
         colliderTransform = thisCollider.transform;
+        down = -1 * transform.up;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         UpdateInput();
+
+        Jump();
         UpdatePosition();
         Crouch();
-        Jump();
 
     }
 
@@ -69,14 +76,7 @@ public class PlayerControlScript : MonoBehaviour
             crouchInput = false;
         }
 
-        if (Input.GetAxisRaw("Jump") == 1)
-        {
-            jumpInput = true;
-        }
-        else
-        {
-            jumpInput = false;
-        }
+        jumpInput = Input.GetButtonDown("Jump");       
 
     }
 
@@ -118,26 +118,106 @@ public class PlayerControlScript : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(groundCheck.position, 0.2f);
+        Gizmos.DrawSphere(groundCheck.position + down * 0f, 0.201f);
 
     }
 
     void Jump()
     {
-
-        if (jumpInput && !jumping)
+        Collider[] hitCollide = Physics.OverlapSphere(groundCheck.position, 0.201f, groundLayer);
+        if (jumpInput && hitCollide.Length > 0)
         {
-            thisRigidbody.velocity = thisRigidbody.velocity + (transform.up * 5);
+            thisRigidbody.AddForce(new Vector3(0, jumpForce, 0));
+        }
+        
+        //if (!jumping)
+        //{
 
-            jumping = true;
-        }
-        else if (jumping)
-        {
-            if (Physics.SphereCast(groundCheck.position, .2f, transform.forward, out ceilingTest,0f, groundLayer))
-            {
-                jumping = false;
-            }
-        }
+        //    Collider[] hitCollide = Physics.OverlapSphere(groundCheck.position, 0.201f, groundLayer);
+
+        //    if (hitCollide.Length > 0)
+        //    {
+        //        thisRigidbody.velocity = new Vector3(thisRigidbody.velocity.x, 0, thisRigidbody.velocity.z);
+                
+        //    }
+        //}
+        //if (jumpInput)
+        //{
+        //    thisRigidbody.velocity = thisRigidbody.velocity + (Vector3.up *  jumpForce);
+        //    //Debug.Log(thisRigidbody.velocity.y);
+        //    jumping = true;
+
+        //}
+
+        //if (thisRigidbody.velocity.y < 0)
+        //{
+        //   // Debug.Log("Fall");
+        //    thisRigidbody.velocity += Vector3.up * Physics.gravity.y * (gravity - 1) * Time.deltaTime;
+        //    jumping = false;
+           
+        //}
+        //else if(thisRigidbody.velocity.y > 0 && !jumpInput)
+        //{
+        //   // Debug.Log("ShortJump");
+        //    thisRigidbody.velocity += Vector3.up * Physics.gravity.y * (shortHopForce - 1) * Time.deltaTime;
+        //}
+
+        //if(jumpInput && !jumping)
+        //{
+        //    thisRigidbody.velocity = thisRigidbody.velocity + (transform.up * jumpForce);
+        //    jumping = true;
+        //}
+        //if(jumping)
+        //{
+        //    thisRigidbody.velocity = thisRigidbody.velocity + (Physics.gravity * gravity * Time.deltaTime);
+        //   v
+
+        //    if (hitCollide.Length > 0)
+        //    {
+        //        Debug.Log("Ground");
+        //        jumping = false;
+        //    }
+        //}
+
+
+        //if (jumpInput && !jumping)
+        //{
+
+        //    currentJumpTime = 0;
+        //    currentJumpTime += Time.deltaTime;
+        //    thisRigidbody.velocity = thisRigidbody.velocity + (transform.up * jumpTime -Mathf.Pow(jumpMultiplier*currentJumpTime, shortHopForce));
+
+        //    jumping = true;            
+        //}
+        //else if (jumping)
+        //{
+        //    if (currentJumpTime < jumpTime && !falling)
+        //    {
+        //        thisRigidbody.velocity = thisRigidbody.velocity + (transform.up * Mathf.Pow(jumpMultiplier*currentJumpTime, shortHopForce));
+        //        currentJumpTime += Time.deltaTime;
+        //    }
+        //    else if(currentJumpTime >= jumpTime)
+        //    {
+        //        currentJumpTime = 0;
+        //        falling = true;
+        //    }
+        //    else
+        //    {
+        //        currentJumpTime += Time.deltaTime; ;
+        //        thisRigidbody.velocity = thisRigidbody.velocity + (down * Mathf.Pow(jumpMultiplier * currentJumpTime, shortHopForce));
+        //        Debug.Log(thisRigidbody.velocity);
+
+        //        Collider[] hitCollide = Physics.OverlapSphere(groundCheck.position, 0.201f, groundLayer);
+
+        //        if (hitCollide.Length > 0)
+        //        {
+        //            Debug.Log("Ground");
+        //            jumping = false;
+        //            falling = false;
+        //        }
+        //    }
+            
+        //}
     }
 
     void Pounce()
@@ -159,9 +239,10 @@ public class PlayerControlScript : MonoBehaviour
 
         camForward.Normalize();
         camRight.Normalize();
+        Vector3 jumpVelocity = new Vector3(0, thisRigidbody.velocity.y, 0);
 
         //thisRigidbody.velocity = new Vector3(playerX * playerSpeed, 0, playerZ* playerSpeed);
-        thisRigidbody.velocity = camForward * playerZ * playerSpeed + camRight * playerX * playerSpeed;
-
+        thisRigidbody.velocity = camForward * playerZ * playerSpeed + camRight * playerX * playerSpeed + jumpVelocity;
+        Debug.Log(thisRigidbody.velocity);
     }
 }
