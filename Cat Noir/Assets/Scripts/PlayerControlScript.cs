@@ -51,7 +51,8 @@ public class PlayerControlScript : MonoBehaviour
     float currentIgnore = 0;
     RaycastHit surfaceHit;
     Transform pounceTargetTransform;
-    
+
+    Animator playerAnimator;
 
     // Use this for initialization
     void Start()
@@ -62,6 +63,7 @@ public class PlayerControlScript : MonoBehaviour
         colliderTransform = thisCollider.transform;
         pounceTarget.layer = LayerMask.NameToLayer("DontRender");
         pounceTargetTransform = pounceTarget.transform;
+        playerAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -100,10 +102,11 @@ public class PlayerControlScript : MonoBehaviour
         if (crouchInput && !jumping)
         {
             crouching = true;
+            playerAnimator.SetTrigger("Crouching");
             //set collidor to be shorter and change color(for now)
             thisCollider.height = crouchingHeight;
             thisCollider.center = new Vector3(0, -0.5f, 0);
-
+            playerAnimator.ResetTrigger("Idle");
         }
         else if (!crouchInput)
         {
@@ -119,10 +122,11 @@ public class PlayerControlScript : MonoBehaviour
                 }
                 thisCollider.height =standingHeight;
                 thisCollider.center = new Vector3(0, 0, 0);
-
+                playerAnimator.SetTrigger("Idle");
             }
 
             crouching = false;
+            playerAnimator.ResetTrigger("Crouching");
 
         }
 
@@ -160,14 +164,24 @@ public class PlayerControlScript : MonoBehaviour
         }
         else if (pouncing && hitCollide.Length > 0 && inAirPounce)
         {
-            if(currentIgnore > ignoreGroundFrames)
-            pouncing = false;
-            Debug.Log("Pouncing");
+            if (currentIgnore > ignoreGroundFrames)
+            {
+                pouncing = false;
+                playerAnimator.SetTrigger("Idle");
+                playerAnimator.ResetTrigger("Pouncing");
+            }
         }
 
         if (crouchInput && jumpInput)
         {
             pounceReady = true;
+            playerAnimator.SetTrigger("PounceReady");
+            playerAnimator.ResetTrigger("Crouching");
+        }
+        else
+        {
+
+            playerAnimator.ResetTrigger("PounceReady");
         }
         if(pounceReady)
         {
@@ -184,6 +198,7 @@ public class PlayerControlScript : MonoBehaviour
             else
             {
                 targetExists = false;
+                pounceReady = false;
                 pounceTarget.layer = LayerMask.NameToLayer("DontRender");
             }
         }
@@ -212,10 +227,12 @@ public class PlayerControlScript : MonoBehaviour
                 * (pounceTargetTransform.position.x > transform.position.x ? 1 : -1);
             Vector3 finalVelocity = Quaternion.AngleAxis(angleBetweenObjects, transform.up) * vel;
 
+            thisRigidbody.velocity = Vector3.zero;
             thisRigidbody.AddForce(finalVelocity*thisRigidbody.mass * pounceForce, ForceMode.Impulse);
             pounceTarget.layer = LayerMask.NameToLayer("DontRender");
             pouncing = true;
             currentIgnore = 0;
+            playerAnimator.SetTrigger("Pouncing");
         }
     }
 
