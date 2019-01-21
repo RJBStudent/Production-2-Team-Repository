@@ -22,6 +22,7 @@ public class PlayerControlScript : MonoBehaviour
     [SerializeField] private float yTargetDistance;
     [SerializeField] private float initialAngle;
     [SerializeField] private float pounceForce;
+    [SerializeField] private float ignoreGroundFrames;
     float playerX;
     float playerZ;
     Transform thisTransform;
@@ -35,6 +36,7 @@ public class PlayerControlScript : MonoBehaviour
     bool crouchInput = false;
     RaycastHit ceilingTest;
 
+    Collider[] hitCollide;
 
     bool jumping = false;
     bool falling = false;
@@ -43,12 +45,13 @@ public class PlayerControlScript : MonoBehaviour
     float currentJumpTime = 0;
 
     bool pouncing = false;
+    bool inAirPounce = false;
     bool pounceReady = false;
+    bool targetExists = false;
+    float currentIgnore = 0;
     RaycastHit surfaceHit;
     Transform pounceTargetTransform;
-
-    private float currenHitDistance;
-    Vector3 down;
+    
 
     // Use this for initialization
     void Start()
@@ -57,7 +60,6 @@ public class PlayerControlScript : MonoBehaviour
         thisRigidbody = gameObject.GetComponent<Rigidbody>();
         thisCollider = gameObject.GetComponent<CapsuleCollider>();
         colliderTransform = thisCollider.transform;
-        down = -1 * transform.up;
         pounceTarget.layer = LayerMask.NameToLayer("DontRender");
         pounceTargetTransform = pounceTarget.transform;
     }
@@ -67,11 +69,11 @@ public class PlayerControlScript : MonoBehaviour
     {
 
         UpdateInput();
-
+        Pounce();
+        GroundCheck();
         Jump();
         UpdatePosition();
         Crouch();
-        Pounce();
 
     }
 
@@ -99,7 +101,7 @@ public class PlayerControlScript : MonoBehaviour
         {
             crouching = true;
             //set collidor to be shorter and change color(for now)
-            thisCollider.height =crouchingHeight;
+            thisCollider.height = crouchingHeight;
             thisCollider.center = new Vector3(0, -0.5f, 0);
 
         }
@@ -112,7 +114,6 @@ public class PlayerControlScript : MonoBehaviour
             {
                 if (Physics.SphereCast(transform.position, 0.5f, transform.up, out ceilingTest, 2f, ignorePlayer))
                 {
-                    currenHitDistance = ceilingTest.distance;
                     return;
 
                 }
@@ -132,15 +133,38 @@ public class PlayerControlScript : MonoBehaviour
     void Jump()
     {
         //***WORKING ITERATION *****
-        Collider[] hitCollide = Physics.OverlapSphere(groundCheck.position, 0.21f, groundLayer);
-        if (jumpInput && hitCollide.Length > 0 && ! crouching)
+        
+        if (jumpInput && hitCollide.Length > 0 && !crouching)
         {
             thisRigidbody.AddForce(new Vector3(0, jumpForce, 0));
+            
         }
+        
+    }
+
+    void GroundCheck()
+    {
+        hitCollide = null;
+        hitCollide = Physics.OverlapSphere(groundCheck.position, 0.21f, groundLayer);
     }
 
     void Pounce()
-    {
+    { 
+       if(pouncing)
+        {
+            currentIgnore++;
+        }
+        if(pouncing && hitCollide.Length == 0)
+        {
+            inAirPounce = true;
+        }
+        else if (pouncing && hitCollide.Length > 0 && inAirPounce)
+        {
+            if(currentIgnore > ignoreGroundFrames)
+            pouncing = false;
+            Debug.Log("Pouncing");
+        }
+
         if (crouchInput && jumpInput)
         {
             pounceReady = true;
@@ -148,20 +172,22 @@ public class PlayerControlScript : MonoBehaviour
         if(pounceReady)
         {
             Vector3 targetDirection = new Vector3(cameraTransform.forward.x, cameraTransform.forward.y + yTargetDistance, cameraTransform.forward.z);
-            if(Physics.Raycast(cameraTransform.position, targetDirection, out surfaceHit, pounceDistance, targetRaycast))
+            if(Physics.Raycast(transform.position, targetDirection, out surfaceHit, pounceDistance, targetRaycast))
             {
                 pounceTarget.layer = LayerMask.NameToLayer("Default");
                 pounceTargetTransform.position = surfaceHit.point;
                 //pounceTargetTransform.rotation = Quaternion.Euler(Mathf.Rad2Deg * surfaceHit.normal.x, Mathf.Rad2Deg * surfaceHit.normal.y, Mathf.Rad2Deg * surfaceHit.normal.z);
                 // pounceTargetTransform.rotation = Quaternion.LookRotation(surfaceHit.normal);
                 pounceTargetTransform.rotation = Quaternion.FromToRotation(transform.up, surfaceHit.normal);
+                targetExists = true;
             }
             else
             {
+                targetExists = false;
                 pounceTarget.layer = LayerMask.NameToLayer("DontRender");
             }
         }
-        if(pounceReady && (!jumpInput || !crouchInput))
+        if(pounceReady && (!jumpInput || !crouchInput) && targetExists)
         {
             pounceReady = false;
             pouncing = true;
@@ -177,6 +203,7 @@ public class PlayerControlScript : MonoBehaviour
             float initialVelocity = (1 / Mathf.Cos(angle)) 
                 * Mathf.Sqrt((0.5f * Physics.gravity.magnitude * Mathf.Pow(distance, 2)) 
                 / (distance * Mathf.Tan(angle) + yOffset));
+            Debug.Log(initialVelocity);
 
             Vector3 vel = new Vector3(0, initialVelocity * Mathf.Sin(angle), initialVelocity * Mathf.Cos(angle));
 
@@ -185,9 +212,10 @@ public class PlayerControlScript : MonoBehaviour
                 * (pounceTargetTransform.position.x > transform.position.x ? 1 : -1);
             Vector3 finalVelocity = Quaternion.AngleAxis(angleBetweenObjects, transform.up) * vel;
 
-            thisRigidbody.AddForce(finalVelocity*thisRigidbody.mass* pounceForce, ForceMode.Impulse);
+            thisRigidbody.AddForce(finalVelocity*thisRigidbody.mass * pounceForce, ForceMode.Impulse);
             pounceTarget.layer = LayerMask.NameToLayer("DontRender");
-            Debug.Log("POunce" + (finalVelocity));
+            pouncing = true;
+            currentIgnore = 0;
         }
     }
 
@@ -204,6 +232,9 @@ public class PlayerControlScript : MonoBehaviour
         Vector3 jumpVelocity = new Vector3(0, thisRigidbody.velocity.y, 0);
 
         //thisRigidbody.velocity = new Vector3(playerX * playerSpeed, 0, playerZ* playerSpeed);
-        thisRigidbody.velocity = camForward * playerZ * playerSpeed + camRight * playerX * playerSpeed + jumpVelocity;
+        if (!pouncing)
+        {
+            thisRigidbody.velocity = camForward * playerZ * playerSpeed + camRight * playerX * playerSpeed + jumpVelocity;
+        }
     }
 }
