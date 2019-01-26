@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour {
 
-    [SerializeField] Projectile proj;
-    [SerializeField] Transform playerTransform;
+    public Projectile proj;
 
+    Renderer render;
     Vector3 dir;
+    Transform playerTransform;
 
     // Use this for initialization
     void Start ()
     {
-	
-        
-        
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        render = GetComponent<Renderer>();
+        render.material = proj.materialType;
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
-        Vector3 dir = new Vector3(transform.position.x+Mathf.Cos(Mathf.Deg2Rad * proj.angle), transform.position.y, transform.position.z+Mathf.Sin(Mathf.Deg2Rad * proj.angle) );
-        transform.position = Vector3.Lerp(transform.position, dir * proj.speed, proj.acceleration * Time.deltaTime);
+        Vector3 dir = new Vector3( transform.position.x + Mathf.Cos(Mathf.Deg2Rad * proj.angle), transform.position.y, transform.position.z + Mathf.Sin(Mathf.Deg2Rad * proj.angle) );        
+        transform.position = Vector3.Lerp(transform.position, dir, proj.acceleration * Time.deltaTime);
         checkBounds();
 		
 	}

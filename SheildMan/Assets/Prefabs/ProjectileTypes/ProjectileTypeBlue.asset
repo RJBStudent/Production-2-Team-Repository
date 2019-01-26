@@ -9,8 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8010a2777814e724fa859ae250fa6c38, type: 3}
-  m_Name: Projectile
+  m_Name: ProjectileTypeBlue
   m_EditorClassIdentifier: 
-  speed: 1
-  acceleration: 1
+  acceleration: 10
   angle: -90
+  projectileType: 1
+  materialType: {fileID: 2100000, guid: 948fb5f7d58b9504a9c443d7c84c15ad, type: 2}
