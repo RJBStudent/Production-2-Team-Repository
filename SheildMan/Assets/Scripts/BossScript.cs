@@ -9,7 +9,7 @@ public class BossScript : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-		
+        bossType.bulletPattern[bossType.currentPattern].Setup();
 	}
 	
 	// Update is called once per frame

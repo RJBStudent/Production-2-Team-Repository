@@ -8,7 +8,7 @@ public class BulletPatternObject : ScriptableObject
 {
 
     [SerializeField] public Vector3[] SpawnPositionRelativeToBoss;
-    [SerializeField] public int[] duplicatePositions;
+    [SerializeField] private int[] duplicatePositions;
     [SerializeField] public int whichPosition;
     [SerializeField] public int repeatPosition;
     [SerializeField] public float positionInterval;
@@ -33,31 +33,58 @@ public class BulletPatternObject : ScriptableObject
    
 
     float currentTime = 0.0f;
+    float switchPosTime = 0.0f;
+    float switchTypeTime = 0.0f;
 
     int switchPosCount = 0;
     int switchAngleCount = 0;
     int switchType = 0;
     int currentIncrement = 1;
+    int[] currentIncrementList;
+    int[] copiedDuplicateArray;
+
+    public void Setup()
+    {
+        currentIncrementList = new int[duplicatePositions.Length];
+        copiedDuplicateArray = new int[duplicatePositions.Length];
+        for (int i = 0; i < currentIncrementList.Length; i++)
+
+        {
+            currentIncrementList[i] = 1;
+
+            copiedDuplicateArray[i] = duplicatePositions[i];
+        }
+    }
+
 
     public void FireBullet(Vector3 bossPosition)
     {
         if(currentTime > spawnInterval)
         {
-            if(currentTime > whenToSwitchBulletType && switchType >= repeatSwitchType)
+            if(switchTypeTime > whenToSwitchBulletType && switchType >= repeatSwitchType)
             {
                
                 whichBullet = (whichBullet + 1) % projectileTypes.Length;                
 
                 switchType = 0;
+
+                switchTypeTime = 0.0f;
             }
 
-            if(currentTime > positionInterval && switchPosCount >= repeatPosition)
+            if(switchPosTime > positionInterval && switchPosCount >= repeatPosition)
             {
 
                 //FIGURE OUT A WAY TO INCREMENT BACKWARDS FOR INDIVIDUALS
-                for (int i = 0; i < duplicatePositions.Length; i++)
+                for (int i = 0; i < copiedDuplicateArray.Length; i++)
                 {
-                    duplicatePositions[i] = (duplicatePositions[i] + currentIncrement) % SpawnPositionRelativeToBoss.Length;
+
+                    if (((copiedDuplicateArray[i] + currentIncrementList[i]) % SpawnPositionRelativeToBoss.Length == 0) && traverseBackwards)
+                    {
+                        currentIncrementList[i] = -currentIncrementList[i];
+
+                    }
+                    copiedDuplicateArray[i] = (copiedDuplicateArray[i] + currentIncrementList[i]) % SpawnPositionRelativeToBoss.Length;
+                    
                 }
 
                 if (((whichPosition + currentIncrement) % SpawnPositionRelativeToBoss.Length == 0) && traverseBackwards)
@@ -71,26 +98,34 @@ public class BulletPatternObject : ScriptableObject
 
 
                 switchPosCount = 0;
+                switchPosTime = 0.0f;
             }
 
-            switchType++;
-            switchPosCount++;
-            if (duplicatePositions.Length > 0)
+
+            if (copiedDuplicateArray.Length > 0)
             {
-                for (int i = 0; i < duplicatePositions.Length; i++)
+                for (int i = 0; i < copiedDuplicateArray.Length; i++)
                 {
-                    GameObject Bullet = (GameObject)Instantiate(bulletPrefab, bossPosition + SpawnPositionRelativeToBoss[duplicatePositions[i]], Quaternion.identity);
+                    GameObject Bullet = (GameObject)Instantiate(bulletPrefab, bossPosition + SpawnPositionRelativeToBoss[copiedDuplicateArray[i]], Quaternion.identity);
                     bulletPrefab.GetComponent<ProjectileScript>().proj = projectileTypes[whichBullet];
+
+                    switchType++;
+                    switchPosCount++;
                 }
             }
             else
             {
                 GameObject Bullet = (GameObject)Instantiate(bulletPrefab, bossPosition + SpawnPositionRelativeToBoss[whichPosition], Quaternion.identity);
                 bulletPrefab.GetComponent<ProjectileScript>().proj = projectileTypes[whichBullet];
+
+                switchType++;
+                switchPosCount++;
             }
                 
             currentTime = 0.0f;
         }
         currentTime += Time.deltaTime;
+        switchPosTime += Time.deltaTime;
+        switchTypeTime += Time.deltaTime;
     }
 }

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Name: Boss_one_Pattern_One
   m_EditorClassIdentifier: 
   SpawnPositionRelativeToBoss:
+  - {x: -7, y: 0, z: 0}
+  - {x: -6, y: 0, z: 0}
   - {x: -5, y: 0, z: 0}
   - {x: -4, y: 0, z: 0}
   - {x: -3, y: 0, z: 0}
@@ -23,9 +25,11 @@ MonoBehaviour:
   - {x: 3, y: 0, z: 0}
   - {x: 4, y: 0, z: 0}
   - {x: 5, y: 0, z: 0}
-  duplicatePositions: 00000000050000000a000000
-  whichPosition: 7
-  repeatPosition: 2
+  - {x: 6, y: 0, z: 0}
+  - {x: 7, y: 0, z: 0}
+  duplicatePositions: 0000000001000000020000000c0000000d0000000e000000
+  whichPosition: 5
+  repeatPosition: 5
   positionInterval: 0
   traverseBackwards: 1
   spawnInterval: 0.5
@@ -36,8 +40,8 @@ MonoBehaviour:
   projectileTypes:
   - {fileID: 11400000, guid: cc10955cec62301448101cd96004e41b, type: 2}
   - {fileID: 11400000, guid: 34c1f86e764d3994fbd2ac259f48d7a4, type: 2}
-  whichBullet: 1
-  whenToSwitchBulletType: 0
-  repeatSwitchType: 2
+  whichBullet: 0
+  whenToSwitchBulletType: 2
+  repeatSwitchType: 0
   bulletPrefab: {fileID: 1395915929176052, guid: 0cc4775667cb266498d1f3c328d2fe6e,
     type: 2}

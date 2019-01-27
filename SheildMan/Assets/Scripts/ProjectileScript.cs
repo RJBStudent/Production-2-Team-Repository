@@ -30,7 +30,7 @@ public class ProjectileScript : MonoBehaviour {
     void checkBounds()
     {
 
-        if ((transform.position.x < playerTransform.position.x - 10 || transform.position.x > playerTransform.position.x + 10)
+        if ((transform.position.x < playerTransform.position.x - 20 || transform.position.x > playerTransform.position.x + 20)
             || (transform.position.z < playerTransform.position.z - 20 || transform.position.z > playerTransform.position.z + 100))
         {
             Destroy(gameObject);
