@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
 
     //Sheild Variables
-    float redShieldInput = 0, blueShieldInput = 0, lastRedInput = 0, lastBlueInput= 0;
+    float redShieldInput = 0, blueShieldInput = 0, lastRedInput = 0, lastBlueInput = 0;
     [SerializeField] float redShieldXDistance, blueShieldXDistance;
     [SerializeField] float shieldInFrontDistance;
     Transform currentShieldInFront, shieldOnSide;
@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 shieldFrontTargetPosition, shieldSideTargetPosition;
     float switchingRotateDegreesOld = 0, switchingRotateDegreesNew = 0;
 
+    bool stopPlayer = false;
+    bool finishShieldRotate = false;
 
     // Use this for initialization
     void Start()
@@ -56,9 +58,12 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
 
+        ShieldUpdate();
+        if (stopPlayer)
+        { return; }
+
         GetInput();
         MovePlayer();
-        ShieldUpdate();
 
     }
 
@@ -100,14 +105,14 @@ public class PlayerMovement : MonoBehaviour
          */
 
 
-        
+
 
         if (switchingShield)
         {
 
             if (currentShieldInFront)
             {
-                
+
 
                 if (initFront)
                 {
@@ -118,11 +123,11 @@ public class PlayerMovement : MonoBehaviour
 
                 inFrontPosition = currentShieldInFront.position - transform.position;
 
-                            
+
 
                 inFrontPosition.y = 0;
                 float angleBetweenOld = Vector3.Angle(currentInitialPosition, inFrontPosition) * (Vector3.Cross(currentInitialPosition, inFrontPosition).y > 0 ? 1 : -1);
-                Debug.Log(angleBetweenOld);
+                
                 float newAngleOld;
                 if (currentShieldInFront == redShield)
                 {
@@ -141,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     switchingRotateDegreesOld += shieldTransformSpeed * Time.deltaTime;
                     newAngleOld = Mathf.Clamp(angleBetweenOld + switchingRotateDegreesOld, 0, blueRotateAmount);
-                    
+
                     if (newAngleOld == blueRotateAmount)
                     {
                         switchingShield = false;
@@ -149,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
                     }
 
                 }
-                               
+
 
                 switchingRotateDegreesOld = newAngleOld - angleBetweenOld;
 
@@ -158,13 +163,13 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-        
+
         if (switchingShieldToSide)
         {
-            
+
             if (shieldOnSide)
             {
-                
+
 
                 if (initSide)
                 {
@@ -177,8 +182,8 @@ public class PlayerMovement : MonoBehaviour
                 onSidePosition = shieldOnSide.position - transform.position;
 
 
-                onSidePosition .y = 0;
-                float angleBetweenNew = Vector3.Angle(otherInitialPosition, onSidePosition ) * (Vector3.Cross(otherInitialPosition, onSidePosition ).y > 0 ? 1 : -1);
+                onSidePosition.y = 0;
+                float angleBetweenNew = Vector3.Angle(otherInitialPosition, onSidePosition) * (Vector3.Cross(otherInitialPosition, onSidePosition).y > 0 ? 1 : -1);
 
                 float newAngleNew;
                 if (shieldOnSide == redShield)
@@ -191,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
 
                         switchingShieldToSide = false;
                         switchingRotateDegreesNew = 0;
-                        
+
                     }
 
                 }
@@ -213,18 +218,15 @@ public class PlayerMovement : MonoBehaviour
 
 
                 shieldOnSide.RotateAround(transform.position, Vector3.up, switchingRotateDegreesNew);
-                
+
             }
         }
-        
+
 
         if ((redShieldInput == 1 || blueShieldInput == 1) && (!switchingShield && !switchingShieldToSide))
         {
-            Debug.Log("InputSheild");
-            if(currentShieldInFront)
+            if (currentShieldInFront)
             {
-
-                Debug.Log(currentShieldInFront);
                 if (currentShieldInFront == redShield)
                 {
                     shieldOnSide = redShield;
@@ -240,7 +242,7 @@ public class PlayerMovement : MonoBehaviour
                         currentShieldInFront.localScale = newScale;
                     }
                 }
-                else if(currentShieldInFront == blueShield)
+                else if (currentShieldInFront == blueShield)
                 {
                     shieldOnSide = blueShield;
                     switchingShieldToSide = true;
@@ -256,16 +258,16 @@ public class PlayerMovement : MonoBehaviour
                     }
                 }
             }
-            else if(!currentShieldInFront)
+            else if (!currentShieldInFront)
             {
-                if(redShieldInput == 1)
+                if (redShieldInput == 1)
                 {
                     currentShieldInFront = redShield;
                     switchingShield = true;
                     initFront = true;
                     currentShieldInFront.localScale = newScale;
                 }
-                else if(blueShieldInput == 1)
+                else if (blueShieldInput == 1)
                 {
                     currentShieldInFront = blueShield;
                     switchingShield = true;
@@ -273,69 +275,59 @@ public class PlayerMovement : MonoBehaviour
                     currentShieldInFront.localScale = newScale;
                 }
             }
+            redShieldInput = 0;
+            blueShieldInput = 0;
         }
 
-
-
-
-    //    if ((redShieldInput == 1 || blueShieldInput == 1) && (!switchingShield || !switchingShieldToSide))
-    //    {
-    //        if (redShieldInput == 1 && currentShieldInFront != blueShield)
-    //        {
-    //            if (currentShieldInFront == redShield)
-    //            {
-    //                shieldOnSide = redShield;
-    //                otherInitialPosition = redShield.position;
-    //                switchingShieldToSide = true;
-    //                shieldOnSide.localScale = orignalScale;
-    //                return;
-    //            }
-    //            currentShieldInFront = redShield;
-    //            shieldOnSide = blueShield;
-    //            currentInitialPosition = currentShieldInFront.position;
-    //            otherInitialPosition = blueShield.position;
-    //            switchingShield = true;
-    //            currentShieldInFront.localScale = newScale;
-    //        }
-    //        else if (blueShieldInput == 1 && currentShieldInFront != redShield)
-    //        {
-
-            //            if (currentShieldInFront == blueShield)
-            //            {
-            //                shieldOnSide = blueShield;
-            //                otherInitialPosition = blueShield.position;
-            //                switchingShieldToSide = true;
-            //                shieldOnSide.localScale = orignalScale;
-            //                return;
-            //            }
-            //            currentShieldInFront = blueShield;
-            //            shieldOnSide = redShield;
-            //            currentInitialPosition = currentShieldInFront.position;
-            //            otherInitialPosition = redShield.position;
-            //            switchingShield = true;
-            //            currentShieldInFront.localScale = newScale;
-            //        }
-            //        else if (redShieldInput == 1 && currentShieldInFront == blueShield)
-            //        {
-            //            currentShieldInFront = redShield;
-            //            shieldOnSide = blueShield;
-            //            currentInitialPosition = currentShieldInFront.position;
-            //            otherInitialPosition = blueShield.position;
-            //            switchingShield = true;
-            //            switchingShieldToSide = true;
-            //            currentShieldInFront.localScale = newScale;
-            //        }
-            //        else if (blueShieldInput == 1 && currentShieldInFront == redShield)
-            //        {
-            //            currentShieldInFront = blueShield;
-            //            shieldOnSide = redShield;
-            //            currentInitialPosition = currentShieldInFront.position;
-            //            otherInitialPosition = redShield.position;
-            //            switchingShield = true;
-            //            switchingShieldToSide = true;
-            //            currentShieldInFront.localScale = newScale;
-            //        }
-            //    }
-
-            }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Red"))
+        {
+            if (currentShieldInFront != redShield)
+            {
+                ResetPlayerTransform();
+            }
+            Destroy(other.gameObject);
+            return;
+        }
+        if (other.gameObject.CompareTag("Blue"))
+        {
+            if (currentShieldInFront != blueShield)
+            {
+                ResetPlayerTransform();
+            }
+            Destroy(other.gameObject);
+            return;
+        }
+    }
+
+    void ResetPlayerTransform()
+    {
+        transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+
+        if(currentShieldInFront)
+        {
+            if(currentShieldInFront == redShield)
+            {
+                redShieldInput = 1;
+            }
+            else if(currentShieldInFront == blueShield)
+            {
+                blueShieldInput = 1;
+            }
+        }
+        
+
+        StartCoroutine(FreezePlayer(1f));
+    }
+
+    IEnumerator FreezePlayer(float time)
+    {
+        stopPlayer = true;
+        yield return new WaitForSecondsRealtime(time);
+        stopPlayer = false;
+    }
+
+}

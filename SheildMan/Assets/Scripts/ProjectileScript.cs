@@ -16,6 +16,14 @@ public class ProjectileScript : MonoBehaviour {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         render = GetComponent<Renderer>();
         render.material = proj.materialType;
+        if(proj.projectileType == Projectile.ProjectileType.RED)
+        {
+            gameObject.tag = "Red";
+        }
+        else if(proj.projectileType == Projectile.ProjectileType.BLUE)
+        {
+            gameObject.tag = "Blue";
+        }
 	}
 	
 	// Update is called once per frame
@@ -30,8 +38,8 @@ public class ProjectileScript : MonoBehaviour {
     void checkBounds()
     {
 
-        if ((transform.position.x < playerTransform.position.x - 20 || transform.position.x > playerTransform.position.x + 20)
-            || (transform.position.z < playerTransform.position.z - 20 || transform.position.z > playerTransform.position.z + 100))
+        if (((transform.position.x < playerTransform.position.x - 20 || transform.position.x > playerTransform.position.x + 20)
+            || (transform.position.z < playerTransform.position.z - 20 || transform.position.z > playerTransform.position.z + 100)) || Vector3.Magnitude(transform.position - new Vector3(0.0f, 0.0f, 0.0f)) < 10)
         {
             Destroy(gameObject);
         }
