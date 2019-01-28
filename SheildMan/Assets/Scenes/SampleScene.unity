@@ -1431,7 +1431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &1446245657
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1678,7 +1678,7 @@ MonoBehaviour:
   blueShieldXDistance: -0.5
   shieldInFrontDistance: 0.5
   shieldSize: 0
-  shieldTransformSpeed: 1
+  shieldTransformSpeed: 100
   shieldScaleSize: 3
 --- !u!1001 &1758555545
 Prefab:
