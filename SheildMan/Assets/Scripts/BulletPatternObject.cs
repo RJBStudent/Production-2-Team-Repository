@@ -35,6 +35,8 @@ public class BulletPatternObject : ScriptableObject
     float currentTime = 0.0f;
     float switchPosTime = 0.0f;
     float switchTypeTime = 0.0f;
+    int currentPosition;
+    int currentType;
 
     int switchPosCount = 0;
     int switchAngleCount = 0;
@@ -45,6 +47,8 @@ public class BulletPatternObject : ScriptableObject
 
     public void Setup()
     {
+        currentType = whichBullet;
+        currentPosition = whichPosition;
         currentIncrementList = new int[duplicatePositions.Length];
         copiedDuplicateArray = new int[duplicatePositions.Length];
         for (int i = 0; i < currentIncrementList.Length; i++)
@@ -59,19 +63,44 @@ public class BulletPatternObject : ScriptableObject
 
     public void FireBullet(Vector3 bossPosition)
     {
-        if(currentTime > spawnInterval)
+
+
+
+        if (currentTime > spawnInterval)
         {
-            if(switchTypeTime > whenToSwitchBulletType && switchType >= repeatSwitchType)
+            if (copiedDuplicateArray.Length > 0)
             {
-               
-                whichBullet = (whichBullet + 1) % projectileTypes.Length;                
+                for (int i = 0; i < copiedDuplicateArray.Length; i++)
+                {
+                    GameObject Bullet = (GameObject)Instantiate(bulletPrefab, bossPosition + SpawnPositionRelativeToBoss[copiedDuplicateArray[i]], Quaternion.identity);
+                    bulletPrefab.GetComponent<ProjectileScript>().proj = projectileTypes[currentType];
+
+                    switchType++;
+                    switchPosCount++;
+                }
+            }
+            else
+            {
+                GameObject Bullet = (GameObject)Instantiate(bulletPrefab, bossPosition + SpawnPositionRelativeToBoss[currentPosition], Quaternion.identity);
+                bulletPrefab.GetComponent<ProjectileScript>().proj = projectileTypes[currentType];
+
+                switchType++;
+                switchPosCount++;
+            }
+
+            currentTime = 0.0f;
+
+            if (switchTypeTime > whenToSwitchBulletType && switchType >= repeatSwitchType)
+            {
+
+                currentType = (currentType+1) % projectileTypes.Length;
 
                 switchType = 0;
 
                 switchTypeTime = 0.0f;
             }
 
-            if(switchPosTime > positionInterval && switchPosCount >= repeatPosition)
+            if (switchPosTime > positionInterval && switchPosCount >= repeatPosition)
             {
 
                 //FIGURE OUT A WAY TO INCREMENT BACKWARDS FOR INDIVIDUALS
@@ -84,16 +113,16 @@ public class BulletPatternObject : ScriptableObject
 
                     }
                     copiedDuplicateArray[i] = (copiedDuplicateArray[i] + currentIncrementList[i]) % SpawnPositionRelativeToBoss.Length;
-                    
+
                 }
 
-                if (((whichPosition + currentIncrement) % SpawnPositionRelativeToBoss.Length == 0) && traverseBackwards)
+                if (((currentPosition + currentIncrement) % SpawnPositionRelativeToBoss.Length == 0) && traverseBackwards)
                 {
                     currentIncrement = -currentIncrement;
-                    
+
                 }
 
-                whichPosition = (whichPosition + currentIncrement) % SpawnPositionRelativeToBoss.Length;
+                currentPosition = (currentPosition + currentIncrement) % SpawnPositionRelativeToBoss.Length;
 
 
 
@@ -101,29 +130,8 @@ public class BulletPatternObject : ScriptableObject
                 switchPosTime = 0.0f;
             }
 
-
-            if (copiedDuplicateArray.Length > 0)
-            {
-                for (int i = 0; i < copiedDuplicateArray.Length; i++)
-                {
-                    GameObject Bullet = (GameObject)Instantiate(bulletPrefab, bossPosition + SpawnPositionRelativeToBoss[copiedDuplicateArray[i]], Quaternion.identity);
-                    bulletPrefab.GetComponent<ProjectileScript>().proj = projectileTypes[whichBullet];
-
-                    switchType++;
-                    switchPosCount++;
-                }
-            }
-            else
-            {
-                GameObject Bullet = (GameObject)Instantiate(bulletPrefab, bossPosition + SpawnPositionRelativeToBoss[whichPosition], Quaternion.identity);
-                bulletPrefab.GetComponent<ProjectileScript>().proj = projectileTypes[whichBullet];
-
-                switchType++;
-                switchPosCount++;
-            }
-                
-            currentTime = 0.0f;
         }
+            
         currentTime += Time.deltaTime;
         switchPosTime += Time.deltaTime;
         switchTypeTime += Time.deltaTime;

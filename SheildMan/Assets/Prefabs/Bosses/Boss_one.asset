@@ -13,5 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnDistance: {x: 0, y: 0, z: 0}
   bulletPattern:
+  - {fileID: 11400000, guid: bd8467568f7bc1e45b8c34d75d6a7983, type: 2}
   - {fileID: 11400000, guid: 87b4748bcdef2b34eae140b937428f42, type: 2}
   currentPattern: 0

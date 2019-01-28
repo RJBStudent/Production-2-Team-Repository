@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ded5677f858fdb46a59b79aea474f2a, type: 3}
+  m_Name: Boss_one_Pattern_Two
+  m_EditorClassIdentifier: 
+  SpawnPositionRelativeToBoss:
+  - {x: -8, y: 0, z: 0}
+  - {x: -7, y: 0, z: 0}
+  - {x: -6, y: 0, z: 0}
+  - {x: -5, y: 0, z: 0}
+  - {x: -4, y: 0, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: -2, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: 5, y: 0, z: 0}
+  - {x: 6, y: 0, z: 0}
+  - {x: 7, y: 0, z: 0}
+  - {x: 8, y: 0, z: 0}
+  duplicatePositions: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f00000010000000
+  whichPosition: 1
+  repeatPosition: 0
+  positionInterval: 3
+  traverseBackwards: 0
+  spawnInterval: 1
+  isBossSpawn: 0
+  angleInterval: 0
+  repeatAngle: 0
+  patternLength: 0
+  projectileTypes:
+  - {fileID: 11400000, guid: cc10955cec62301448101cd96004e41b, type: 2}
+  - {fileID: 11400000, guid: 34c1f86e764d3994fbd2ac259f48d7a4, type: 2}
+  whichBullet: 0
+  whenToSwitchBulletType: 0
+  repeatSwitchType: 1
+  bulletPrefab: {fileID: 1395915929176052, guid: 0cc4775667cb266498d1f3c328d2fe6e,
+    type: 2}
