@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class CameraController : MonoBehaviour {
     [SerializeField] float xSpeed, ySpeed;
     [SerializeField] float distance;
     [SerializeField] float lerpSpeed;
+    [SerializeField] Transform cannonRotate;
+    [SerializeField] Image targetUI;
 
     float xMovement = 0, yMovement = 0;
 
