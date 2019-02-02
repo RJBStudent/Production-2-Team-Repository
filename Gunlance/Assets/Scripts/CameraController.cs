@@ -5,17 +5,18 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
     [SerializeField] Transform playerTransform;
-    [SerializeField] private float heightRestrictMax, heightRestrictMin;
-    [SerializeField] private float xSpeed, ySpeed;
-    [SerializeField] private float distance;
-
+    [SerializeField] float heightRestrictMax, heightRestrictMin;
+    [SerializeField] float xSpeed, ySpeed;
+    [SerializeField] float distance;
+    [SerializeField] float lerpSpeed;
 
     float xMovement = 0, yMovement = 0;
+
+    Vector3 newPos, pos;
 
     // Use this for initialization
     void Start ()
     {
-	    
 	}
 	
 	// Update is called once per frame
@@ -30,7 +31,6 @@ public class CameraController : MonoBehaviour {
         xMovement += Input.GetAxis("Mouse X") * xSpeed;
         yMovement -= Input.GetAxis("Mouse Y") * ySpeed;
 
-
         yMovement = Mathf.Clamp(yMovement, heightRestrictMin, heightRestrictMax);
     }
 
@@ -39,8 +39,14 @@ public class CameraController : MonoBehaviour {
     {
         Vector3 dir = new Vector3(0, 0, -distance);
         Quaternion rotation = Quaternion.Euler(yMovement, xMovement, 0);
+
+        newPos = playerTransform.position + rotation * dir;
+        pos = Vector3.Lerp(pos, newPos, Time.deltaTime * lerpSpeed);
+
         
-        transform.position = playerTransform.position + rotation * dir;
+
+        //transform.position = playerTransform.position + rotation * dir;
+        transform.position = pos;
         transform.LookAt(playerTransform.position);
         
     }

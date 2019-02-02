@@ -6,7 +6,11 @@ public class PlayerMovementScript : MonoBehaviour {
 
     [SerializeField] Transform cameraTransform;
     [SerializeField] float playerSpeed;
+    [SerializeField] float lerpSpeed;
+    [SerializeField] float FOVSpeed;
+    [SerializeField] float minFOV, maxFOV;
 
+    Camera thisCamera;
     Rigidbody thisRB;
 
     float xDirection, zDirection;
@@ -17,7 +21,8 @@ public class PlayerMovementScript : MonoBehaviour {
 	void Start ()
     {
         thisRB = GetComponent<Rigidbody>();
-	}
+        thisCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -45,5 +50,10 @@ public class PlayerMovementScript : MonoBehaviour {
         camRight.Normalize();
         Vector3 jumpVelocity = new Vector3(0, thisRB.velocity.y, 0);
                 thisRB.velocity = camForward * zDirection * playerSpeed + camRight * xDirection * playerSpeed + jumpVelocity;
+
+        
+
+        thisCamera.fieldOfView = (thisRB.velocity.magnitude > 2) ?Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView + FOVSpeed, Time.deltaTime) : Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView - FOVSpeed, Time.deltaTime);
+        thisCamera.fieldOfView = Mathf.Clamp(thisCamera.fieldOfView, minFOV, maxFOV);
     }
 }
