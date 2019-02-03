@@ -14,6 +14,7 @@ public class PlayerMovementScript : MonoBehaviour {
     [SerializeField] float explodeRadius;    
     [SerializeField] float yRotationSpeed;
     [SerializeField] float explodeTime;
+    [SerializeField] float upwardsForce;
     
 
     Camera thisCamera;
@@ -90,20 +91,20 @@ public class PlayerMovementScript : MonoBehaviour {
     {
         if(explodeForwardInput == 1.0 && !addedForce)
         {
-            thisRB.AddExplosionForce(force, frontExplosionPosition.position, explodeRadius, 1.0f, ForceMode.Impulse);
+            thisRB.AddExplosionForce(force, frontExplosionPosition.position, explodeRadius, upwardsForce, ForceMode.Impulse);
             originalExplodePosition = frontExplosionPosition.position;
             StartCoroutine( ExplodeTime(explodeTime));
         }
         else if(explodeBackInput == 1.0 && !addedForce)
         {
-            thisRB.AddExplosionForce(force, backExplosionPosition.position, explodeRadius, 1.0f, ForceMode.Impulse);
+            thisRB.AddExplosionForce(force, backExplosionPosition.position, explodeRadius, upwardsForce, ForceMode.Impulse);
             originalExplodePosition = backExplosionPosition.position;
             StartCoroutine(ExplodeTime(explodeTime));
         }
 
         if(addedForce)
         {
-            thisRB.AddExplosionForce(force, originalExplodePosition, explodeRadius, 1.0f, ForceMode.Impulse);
+            thisRB.AddExplosionForce(force, originalExplodePosition, explodeRadius, upwardsForce, ForceMode.Impulse);
             lastVelocity = new Vector3(thisRB.velocity.x, 0, thisRB.velocity.z); 
         }
     }

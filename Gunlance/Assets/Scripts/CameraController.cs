@@ -12,10 +12,14 @@ public class CameraController : MonoBehaviour {
     [SerializeField] float lerpSpeed;
     [SerializeField] Transform cannonRotate;
     [SerializeField] Image targetUI;
+    [SerializeField] float aimOffset;
 
     float xMovement = 0, yMovement = 0;
 
     Vector3 newPos, pos;
+
+    Vector3 aimPosition;
+    float cannonAngle = 0;
 
     // Use this for initialization
     void Start ()
@@ -27,12 +31,15 @@ public class CameraController : MonoBehaviour {
 
         GetInput();
         UpdatePosition();
+        AimControl();
 	}
 
     void GetInput()
     {
         xMovement += Input.GetAxis("Mouse X") * xSpeed;
         yMovement -= Input.GetAxis("Mouse Y") * ySpeed;
+
+        cannonAngle -= Input.GetAxis("Mouse Y") * ySpeed;
 
         yMovement = Mathf.Clamp(yMovement, heightRestrictMin, heightRestrictMax);
     }
@@ -52,5 +59,13 @@ public class CameraController : MonoBehaviour {
         transform.position = pos;
         transform.LookAt(playerTransform.position);
         
+    }
+
+    void AimControl()
+    {
+        
+        cannonAngle = Mathf.Clamp(cannonAngle, -30, 90);
+
+        cannonRotate.rotation = Quaternion.Euler(cannonAngle, playerTransform.eulerAngles.y, playerTransform.eulerAngles.z);
     }
 }

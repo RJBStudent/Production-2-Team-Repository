@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,7 +135,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 154149145}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.333, y: -0, z: -1.492}
+  m_LocalPosition: {x: -1, y: -0, z: 0.667}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2062768075}
@@ -303,8 +303,9 @@ MonoBehaviour:
   ySpeed: 3
   distance: 10
   lerpSpeed: 5
-  cannonRotate: {fileID: 0}
+  cannonRotate: {fileID: 2062768075}
   targetUI: {fileID: 0}
+  aimOffset: 20
 --- !u!1001 &554349342
 Prefab:
   m_ObjectHideFlags: 0
@@ -369,7 +370,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 970187321}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.333, y: 0, z: -1.492}
+  m_LocalPosition: {x: -1, y: 0, z: -0.667}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2062768075}
@@ -690,6 +691,7 @@ MonoBehaviour:
   explodeRadius: 3
   yRotationSpeed: 5
   explodeTime: 0.5
+  upwardsForce: 2
 --- !u!1 &2062768074
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,15 +716,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2062768074}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.79, y: -0.23, z: -0.14}
-  m_LocalScale: {x: 1.5, y: 0.5, z: 0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7, y: -0.2, z: -0.1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1.5}
   m_Children:
   - {fileID: 154149146}
   - {fileID: 970187322}
   m_Father: {fileID: 1987871917}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2062768076
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -731,7 +733,7 @@ BoxCollider:
   m_GameObject: {fileID: 2062768074}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
