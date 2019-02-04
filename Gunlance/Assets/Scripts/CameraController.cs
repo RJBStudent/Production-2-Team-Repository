@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour {
 
     [SerializeField] Transform playerTransform;
     [SerializeField] float heightRestrictMax, heightRestrictMin;
+    [SerializeField] float aimMin, aimMax;
     [SerializeField] float xSpeed, ySpeed;
     [SerializeField] float distance;
     [SerializeField] float lerpSpeed;
@@ -37,11 +38,18 @@ public class CameraController : MonoBehaviour {
     void GetInput()
     {
         xMovement += Input.GetAxis("Mouse X") * xSpeed;
-        yMovement -= Input.GetAxis("Mouse Y") * ySpeed;
+        
 
         cannonAngle -= Input.GetAxis("Mouse Y") * ySpeed;
 
+        //Only move when the cannon angle is within these bounds
+        if (-cannonAngle >= heightRestrictMin && -cannonAngle <= heightRestrictMax)
+        {
+            yMovement -= Input.GetAxis("Mouse Y") * ySpeed;
+        }
+
         yMovement = Mathf.Clamp(yMovement, heightRestrictMin, heightRestrictMax);
+
     }
 
 
@@ -64,7 +72,7 @@ public class CameraController : MonoBehaviour {
     void AimControl()
     {
         
-        cannonAngle = Mathf.Clamp(cannonAngle, -30, 90);
+        cannonAngle = Mathf.Clamp(cannonAngle, aimMin, aimMax);
 
         cannonRotate.rotation = Quaternion.Euler(cannonAngle, playerTransform.eulerAngles.y, playerTransform.eulerAngles.z);
     }

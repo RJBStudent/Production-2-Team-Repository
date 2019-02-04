@@ -15,7 +15,9 @@ public class PlayerMovementScript : MonoBehaviour {
     [SerializeField] float yRotationSpeed;
     [SerializeField] float explodeTime;
     [SerializeField] float upwardsForce;
-    
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform groundCheck;
+    Collider[] hitCollide;
 
     Camera thisCamera;
     Rigidbody thisRB;
@@ -37,6 +39,7 @@ public class PlayerMovementScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        GroundCheck();
         GetInput();
         MovePlayer();
         ExplodeDirection();
@@ -61,30 +64,42 @@ public class PlayerMovementScript : MonoBehaviour {
 
         camForward.Normalize();
         camRight.Normalize();
-        //Vector3 jumpVelocity = new Vector3(0, thisRB.velocity.y, 0);
-        thisRB.velocity = camForward * zDirection * playerSpeed + camRight * xDirection * playerSpeed;
-
-        Vector3 targetDirection;
-        if (thisRB.velocity.magnitude != 0)
+        Vector3 jumpVelocity = new Vector3(0, thisRB.velocity.y, 0);
+        if (!addedForce)
         {
-
-            targetDirection = new Vector3(transform.position.x + thisRB.velocity.normalized.x, transform.position.y, transform.position.z + thisRB.velocity.normalized.z);
-            
-        }
-        else
-        {
-            targetDirection = lastVelocity;
+            thisRB.velocity = camForward * zDirection * playerSpeed + camRight * xDirection * playerSpeed + jumpVelocity;
         }
        
 
-        targetDirection = Vector3.Lerp(lastVelocity, targetDirection, Time.deltaTime * yRotationSpeed);
+        Vector3 targetDirection;
+        //if (thisRB.velocity.magnitude != 0  || hitCollide.Length > 0)
+        //{
 
+        // targetDirection = new Vector3(transform.position.x, transform.position.y, transform.position.z + camRight.z * 5);
+        targetDirection = transform.position + (camForward * 5);
+        //}
+        //else
+        //{
+        //    targetDirection = lastVelocity;
+
+        //}
+
+
+       // targetDirection = Vector3.Lerp(lastVelocity, targetDirection, Time.deltaTime * yRotationSpeed);
         transform.LookAt(targetDirection);
+        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
         
         lastVelocity = new Vector3(targetDirection.x, transform.position.y, targetDirection.z);
 
-        thisCamera.fieldOfView = (thisRB.velocity.magnitude > 5) ?Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView + FOVSpeed, Time.deltaTime) : Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView - FOVSpeed, Time.deltaTime);
+
+        thisCamera.fieldOfView = (thisRB.velocity.magnitude > 10) ?Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView + FOVSpeed, Time.deltaTime) : Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView - FOVSpeed, Time.deltaTime);
         thisCamera.fieldOfView = Mathf.Clamp(thisCamera.fieldOfView, minFOV, maxFOV);
+    }
+
+    void GroundCheck()
+    {
+        hitCollide = null;
+        hitCollide = Physics.OverlapSphere(groundCheck.position, 0.21f, groundLayer);
     }
 
     void ExplodeDirection()
@@ -93,19 +108,23 @@ public class PlayerMovementScript : MonoBehaviour {
         {
             thisRB.AddExplosionForce(force, frontExplosionPosition.position, explodeRadius, upwardsForce, ForceMode.Impulse);
             originalExplodePosition = frontExplosionPosition.position;
+
+            lastVelocity = new Vector3(transform.position.x + thisRB.velocity.x, transform.position.y, transform.position.z + thisRB.velocity.z);
             StartCoroutine( ExplodeTime(explodeTime));
         }
         else if(explodeBackInput == 1.0 && !addedForce)
         {
             thisRB.AddExplosionForce(force, backExplosionPosition.position, explodeRadius, upwardsForce, ForceMode.Impulse);
             originalExplodePosition = backExplosionPosition.position;
+
+            lastVelocity = new Vector3(transform.position.x + thisRB.velocity.x, transform.position.y, transform.position.z + thisRB.velocity.z);
             StartCoroutine(ExplodeTime(explodeTime));
         }
 
         if(addedForce)
         {
-            thisRB.AddExplosionForce(force, originalExplodePosition, explodeRadius, upwardsForce, ForceMode.Impulse);
-            lastVelocity = new Vector3(thisRB.velocity.x, 0, thisRB.velocity.z); 
+           // thisRB.AddExplosionForce(force, originalExplodePosition, explodeRadius, upwardsForce, ForceMode.Impulse);
+           // lastVelocity = new Vector3(transform.position.x + thisRB.velocity.x, transform.position.y, transform.position.z + thisRB.velocity.z); 
         }
     }
 
@@ -114,5 +133,14 @@ public class PlayerMovementScript : MonoBehaviour {
         addedForce = true;
         yield return new WaitForSecondsRealtime(time);
         addedForce = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        if (addedForce)
+        {
+            Gizmos.DrawSphere(originalExplodePosition, explodeRadius);
+    }
     }
 }
