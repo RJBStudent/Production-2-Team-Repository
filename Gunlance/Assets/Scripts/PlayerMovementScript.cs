@@ -9,31 +9,42 @@ public class PlayerMovementScript : MonoBehaviour {
     [SerializeField] float lerpSpeed;
     [SerializeField] float FOVSpeed;
     [SerializeField] float minFOV, maxFOV;
-    [SerializeField] Transform backExplosionPosition, frontExplosionPosition;
-    [SerializeField] float force;
+    [SerializeField] Transform explosionPosition, sideExplosion;
+    [SerializeField] float force, sideForce;
     [SerializeField] float explodeRadius;    
     [SerializeField] float yRotationSpeed;
     [SerializeField] float explodeTime;
-    [SerializeField] float upwardsForce;
+    [SerializeField] float upwardsForce, upwardsSideForce;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] int maxShots;
+
     Collider[] hitCollide;
 
     Camera thisCamera;
     Rigidbody thisRB;
     Vector3 lastVelocity;
 
-    float explodeForwardInput = 0, explodeBackInput = 0;
+    float explodeInput = 0;
     float xDirection, zDirection;
     Vector3 camForward, camRight;
     bool addedForce;
     Vector3 originalExplodePosition;
+    int currentShot = 0;
+    bool inAir = false;
+
+    //Glide Variables
+    float glideInput = 0;
+    bool gliding = false;
+    [SerializeField] Vector3 newGravity;
+    Vector3 origGravity;
 
 	// Use this for initialization
 	void Start ()
     {
         thisRB = GetComponent<Rigidbody>();
         thisCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        origGravity = Physics.gravity;
     }
 	
 	// Update is called once per frame
@@ -43,6 +54,7 @@ public class PlayerMovementScript : MonoBehaviour {
         GetInput();
         MovePlayer();
         ExplodeDirection();
+        Glide();
 	}
 
     void GetInput ()
@@ -50,8 +62,8 @@ public class PlayerMovementScript : MonoBehaviour {
         xDirection = Input.GetAxis("Horizontal");
         zDirection = Input.GetAxis("Vertical");
 
-        explodeForwardInput = Input.GetAxisRaw("FrontExplosion");
-        explodeBackInput = Input.GetAxisRaw("BackExplosion");
+        explodeInput = Input.GetAxisRaw("ExplodeInput");
+        glideInput = Input.GetAxisRaw("GlideInput");
     }
 
     void MovePlayer()
@@ -69,23 +81,14 @@ public class PlayerMovementScript : MonoBehaviour {
         {
             thisRB.velocity = camForward * zDirection * playerSpeed + camRight * xDirection * playerSpeed + jumpVelocity;
         }
-       
+
+        sideExplosion.position = camForward * (-zDirection/1) + camRight * (-xDirection/1) +transform.position;
+        sideExplosion.position = new Vector3(sideExplosion.position.x, sideExplosion.position.y - 1f, sideExplosion.position.z);
 
         Vector3 targetDirection;
-        //if (thisRB.velocity.magnitude != 0  || hitCollide.Length > 0)
-        //{
-
-        // targetDirection = new Vector3(transform.position.x, transform.position.y, transform.position.z + camRight.z * 5);
+        
         targetDirection = transform.position + (camForward * 5);
-        //}
-        //else
-        //{
-        //    targetDirection = lastVelocity;
-
-        //}
-
-
-       // targetDirection = Vector3.Lerp(lastVelocity, targetDirection, Time.deltaTime * yRotationSpeed);
+        
         transform.LookAt(targetDirection);
         transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
         
@@ -100,31 +103,56 @@ public class PlayerMovementScript : MonoBehaviour {
     {
         hitCollide = null;
         hitCollide = Physics.OverlapSphere(groundCheck.position, 0.21f, groundLayer);
+        if(hitCollide.Length > 0)
+        {
+            inAir = false;
+            currentShot = 0;
+        }
+        else
+        {
+            inAir = true;
+        }
+
     }
 
     void ExplodeDirection()
     {
-        if(explodeForwardInput == 1.0 && !addedForce)
-        {
-            thisRB.AddExplosionForce(force, frontExplosionPosition.position, explodeRadius, upwardsForce, ForceMode.Impulse);
-            originalExplodePosition = frontExplosionPosition.position;
 
-            lastVelocity = new Vector3(transform.position.x + thisRB.velocity.x, transform.position.y, transform.position.z + thisRB.velocity.z);
-            StartCoroutine( ExplodeTime(explodeTime));
+        if(currentShot > maxShots)
+        {
+            return;
         }
-        else if(explodeBackInput == 1.0 && !addedForce)
-        {
-            thisRB.AddExplosionForce(force, backExplosionPosition.position, explodeRadius, upwardsForce, ForceMode.Impulse);
-            originalExplodePosition = backExplosionPosition.position;
 
-            lastVelocity = new Vector3(transform.position.x + thisRB.velocity.x, transform.position.y, transform.position.z + thisRB.velocity.z);
+        if(explodeInput == 1.0 && !inAir && currentShot == 0 && !addedForce && !gliding)
+        {
+            thisRB.velocity = Vector3.zero;
+            thisRB.AddExplosionForce(force, explosionPosition.position, explodeRadius, upwardsForce, ForceMode.Impulse);
+            currentShot++;
+            originalExplodePosition = explosionPosition.position;
             StartCoroutine(ExplodeTime(explodeTime));
         }
 
-        if(addedForce)
+        if(explodeInput == 1.0 && inAir && currentShot > 0 && !addedForce && !gliding)
         {
-           // thisRB.AddExplosionForce(force, originalExplodePosition, explodeRadius, upwardsForce, ForceMode.Impulse);
-           // lastVelocity = new Vector3(transform.position.x + thisRB.velocity.x, transform.position.y, transform.position.z + thisRB.velocity.z); 
+            thisRB.velocity = Vector3.zero;
+            thisRB.AddExplosionForce(sideForce, sideExplosion.position, explodeRadius, upwardsSideForce, ForceMode.Impulse);
+            originalExplodePosition = sideExplosion.position;
+            currentShot++;
+            StartCoroutine(ExplodeTime(explodeTime));
+        }
+        
+    }
+
+
+    void Glide()
+    {
+        if(glideInput == 1.0f && !addedForce && inAir)
+        {
+            thisRB.velocity = new Vector3(thisRB.velocity.x, thisRB.velocity.y / 2, thisRB.velocity.z);
+        }
+        else
+        {
+            gliding = false;
         }
     }
 

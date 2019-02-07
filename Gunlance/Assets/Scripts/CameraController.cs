@@ -43,10 +43,10 @@ public class CameraController : MonoBehaviour {
         cannonAngle -= Input.GetAxis("Mouse Y") * ySpeed;
 
         //Only move when the cannon angle is within these bounds
-        if (-cannonAngle >= heightRestrictMin && -cannonAngle <= heightRestrictMax)
-        {
+       // if (-cannonAngle >= heightRestrictMin && -cannonAngle <= heightRestrictMax)
+        //{
             yMovement -= Input.GetAxis("Mouse Y") * ySpeed;
-        }
+        //}
 
         yMovement = Mathf.Clamp(yMovement, heightRestrictMin, heightRestrictMax);
 
@@ -74,6 +74,6 @@ public class CameraController : MonoBehaviour {
         
         cannonAngle = Mathf.Clamp(cannonAngle, aimMin, aimMax);
 
-        cannonRotate.rotation = Quaternion.Euler(cannonAngle, playerTransform.eulerAngles.y, playerTransform.eulerAngles.z);
+        //cannonRotate.rotation = Quaternion.Euler(cannonAngle, playerTransform.eulerAngles.y, playerTransform.eulerAngles.z);
     }
 }
