@@ -6,6 +6,7 @@ public class PlayerMovementScript : MonoBehaviour {
 
     [SerializeField] Transform cameraTransform;
     [SerializeField] float playerSpeed;
+    [SerializeField] float airMovementSpeed;
     [SerializeField] float lerpSpeed;
     [SerializeField] float FOVSpeed;
     [SerializeField] float minFOV, maxFOV;
@@ -39,6 +40,13 @@ public class PlayerMovementScript : MonoBehaviour {
     bool gliding = false;
     [SerializeField] Vector3 newGravity;
     Vector3 origGravity;
+    Vector3 velocityInfluence;
+    [SerializeField] float basedGlideSpeed, incrementedGlideSpeed;
+
+    //Jump Variables
+    [SerializeField] float jumpForce;
+    float jumpInput = 0.0f;
+    float lastJumpInput = 0.0f;
 
 	// Use this for initialization
 	void Start ()
@@ -53,6 +61,7 @@ public class PlayerMovementScript : MonoBehaviour {
     {
         GroundCheck();
         GetInput();
+        Jump();
         MovePlayer();
         ExplodeDirection();
         Glide();
@@ -65,6 +74,10 @@ public class PlayerMovementScript : MonoBehaviour {
 
         explodeInput = Input.GetAxisRaw("ExplodeInput");
         glideInput = Input.GetAxisRaw("GlideInput");
+
+        if (Input.GetAxisRaw("Jump") != lastJumpInput)
+        { jumpInput = Input.GetAxisRaw("Jump"); lastJumpInput = jumpInput; }
+        else { jumpInput = 0; }
     }
 
     void MovePlayer()
@@ -78,21 +91,70 @@ public class PlayerMovementScript : MonoBehaviour {
         camForward.Normalize();
         camRight.Normalize();
         Vector3 jumpVelocity = new Vector3(0, thisRB.velocity.y, 0);
-        if (!addedForce)
+        if (!addedForce && !inAir)
         {
             thisRB.velocity = camForward * zDirection * playerSpeed + camRight * xDirection * playerSpeed + jumpVelocity;
         }
-
-        if (Mathf.Abs(zDirection) > 0.5 || Mathf.Abs( xDirection )> 0.5)
+        else if(addedForce || inAir)
         {
-            sideExplosion.position = camForward * (-zDirection / 1) + camRight * (-xDirection / 1) + transform.position;
-            sideExplosion.position = new Vector3(sideExplosion.position.x, sideExplosion.position.y - 1f, sideExplosion.position.z);
+            thisRB.velocity = Vector3.Lerp(thisRB.velocity, thisRB.velocity.normalized + camForward * zDirection * airMovementSpeed + camRight * xDirection * airMovementSpeed, Time.deltaTime);
+            thisRB.velocity = thisRB.velocity;
+        }
+        else if(gliding)
+        {
+            thisRB.velocity = Vector3.Lerp(thisRB.velocity, thisRB.velocity.normalized + camForward * ((zDirection < 0f) ? basedGlideSpeed : zDirection + incrementedGlideSpeed) * airMovementSpeed + jumpVelocity, Time.deltaTime);
+        }
+
+
+        if (Mathf.Abs(zDirection) > 0.65 || Mathf.Abs( xDirection ) > 0.65)
+        {
+            float zValue = zDirection, xValue = xDirection;
+            if (zDirection < -0.5)
+            {
+                zValue = Mathf.Clamp(zValue*2f, -0.9f, zValue * 2f);
+            }
+            else if(zDirection > 0.5)
+            {
+                zValue = Mathf.Clamp(zValue * 2f, zValue * 2f, 0.9f);
+            }
+            if(xDirection < -0.5)
+            {
+                xValue = Mathf.Clamp(xValue * 2f, -0.9f, xValue * 2f);
+            }
+            else if(xDirection > 0.5)
+            {
+                xValue = Mathf.Clamp(xValue * 2f, xValue * 2f, 0.9f);
+            }
+
+            if(Mathf.Abs(xValue) > 0.65f && Mathf.Abs(zValue) > 0.65f)
+            {
+                if (zDirection < -0.5)
+                {
+                    zValue = Mathf.Clamp(zValue * 2f, -0.75f, zValue * 2f);
+                }
+                else if (zDirection > 0.5)
+                {
+                    zValue = Mathf.Clamp(zValue * 2f, zValue * 2f, 0.75f);
+                }
+                if (xDirection < -0.5)
+                {
+                    xValue = Mathf.Clamp(xValue * 2f, -0.75f, xValue * 2f);
+                }
+                else if (xDirection > 0.5)
+                {
+                    xValue = Mathf.Clamp(xValue * 2f, xValue * 2f, 0.75f);
+                }
+
+            }
+
+            sideExplosion.position = camForward * (-zValue) + camRight * (-xValue) + transform.position;
+            sideExplosion.position = new Vector3(sideExplosion.position.x, transform.position.y - 1f, sideExplosion.position.z);
 
         }
         else
         {
-            sideExplosion.position = camForward   + camRight + transform.position + sideExplosion.position; //So this never increments..??
-            sideExplosion.position = new Vector3(sideExplosion.position.x, sideExplosion.position.y - 0f, sideExplosion.position.z);
+           // sideExplosion.position = camForward   + camRight + transform.position + sideExplosion.position; //So this never increments..??
+            sideExplosion.position = new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z);
 
         }
 
@@ -134,15 +196,7 @@ public class PlayerMovementScript : MonoBehaviour {
             return;
         }
 
-        //if(explodeInput == 1.0 && !inAir && currentShot == 0 && !addedForce && !gliding)
-        //{
-        //    thisRB.velocity = Vector3.zero;
-        //    thisRB.AddExplosionForce(force, explosionPosition.position, explodeRadius, upwardsForce, ForceMode.Impulse);
-        //    currentShot++;
-        //    originalExplodePosition = explosionPosition.position;
-        //    StartCoroutine(ExplodeTime(explodeTime));
-        //}
-
+        
         if(explodeInput == 1.0 && !addedForce && !gliding)
         {
             thisRB.velocity = Vector3.zero;
@@ -154,12 +208,23 @@ public class PlayerMovementScript : MonoBehaviour {
         
     }
 
+    void Jump()
+    {
+        if(jumpInput != 0.0f && !inAir)
+        {
+            thisRB.AddForce(new Vector3(0, jumpForce, 0));
+        }
+    }
 
     void Glide()
     {
+
+        //Always in direction of camera forward, left stick controlls left and right movement
         if(glideInput == 1.0f && !addedForce && inAir)
         {
             thisRB.velocity = new Vector3(thisRB.velocity.x, thisRB.velocity.y / 2, thisRB.velocity.z);
+           
+            gliding = true;
         }
         else
         {
