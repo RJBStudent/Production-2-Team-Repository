@@ -32,6 +32,7 @@ public class PlayerMovementScript : MonoBehaviour {
     Vector3 originalExplodePosition;
     int currentShot = 0;
     bool inAir = false;
+    float distanceBelow;
 
     //Glide Variables
     float glideInput = 0;
@@ -82,8 +83,18 @@ public class PlayerMovementScript : MonoBehaviour {
             thisRB.velocity = camForward * zDirection * playerSpeed + camRight * xDirection * playerSpeed + jumpVelocity;
         }
 
-        sideExplosion.position = camForward * (-zDirection/1) + camRight * (-xDirection/1) +transform.position;
-        sideExplosion.position = new Vector3(sideExplosion.position.x, sideExplosion.position.y - 1f, sideExplosion.position.z);
+        if (Mathf.Abs(zDirection) > 0.5 || Mathf.Abs( xDirection )> 0.5)
+        {
+            sideExplosion.position = camForward * (-zDirection / 1) + camRight * (-xDirection / 1) + transform.position;
+            sideExplosion.position = new Vector3(sideExplosion.position.x, sideExplosion.position.y - 1f, sideExplosion.position.z);
+
+        }
+        else
+        {
+            sideExplosion.position = camForward   + camRight + transform.position + sideExplosion.position; //So this never increments..??
+            sideExplosion.position = new Vector3(sideExplosion.position.x, sideExplosion.position.y - 0f, sideExplosion.position.z);
+
+        }
 
         Vector3 targetDirection;
         
@@ -123,16 +134,16 @@ public class PlayerMovementScript : MonoBehaviour {
             return;
         }
 
-        if(explodeInput == 1.0 && !inAir && currentShot == 0 && !addedForce && !gliding)
-        {
-            thisRB.velocity = Vector3.zero;
-            thisRB.AddExplosionForce(force, explosionPosition.position, explodeRadius, upwardsForce, ForceMode.Impulse);
-            currentShot++;
-            originalExplodePosition = explosionPosition.position;
-            StartCoroutine(ExplodeTime(explodeTime));
-        }
+        //if(explodeInput == 1.0 && !inAir && currentShot == 0 && !addedForce && !gliding)
+        //{
+        //    thisRB.velocity = Vector3.zero;
+        //    thisRB.AddExplosionForce(force, explosionPosition.position, explodeRadius, upwardsForce, ForceMode.Impulse);
+        //    currentShot++;
+        //    originalExplodePosition = explosionPosition.position;
+        //    StartCoroutine(ExplodeTime(explodeTime));
+        //}
 
-        if(explodeInput == 1.0 && inAir && currentShot > 0 && !addedForce && !gliding)
+        if(explodeInput == 1.0 && !addedForce && !gliding)
         {
             thisRB.velocity = Vector3.zero;
             thisRB.AddExplosionForce(sideForce, sideExplosion.position, explodeRadius, upwardsSideForce, ForceMode.Impulse);
