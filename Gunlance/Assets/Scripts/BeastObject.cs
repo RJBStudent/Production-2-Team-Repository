@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Beast")]
 public class BeastObject : ScriptableObject
 {
-
-    [SerializeField] public GameObject beastObject;
-    [SerializeField] public Vector3[] MovementNodes; 
-
+    
+    [SerializeField] public Vector3[] movementNodes;
+    [SerializeField] public float nodeRadius;
+    [SerializeField] public float speed;
 }
