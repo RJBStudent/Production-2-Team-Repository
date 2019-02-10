@@ -13,8 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementNodes:
   - {x: 1, y: 0, z: 5}
-  - {x: 1, y: 0, z: 8}
-  - {x: -5, y: 0, z: 8}
+  - {x: 1, y: 0, z: -8}
+  - {x: -5, y: 0, z: -8}
   - {x: -5, y: 0, z: 5}
   nodeRadius: 1
-  speed: 20
+  nodeRotateRadius: 2
+  speed: 2
+  rotationSpeed: 5

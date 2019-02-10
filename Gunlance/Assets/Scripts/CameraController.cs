@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         GetInput();
         UpdatePosition();
@@ -66,7 +66,7 @@ public class CameraController : MonoBehaviour {
         //transform.position = playerTransform.position + rotation * dir;
         transform.position = pos;
         transform.LookAt(playerTransform.position);
-        
+
     }
 
     void AimControl()
