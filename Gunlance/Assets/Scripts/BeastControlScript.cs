@@ -19,7 +19,7 @@ public class BeastControlScript : MonoBehaviour {
     {
         targetNode = 0;
         targetRotateNode = 0;
-        targetDirection = beastValues.movementNodes[targetNode];
+        targetPosition = beastValues.movementNodes[targetNode];
         targetLookDirection = beastValues.movementNodes[targetRotateNode];
 	}
 	

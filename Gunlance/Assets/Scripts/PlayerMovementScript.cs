@@ -7,17 +7,15 @@ public class PlayerMovementScript : MonoBehaviour {
     [SerializeField] Transform cameraTransform;
     [SerializeField] float playerSpeed;
     [SerializeField] float airMovementSpeed;
-    [SerializeField] float lerpSpeed;
     [SerializeField] float FOVSpeed;
     [SerializeField] float minFOV, maxFOV;
-    [SerializeField] Transform explosionPosition, sideExplosion;
-    [SerializeField] float force, sideForce;
-    [SerializeField] float explodeRadius;    
-    [SerializeField] float yRotationSpeed;
+    [SerializeField] Transform sideExplosion;
+    [SerializeField] float sideForce;
+    [SerializeField] float explodeRadius; 
     [SerializeField] float explodeTime;
-    [SerializeField] float upwardsForce, upwardsSideForce;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Transform groundCheck;
+    [SerializeField] float upwardsSideForce;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] Transform groundCheck;
     [SerializeField] int maxShots;
 
     Collider[] hitCollide;
@@ -38,8 +36,6 @@ public class PlayerMovementScript : MonoBehaviour {
     //Glide Variables
     float glideInput = 0;
     bool gliding = false;
-    [SerializeField] Vector3 newGravity;
-    Vector3 origGravity;
     Vector3 velocityInfluence;
     [SerializeField] float basedGlideSpeed, incrementedGlideSpeed;
 
@@ -53,7 +49,6 @@ public class PlayerMovementScript : MonoBehaviour {
     {
         thisRB = GetComponent<Rigidbody>();
         thisCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        origGravity = Physics.gravity;
     }
 	
 	// Update is called once per frame
@@ -170,6 +165,12 @@ public class PlayerMovementScript : MonoBehaviour {
 
         thisCamera.fieldOfView = (thisRB.velocity.magnitude > 10) ?Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView + FOVSpeed, Time.deltaTime) : Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView - FOVSpeed, Time.deltaTime);
         thisCamera.fieldOfView = Mathf.Clamp(thisCamera.fieldOfView, minFOV, maxFOV);
+
+        if(transform.position.y < -5f)
+        {
+            transform.position = new Vector3(1, 1, 1);
+            thisRB.velocity = Vector3.zero;
+        }
     }
 
     void GroundCheck()

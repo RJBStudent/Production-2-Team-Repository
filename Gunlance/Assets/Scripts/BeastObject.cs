@@ -6,7 +6,7 @@ using UnityEngine;
 public class BeastObject : ScriptableObject
 {
     
-    [SerializeField] public Vector3[] movementNodes;
+     public Vector3[] movementNodes;
     [SerializeField] public float nodeRadius;
     [SerializeField] public float nodeRotateRadius;
     [SerializeField] public float speed;
