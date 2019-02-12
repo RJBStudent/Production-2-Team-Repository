@@ -1,0 +1,167 @@
+fileFormatVersion: 2
+guid: 4b179c951a102db438dd17f1088233e4
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: buff_body_lp
+    100002: buff_horn_r_l_lp
+    100004: buff_horn_r_l_lp1
+    100006: climb_neck
+    100008: climb_rear
+    100010: climb_ribs
+    100012: crystal_head
+    100014: crystal_rear
+    100016: crystal_ribs
+    100018: crystal_shoulder
+    100020: //RootNode
+    100022: tall_l_head
+    100024: tall_l_neck_l
+    100026: tall_l_neck_r
+    100028: tall_m_neck
+    100030: tall_m_rear
+    100032: tall_m_ribs
+    100034: tall_s_rear_l
+    100036: tall_s_rear_r
+    100038: transform1
+    100040: transform10
+    100042: transform11
+    100044: transform12
+    100046: transform13
+    100048: transform14
+    100050: transform15
+    100052: transform16
+    100054: transform17
+    100056: transform2
+    100058: transform3
+    100060: transform4
+    100062: transform5
+    100064: transform6
+    100066: transform7
+    100068: transform8
+    100070: transform9
+    400000: buff_body_lp
+    400002: buff_horn_r_l_lp
+    400004: buff_horn_r_l_lp1
+    400006: climb_neck
+    400008: climb_rear
+    400010: climb_ribs
+    400012: crystal_head
+    400014: crystal_rear
+    400016: crystal_ribs
+    400018: crystal_shoulder
+    400020: //RootNode
+    400022: tall_l_head
+    400024: tall_l_neck_l
+    400026: tall_l_neck_r
+    400028: tall_m_neck
+    400030: tall_m_rear
+    400032: tall_m_ribs
+    400034: tall_s_rear_l
+    400036: tall_s_rear_r
+    400038: transform1
+    400040: transform10
+    400042: transform11
+    400044: transform12
+    400046: transform13
+    400048: transform14
+    400050: transform15
+    400052: transform16
+    400054: transform17
+    400056: transform2
+    400058: transform3
+    400060: transform4
+    400062: transform5
+    400064: transform6
+    400066: transform7
+    400068: transform8
+    400070: transform9
+    2100000: lambert1
+    2100002: lambert6
+    2100004: tall_climb
+    2100006: climable
+    2300000: buff_horn_r_l_lp1
+    3300000: buff_horn_r_l_lp1
+    4300000: buff_horn_r_l_lp1
+    6400000: buff_horn_r_l_lp1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
