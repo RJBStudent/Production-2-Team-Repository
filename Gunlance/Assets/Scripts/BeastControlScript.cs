@@ -59,7 +59,6 @@ public class BeastControlScript : MonoBehaviour {
             Quaternion toDirection = Quaternion.LookRotation(targetDirection);
             transform.rotation = Quaternion.Lerp(transform.rotation, toDirection, Time.deltaTime * beastValues.rotationSpeed);
         }
-        Debug.Log("pos: " + targetNode + " rot: " + targetRotateNode);
 
     }
 }

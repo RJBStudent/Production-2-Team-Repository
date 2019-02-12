@@ -15,6 +15,8 @@ public class PlayerMovementScript : MonoBehaviour {
     [SerializeField] float explodeTime;
     [SerializeField] float upwardsSideForce;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask beastLayer;
+    [SerializeField] LayerMask crystalLayer;
     [SerializeField] Transform groundCheck;
     [SerializeField] int maxShots;
 
@@ -24,7 +26,10 @@ public class PlayerMovementScript : MonoBehaviour {
     Rigidbody thisRB;
     Vector3 lastVelocity;
 
+
+    //Explode variables
     float explodeInput = 0;
+    float lastExplodeInput = 0.0f;
     float xDirection, zDirection;
     Vector3 camForward, camRight;
     bool addedForce;
@@ -38,17 +43,25 @@ public class PlayerMovementScript : MonoBehaviour {
     bool gliding = false;
     Vector3 velocityInfluence;
     [SerializeField] float basedGlideSpeed, incrementedGlideSpeed;
+    [SerializeField] GameObject gliderTemp;
 
     //Jump Variables
     [SerializeField] float jumpForce;
     float jumpInput = 0.0f;
     float lastJumpInput = 0.0f;
 
-	// Use this for initialization
-	void Start ()
+    //Light Variables
+    [SerializeField] GameObject thisLight;
+    Transform lightTransform;
+
+    // Use this for initialization
+    void Start ()
     {
         thisRB = GetComponent<Rigidbody>();
         thisCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        thisLight.SetActive(false);
+        lightTransform = thisLight.transform;
+        gliderTemp.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -67,7 +80,10 @@ public class PlayerMovementScript : MonoBehaviour {
         xDirection = Input.GetAxis("Horizontal");
         zDirection = Input.GetAxis("Vertical");
 
-        explodeInput = Input.GetAxisRaw("ExplodeInput");
+        if (Input.GetAxisRaw("ExplodeInput") != lastExplodeInput)
+        { explodeInput = Input.GetAxisRaw("ExplodeInput");  lastExplodeInput = explodeInput; }
+        else
+        { explodeInput = 0.0f;  }
         glideInput = Input.GetAxisRaw("GlideInput");
 
         if (Input.GetAxisRaw("Jump") != lastJumpInput)
@@ -86,7 +102,13 @@ public class PlayerMovementScript : MonoBehaviour {
         camForward.Normalize();
         camRight.Normalize();
         Vector3 jumpVelocity = new Vector3(0, thisRB.velocity.y, 0);
-        if (!addedForce && !inAir)
+
+        if (gliding)
+        {
+
+            thisRB.velocity = Vector3.Lerp(thisRB.velocity, thisRB.velocity.normalized + camForward * ((zDirection < 0f) ? basedGlideSpeed : zDirection + incrementedGlideSpeed) * airMovementSpeed + jumpVelocity, Time.deltaTime);
+        }
+        else if (!addedForce && !inAir)
         {
             thisRB.velocity = camForward * zDirection * playerSpeed + camRight * xDirection * playerSpeed + jumpVelocity;
         }
@@ -95,10 +117,7 @@ public class PlayerMovementScript : MonoBehaviour {
             thisRB.velocity = Vector3.Lerp(thisRB.velocity, thisRB.velocity.normalized + camForward * zDirection * airMovementSpeed + camRight * xDirection * airMovementSpeed, Time.deltaTime);
             thisRB.velocity = thisRB.velocity;
         }
-        else if(gliding)
-        {
-            thisRB.velocity = Vector3.Lerp(thisRB.velocity, thisRB.velocity.normalized + camForward * ((zDirection < 0f) ? basedGlideSpeed : zDirection + incrementedGlideSpeed) * airMovementSpeed + jumpVelocity, Time.deltaTime);
-        }
+        
 
 
         if (Mathf.Abs(zDirection) > 0.65 || Mathf.Abs( xDirection ) > 0.65)
@@ -139,7 +158,6 @@ public class PlayerMovementScript : MonoBehaviour {
                 {
                     xValue = Mathf.Clamp(xValue * 2f, xValue * 2f, 0.75f);
                 }
-
             }
 
             sideExplosion.position = camForward * (-zValue) + camRight * (-xValue) + transform.position;
@@ -176,7 +194,7 @@ public class PlayerMovementScript : MonoBehaviour {
     void GroundCheck()
     {
         hitCollide = null;
-        hitCollide = Physics.OverlapSphere(groundCheck.position, 0.21f, groundLayer);
+        hitCollide = Physics.OverlapSphere(groundCheck.position, 0.5f, groundLayer);
         if(hitCollide.Length > 0)
         {
             inAir = false;
@@ -185,6 +203,14 @@ public class PlayerMovementScript : MonoBehaviour {
         else
         {
             inAir = true;
+        }
+
+        for(int i = 0; i < hitCollide.Length; i++)
+        {
+            if(beastLayer==(beastLayer | (1 << hitCollide[i].gameObject.layer)))
+            {
+
+            }
         }
 
     }
@@ -231,11 +257,23 @@ public class PlayerMovementScript : MonoBehaviour {
         {
             gliding = false;
         }
+
+        //Render Glider
+        if(gliding)
+        {
+            gliderTemp.SetActive(true);
+        }
+        else
+        {
+            gliderTemp.SetActive(false);
+        }
     }
 
     IEnumerator ExplodeTime(float time)
     {
         addedForce = true;
+        thisLight.SetActive(true);
+        lightTransform.position = transform.position;
         yield return new WaitForSecondsRealtime(time);
         addedForce = false;
     }

@@ -1,0 +1,178 @@
+fileFormatVersion: 2
+guid: ceb1a75b205affa4f973bb944dddd074
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: buff_body
+    100002: buff_horns
+    100004: climable_l_neck
+    100006: climable_l_rear
+    100008: climable_t_back_lower
+    100010: climable_t_neck
+    100012: climable_t_rear_l
+    100014: climable_t_rear_r
+    100016: climable_t_shoulder_l
+    100018: climable_t_shoulder_r
+    100020: climbable_l_back
+    100022: climbable_t_back_mid
+    100024: climbable_t_back_upper
+    100026: mineral_back_r
+    100028: mineral_neck
+    100030: mineral_rear
+    100032: mineral_shoulder_l
+    100034: //RootNode
+    400000: buff_body
+    400002: buff_horns
+    400004: climable_l_neck
+    400006: climable_l_rear
+    400008: climable_t_back_lower
+    400010: climable_t_neck
+    400012: climable_t_rear_l
+    400014: climable_t_rear_r
+    400016: climable_t_shoulder_l
+    400018: climable_t_shoulder_r
+    400020: climbable_l_back
+    400022: climbable_t_back_mid
+    400024: climbable_t_back_upper
+    400026: mineral_back_r
+    400028: mineral_neck
+    400030: mineral_rear
+    400032: mineral_shoulder_l
+    400034: //RootNode
+    2100000: tall_climb
+    2100002: climable
+    2100004: lambert6
+    2100006: lambert1
+    2300000: buff_body
+    2300002: buff_horns
+    2300004: climable_l_neck
+    2300006: climable_l_rear
+    2300008: climable_t_back_lower
+    2300010: climable_t_neck
+    2300012: climable_t_rear_l
+    2300014: climable_t_rear_r
+    2300016: climable_t_shoulder_l
+    2300018: climable_t_shoulder_r
+    2300020: climbable_l_back
+    2300022: climbable_t_back_mid
+    2300024: climbable_t_back_upper
+    2300026: mineral_back_r
+    2300028: mineral_neck
+    2300030: mineral_rear
+    2300032: mineral_shoulder_l
+    3300000: buff_body
+    3300002: buff_horns
+    3300004: climable_l_neck
+    3300006: climable_l_rear
+    3300008: climable_t_back_lower
+    3300010: climable_t_neck
+    3300012: climable_t_rear_l
+    3300014: climable_t_rear_r
+    3300016: climable_t_shoulder_l
+    3300018: climable_t_shoulder_r
+    3300020: climbable_l_back
+    3300022: climbable_t_back_mid
+    3300024: climbable_t_back_upper
+    3300026: mineral_back_r
+    3300028: mineral_neck
+    3300030: mineral_rear
+    3300032: mineral_shoulder_l
+    4300000: climable_t_shoulder_r
+    4300002: climable_t_shoulder_l
+    4300004: climable_t_rear_r
+    4300006: climbable_t_back_mid
+    4300008: climbable_t_back_upper
+    4300010: climable_t_rear_l
+    4300012: climable_t_neck
+    4300014: climable_t_back_lower
+    4300016: climbable_l_back
+    4300018: climable_l_neck
+    4300020: climable_l_rear
+    4300022: mineral_rear
+    4300024: mineral_neck
+    4300026: mineral_shoulder_l
+    4300028: mineral_back_r
+    4300030: buff_horns
+    4300032: buff_body
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
