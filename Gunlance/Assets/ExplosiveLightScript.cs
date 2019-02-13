@@ -13,6 +13,7 @@ public class ExplosiveLightScript : MonoBehaviour {
 
     bool intense = true;
 
+    //gets light component and sets up necessary variables
     void Start()
     {
         thisLight = GetComponent<Light>();
@@ -21,6 +22,7 @@ public class ExplosiveLightScript : MonoBehaviour {
     // Use this for initialization
     void OnEnable ()
     {
+        //When enabled start light intensity routine
         StartCoroutine(LifeLine());	
 	}
 

@@ -24,7 +24,6 @@ public class PlayerMovementScript : MonoBehaviour {
 
     Camera thisCamera;
     Rigidbody thisRB;
-    Vector3 lastVelocity;
 
 
     //Explode variables
@@ -44,6 +43,7 @@ public class PlayerMovementScript : MonoBehaviour {
     Vector3 velocityInfluence;
     [SerializeField] float basedGlideSpeed, incrementedGlideSpeed;
     [SerializeField] GameObject gliderTemp;
+    [SerializeField] float fallSpeedGliding;
 
     //Jump Variables
     [SerializeField] float jumpForce;
@@ -119,7 +119,7 @@ public class PlayerMovementScript : MonoBehaviour {
         }
         
 
-
+        //Spooky if statement
         if (Mathf.Abs(zDirection) > 0.65 || Mathf.Abs( xDirection ) > 0.65)
         {
             float zValue = zDirection, xValue = xDirection;
@@ -174,11 +174,12 @@ public class PlayerMovementScript : MonoBehaviour {
         Vector3 targetDirection;
         
         targetDirection = transform.position + (camForward * 5);
-        
-        transform.LookAt(targetDirection);
-        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
-        
-        lastVelocity = new Vector3(targetDirection.x, transform.position.y, targetDirection.z);
+
+        if (thisRB.velocity.magnitude > 0.5f)
+        {
+            transform.LookAt(targetDirection);
+            transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
+        }
 
 
         thisCamera.fieldOfView = (thisRB.velocity.magnitude > 10) ?Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView + FOVSpeed, Time.deltaTime) : Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView - FOVSpeed, Time.deltaTime);
@@ -205,13 +206,15 @@ public class PlayerMovementScript : MonoBehaviour {
             inAir = true;
         }
 
-        for(int i = 0; i < hitCollide.Length; i++)
+        for(int i = 0; i < hitCollide.Length && !inAir; i++)
         {
-            if(beastLayer==(beastLayer | (1 << hitCollide[i].gameObject.layer)))
+            if((groundLayer & 1 << hitCollide[i].gameObject.layer) != 0)
             {
-
+                transform.parent = hitCollide[i].gameObject.transform;
+                return;
             }
         }
+        
 
     }
 
@@ -249,8 +252,9 @@ public class PlayerMovementScript : MonoBehaviour {
         //Always in direction of camera forward, left stick controlls left and right movement
         if(glideInput == 1.0f && !addedForce && inAir)
         {
-            thisRB.velocity = new Vector3(thisRB.velocity.x, thisRB.velocity.y / 2, thisRB.velocity.z);
-           
+            //cut the falling velocity by fallSpeedGliding
+            thisRB.velocity = new Vector3(thisRB.velocity.x, thisRB.velocity.y / fallSpeedGliding, thisRB.velocity.z);
+                       
             gliding = true;
         }
         else
@@ -269,11 +273,22 @@ public class PlayerMovementScript : MonoBehaviour {
         }
     }
 
+    //How long does the force get added
     IEnumerator ExplodeTime(float time)
     {
         addedForce = true;
+
+        //Set flash animation for explosion
         thisLight.SetActive(true);
         lightTransform.position = transform.position;
+
+        //Check if the explosion hits any crystals nearby
+        hitCollide = null;
+        hitCollide = Physics.OverlapSphere(groundCheck.position, 0.5f, crystalLayer);
+        for(int i = 0; i < hitCollide.Length; i++)
+        {            
+           // hitCollide.getCo
+        }
         yield return new WaitForSecondsRealtime(time);
         addedForce = false;
     }
@@ -284,6 +299,6 @@ public class PlayerMovementScript : MonoBehaviour {
         if (addedForce)
         {
             Gizmos.DrawSphere(originalExplodePosition, explodeRadius);
-    }
+        }
     }
 }

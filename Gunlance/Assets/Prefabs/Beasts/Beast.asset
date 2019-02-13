@@ -21,4 +21,4 @@ MonoBehaviour:
   nodeRadius: 1
   nodeRotateRadius: 2
   speed: 2
-  rotationSpeed: 5
+  rotationSpeed: 0.5
