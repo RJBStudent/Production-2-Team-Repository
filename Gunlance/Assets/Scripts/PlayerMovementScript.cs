@@ -37,6 +37,8 @@ public class PlayerMovementScript : MonoBehaviour {
     bool inAir = false;
     float distanceBelow;
 
+    float crystalsOnScene = 0;
+
     //Glide Variables
     float glideInput = 0;
     bool gliding = false;
@@ -62,6 +64,7 @@ public class PlayerMovementScript : MonoBehaviour {
         thisLight.SetActive(false);
         lightTransform = thisLight.transform;
         gliderTemp.SetActive(false);
+        LoadLevel();
     }
 	
 	// Update is called once per frame
@@ -73,6 +76,10 @@ public class PlayerMovementScript : MonoBehaviour {
         MovePlayer();
         ExplodeDirection();
         Glide();
+        if (crystalsOnScene <= 0)
+        {
+            Debug.Log("WIN");
+        }
 	}
 
     void GetInput ()
@@ -89,6 +96,17 @@ public class PlayerMovementScript : MonoBehaviour {
         if (Input.GetAxisRaw("Jump") != lastJumpInput)
         { jumpInput = Input.GetAxisRaw("Jump"); lastJumpInput = jumpInput; }
         else { jumpInput = 0; }
+
+        if(Input.GetKey(KeyCode.Return))
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            GetComponent<MeshRenderer>().enabled = true;
+            gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
+        }
     }
 
     void MovePlayer()
@@ -220,8 +238,7 @@ public class PlayerMovementScript : MonoBehaviour {
 
     void ExplodeDirection()
     {
-
-        if(currentShot > maxShots)
+        if(currentShot >= maxShots-1)
         {
             return;
         }
@@ -284,10 +301,12 @@ public class PlayerMovementScript : MonoBehaviour {
 
         //Check if the explosion hits any crystals nearby
         hitCollide = null;
-        hitCollide = Physics.OverlapSphere(groundCheck.position, 0.5f, crystalLayer);
+        hitCollide = Physics.OverlapSphere(originalExplodePosition, explodeRadius, crystalLayer);
+        Debug.Log("EXPLODE? " + hitCollide.Length);
         for(int i = 0; i < hitCollide.Length; i++)
-        {            
-           // hitCollide.getCo
+        {
+            Destroy(hitCollide[i].gameObject);
+            crystalsOnScene--;
         }
         yield return new WaitForSecondsRealtime(time);
         addedForce = false;
@@ -300,5 +319,12 @@ public class PlayerMovementScript : MonoBehaviour {
         {
             Gizmos.DrawSphere(originalExplodePosition, explodeRadius);
         }
+    }
+
+    void LoadLevel()
+    {
+        GameObject[] crystalList = GameObject.FindGameObjectsWithTag("Crystal");
+        crystalsOnScene = crystalList.Length;
+
     }
 }
