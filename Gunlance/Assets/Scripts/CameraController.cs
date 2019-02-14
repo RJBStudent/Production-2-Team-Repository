@@ -15,6 +15,12 @@ public class CameraController : MonoBehaviour
     float xMovement = 0, yMovement = 0;
 
     Vector3 newPos, pos;
+
+
+    //Temporary Debug Values
+    bool removeCameraControl = false;
+    float xPos, zPos;
+
     
     // Use this for initialization
     void Start()
@@ -26,23 +32,41 @@ public class CameraController : MonoBehaviour
     {
 
         GetInput();
-        UpdatePosition();
+        //Dont move the camera with the player if the control is removed
+        if (!removeCameraControl)
+        {
+            UpdatePosition();
+        }
+        else
+        {
+            UpdateCamera();
+        }
     }
 
     void GetInput()
     {
+        //Which direction to move in
         xMovement += Input.GetAxis("Mouse X") * xSpeed;
 
-        
-
-        //Only move when the cannon angle is within these bounds
-        // if (-cannonAngle >= heightRestrictMin && -cannonAngle <= heightRestrictMax)
-        //{
         yMovement -= Input.GetAxis("Mouse Y") * ySpeed;
-        //}
 
-        yMovement = Mathf.Clamp(yMovement, heightRestrictMin, heightRestrictMax);
+        //Temporary Movement
+        xPos = Input.GetAxis("Horizontal");
+        zPos = Input.GetAxis("Vertical");
 
+
+        //TEMPORARY FILM CONTROL
+        if(Input.GetKey(KeyCode.C))
+        {
+            removeCameraControl = true;
+        }
+
+        //Clamp how high and low the camera can go
+        if (!removeCameraControl)
+        {
+            yMovement = Mathf.Clamp(yMovement, heightRestrictMin, heightRestrictMax);
+        }
+        
     }
 
 
@@ -51,14 +75,25 @@ public class CameraController : MonoBehaviour
         Vector3 dir = new Vector3(0, 0, -distance);
         Quaternion rotation = Quaternion.Euler(yMovement, xMovement, 0);
 
+        //Move the position to the players position plus the offset
         newPos = playerTransform.position + rotation * dir;
         pos = Vector3.Lerp(pos, newPos, Time.deltaTime * lerpSpeed);
 
-
-
-        //transform.position = playerTransform.position + rotation * dir;
+        
         transform.position = pos;
         transform.LookAt(playerTransform.position);
+    }
+
+    //Camera FILM TEMPORARY
+     void UpdateCamera()
+    {
+
+        Quaternion rotation = Quaternion.Euler(yMovement, xMovement, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * lerpSpeed);
+
+        transform.Translate(Vector3.right * xPos / lerpSpeed);
+        transform.Translate(transform.up * zPos / lerpSpeed, Space.World);
+        
 
     }
 }

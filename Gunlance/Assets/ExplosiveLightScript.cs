@@ -30,16 +30,19 @@ public class ExplosiveLightScript : MonoBehaviour {
     {
         if (intense)
         {
+            //Increase intensity if in alive coroutine
             thisLight.intensity += rateOfIntensityPerFrame;
         }
         else
         {
+            //decrease intensity in death coroutine
             thisLight.intensity -= rateOfDecayIntensityPerFrame;
         }
     }
 
     IEnumerator LifeLine()
     {
+        //Set boolean for whether it should increment intensity
         intense = true;
         yield return new WaitForSeconds(lifeSpan);
         StartCoroutine(DieSpeed());
@@ -47,6 +50,7 @@ public class ExplosiveLightScript : MonoBehaviour {
 
     IEnumerator DieSpeed()
     {
+        //Set boolean for whether it should decrement intensity
         intense = false;
         yield return new WaitForSeconds(dieSpan);
         thisLight.intensity = 1;

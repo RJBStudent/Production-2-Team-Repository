@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerMovementScript : MonoBehaviour {
 
-    [SerializeField] Transform cameraTransform;
+
+    [SerializeField] Transform cameraTransform; 
     [SerializeField] float playerSpeed;
     [SerializeField] float airMovementSpeed;
     [SerializeField] float FOVSpeed;
@@ -25,7 +26,9 @@ public class PlayerMovementScript : MonoBehaviour {
     Camera thisCamera;
     Rigidbody thisRB;
 
-    [SerializeField] Animator clip;
+    [SerializeField] Animator clip; //TEMPORARY FOR TRAILER
+    bool removeControl = false; // TEMPORARY FOR TRAILER
+
 
     //Explode variables
     float explodeInput = 0;
@@ -62,9 +65,13 @@ public class PlayerMovementScript : MonoBehaviour {
     {
         thisRB = GetComponent<Rigidbody>();
         thisCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        
+        //Turn off light and glider for temporary animation
         thisLight.SetActive(false);
         lightTransform = thisLight.transform;
         gliderTemp.SetActive(false);
+
+        //Load crystals into scene
         LoadLevel();
     }
 	
@@ -72,32 +79,48 @@ public class PlayerMovementScript : MonoBehaviour {
 	void FixedUpdate ()
     {
         GroundCheck();
+
         GetInput();
+
+        //Temporary camera control
+        if (removeControl)
+            return;
+
         Jump();
         MovePlayer();
         ExplodeDirection();
         Glide();
+
+        //Temporary win condition
         if (crystalsOnScene <= 0)
         {
             Debug.Log("WIN");
         }
 	}
 
+
+    //Input for controller
     void GetInput ()
     {
+        //Left stick movment
         xDirection = Input.GetAxis("Horizontal");
         zDirection = Input.GetAxis("Vertical");
 
+        //On press Explode
         if (Input.GetAxisRaw("ExplodeInput") != lastExplodeInput)
         { explodeInput = Input.GetAxisRaw("ExplodeInput");  lastExplodeInput = explodeInput; }
         else
         { explodeInput = 0.0f;  }
+
+        //On hold Glide
         glideInput = Input.GetAxisRaw("GlideInput");
 
+        //On press jump
         if (Input.GetAxisRaw("Jump") != lastJumpInput)
         { jumpInput = Input.GetAxisRaw("Jump"); lastJumpInput = jumpInput; }
         else { jumpInput = 0; }
 
+        //Temporary Turn off render for video
         if(Input.GetKey(KeyCode.Return))
         {
             GetComponent<MeshRenderer>().enabled = false; MeshRenderer[] meshs = gameObject.GetComponentsInChildren<MeshRenderer>();
@@ -116,15 +139,24 @@ public class PlayerMovementScript : MonoBehaviour {
             }
         }
 
+        //Temporary animation for pick up gun
         if(Input.GetKey(KeyCode.P))
         {
             Debug.Log("OUCH");
             clip.SetTrigger("Anim");
         }
+
+        //Temporary Camera remove control from player
+        if (Input.GetKey(KeyCode.C))
+        {
+            removeControl = true;
+        }
     }
 
+    //Update player position
     void MovePlayer()
     {
+        //Camera forward and right directions
         camForward = cameraTransform.forward;
         camRight = cameraTransform.right;
 
@@ -133,25 +165,29 @@ public class PlayerMovementScript : MonoBehaviour {
 
         camForward.Normalize();
         camRight.Normalize();
+
+        //Current Y velocity
         Vector3 jumpVelocity = new Vector3(0, thisRB.velocity.y, 0);
 
-        if (gliding)
+        if (gliding)   
         {
-
+            //If gliding always have velocity forward of camera and make it faster if the left stick is being pushed forward, slower if backwards
             thisRB.velocity = Vector3.Lerp(thisRB.velocity, thisRB.velocity.normalized + camForward * ((zDirection < 0f) ? basedGlideSpeed : zDirection + incrementedGlideSpeed) * airMovementSpeed + jumpVelocity, Time.deltaTime);
         }
         else if (!addedForce && !inAir)
         {
+            //Ground Movement
             thisRB.velocity = camForward * zDirection * playerSpeed + camRight * xDirection * playerSpeed + jumpVelocity;
         }
         else if(addedForce || inAir)
         {
+            //Falling velocity
             thisRB.velocity = Vector3.Lerp(thisRB.velocity, thisRB.velocity.normalized + camForward * zDirection * airMovementSpeed + camRight * xDirection * airMovementSpeed, Time.deltaTime);
-            thisRB.velocity = thisRB.velocity;
+           
         }
         
 
-        //Spooky if statement
+        //Spooky if statement That clamps movement of the explosion position. If it is too close to zero it will explode up too much
         if (Mathf.Abs(zDirection) > 0.65 || Mathf.Abs( xDirection ) > 0.65)
         {
             float zValue = zDirection, xValue = xDirection;
@@ -171,7 +207,8 @@ public class PlayerMovementScript : MonoBehaviour {
             {
                 xValue = Mathf.Clamp(xValue * 2f, xValue * 2f, 0.9f);
             }
-
+            
+            //Clamp again if it is both greater the than value, this fixes it still going to high if it is too close to the character
             if(Mathf.Abs(xValue) > 0.65f && Mathf.Abs(zValue) > 0.65f)
             {
                 if (zDirection < -0.5)
@@ -192,31 +229,36 @@ public class PlayerMovementScript : MonoBehaviour {
                 }
             }
 
+            //Set the position of the expolsion to the new clamped values
             sideExplosion.position = camForward * (-zValue) + camRight * (-xValue) + transform.position;
             sideExplosion.position = new Vector3(sideExplosion.position.x, transform.position.y - 1f, sideExplosion.position.z);
 
         }
         else
         {
-           // sideExplosion.position = camForward   + camRight + transform.position + sideExplosion.position; //So this never increments..??
+            //Put it below the player directly otherwise
             sideExplosion.position = new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z);
 
         }
 
         Vector3 targetDirection;
         
+        //Where the player should look
         targetDirection = transform.position + (camForward * 5);
 
+        //If the player isn't moving keep the rotation as it was
         if (thisRB.velocity.magnitude > 0.5f)
         {
+            //Update new rotation if player is moving
             transform.LookAt(targetDirection);
             transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
         }
 
-
+        //If the players velocity is grater than 10 increase the FOV or decrease it otherwise
         thisCamera.fieldOfView = (thisRB.velocity.magnitude > 10) ?Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView + FOVSpeed, Time.deltaTime) : Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView - FOVSpeed, Time.deltaTime);
         thisCamera.fieldOfView = Mathf.Clamp(thisCamera.fieldOfView, minFOV, maxFOV);
 
+        //If the players position is too low respawn at 1 1 1 TEMPORARY
         if(transform.position.y < -5f)
         {
             transform.position = new Vector3(1, 1, 1);
@@ -224,10 +266,12 @@ public class PlayerMovementScript : MonoBehaviour {
         }
     }
 
+    //Check what is under the player
     void GroundCheck()
     {
         hitCollide = null;
         hitCollide = Physics.OverlapSphere(groundCheck.position, 0.5f, groundLayer);
+        //If this collision is greater than 0 it is on a surface
         if(hitCollide.Length > 0)
         {
             inAir = false;
@@ -238,6 +282,7 @@ public class PlayerMovementScript : MonoBehaviour {
             inAir = true;
         }
 
+        //check if the player should attach itself to the ground or beast
         for(int i = 0; i < hitCollide.Length && !inAir; i++)
         {
             if((groundLayer & 1 << hitCollide[i].gameObject.layer) != 0)
@@ -250,14 +295,16 @@ public class PlayerMovementScript : MonoBehaviour {
 
     }
 
+    //When the input is received for explode propell with motion
     void ExplodeDirection()
     {
+        //Dont do anything if the player is out of shots
         if(currentShot >= maxShots-1)
         {
             return;
         }
 
-        
+        //Create explosion where the sidePosition is
         if(explodeInput == 1.0 && !addedForce && !gliding)
         {
             thisRB.velocity = Vector3.zero;
@@ -269,6 +316,7 @@ public class PlayerMovementScript : MonoBehaviour {
         
     }
 
+    //Add jump force to velocity when input pressed
     void Jump()
     {
         if(jumpInput != 0.0f && !inAir)
@@ -277,6 +325,7 @@ public class PlayerMovementScript : MonoBehaviour {
         }
     }
 
+    //Glide while button held
     void Glide()
     {
 
@@ -316,7 +365,8 @@ public class PlayerMovementScript : MonoBehaviour {
         //Check if the explosion hits any crystals nearby
         hitCollide = null;
         hitCollide = Physics.OverlapSphere(originalExplodePosition, explodeRadius, crystalLayer);
-        Debug.Log("EXPLODE? " + hitCollide.Length);
+
+        //Destroy any crystals hit
         for(int i = 0; i < hitCollide.Length; i++)
         {
             Destroy(hitCollide[i].gameObject);
@@ -326,6 +376,7 @@ public class PlayerMovementScript : MonoBehaviour {
         addedForce = false;
     }
 
+    //Debugging for where the explosion is 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -335,6 +386,7 @@ public class PlayerMovementScript : MonoBehaviour {
         }
     }
 
+    //Loads all the crystals on new level
     void LoadLevel()
     {
         GameObject[] crystalList = GameObject.FindGameObjectsWithTag("Crystal");
