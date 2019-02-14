@@ -25,6 +25,7 @@ public class PlayerMovementScript : MonoBehaviour {
     Camera thisCamera;
     Rigidbody thisRB;
 
+    [SerializeField] Animator clip;
 
     //Explode variables
     float explodeInput = 0;
@@ -99,13 +100,26 @@ public class PlayerMovementScript : MonoBehaviour {
 
         if(Input.GetKey(KeyCode.Return))
         {
-            GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
+            GetComponent<MeshRenderer>().enabled = false; MeshRenderer[] meshs = gameObject.GetComponentsInChildren<MeshRenderer>();
+            for (int i = 0; i < meshs.Length; i++)
+            {
+                meshs[i].enabled = false;
+            }
         }
         else
         {
             GetComponent<MeshRenderer>().enabled = true;
-            gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
+            MeshRenderer[] meshs =  gameObject.GetComponentsInChildren<MeshRenderer>();
+            for(int i = 0; i < meshs.Length; i++)
+            {
+                meshs[i].enabled = true;
+            }
+        }
+
+        if(Input.GetKey(KeyCode.P))
+        {
+            Debug.Log("OUCH");
+            clip.SetTrigger("Anim");
         }
     }
 
