@@ -11,11 +11,12 @@ public class Bourdelais_CameraController : MonoBehaviour
     [SerializeField] float xSpeed, ySpeed;    
     [SerializeField] float lerpSpeed;
     [SerializeField] float rotateAround = 70f;
+    [SerializeField] float rotateAroundVertical = 45f;
     [Header("Camera Clipping Values")]
     [SerializeField] float minimumClipDistance;
     [SerializeField] LayerMask cameraCollideMask;
-    [SerializeField] float maxDistance, minDistance;
-    [SerializeField] float distanceUp;
+    [SerializeField] float maxDistance = 3, minDistance = 1;
+    [SerializeField] float distanceUp = 3f;
 
     float xMovement = 0, yMovement = 0;
 
@@ -24,7 +25,7 @@ public class Bourdelais_CameraController : MonoBehaviour
     //Collision Values
     Vector3 camMask;
     RaycastHit wallHit;
-    float distanceAway;
+    float distanceAway = 3f;
 
     //Temporary Debug Values
     bool removeCameraControl = false;
@@ -36,6 +37,7 @@ public class Bourdelais_CameraController : MonoBehaviour
     {
         rotateAround = playerTransform.eulerAngles.y - 45f;
         wallHit = new RaycastHit();
+        distanceAway = 3.0f;
     }
 
     // Update is called once per frame
@@ -59,8 +61,20 @@ public class Bourdelais_CameraController : MonoBehaviour
         //Which direction to move in
         xMovement = Input.GetAxis("Mouse X") * xSpeed;
 
-        yMovement = Input.GetAxis("Mouse Y") * ySpeed;
+        yMovement = -Input.GetAxis("Mouse Y") * ySpeed;
+       
 
+        if(xMovement < 0.1f && xMovement > -0.1f)
+        {
+            xMovement = 0.0f;
+        }
+
+
+        if (yMovement < 0.1f && yMovement > -0.1f)
+        {
+            yMovement = 0.0f;
+        }
+        Debug.Log(yMovement / ySpeed);
         //Temporary Movement
         xPos = Input.GetAxis("Horizontal");
         zPos = Input.GetAxis("Vertical");
@@ -75,7 +89,7 @@ public class Bourdelais_CameraController : MonoBehaviour
         //Clamp how high and low the camera can go
         if (!removeCameraControl)
         {
-            yMovement = Mathf.Clamp(yMovement, heightRestrictMin, heightRestrictMax);
+            rotateAroundVertical = Mathf.Clamp(rotateAroundVertical, heightRestrictMin, heightRestrictMax);
         }
         
     }
@@ -85,14 +99,14 @@ public class Bourdelais_CameraController : MonoBehaviour
     {
         Vector3 dir = new Vector3(0, 0, -distanceAway);
         //Quaternion rotation = Quaternion.Euler(yMovement, xMovement, 0);
-        Quaternion rotation = Quaternion.Euler(55f, rotateAround, 0);
+        Quaternion rotation = Quaternion.Euler(rotateAroundVertical, rotateAround, 0);
         Vector3 rotateVector = rotation * Vector3.one;
 
         //Move the position to the players position plus the offset
-        newPos = playerTransform.position + Vector3.up * distanceUp - rotateVector * distanceAway;
-        camMask = playerTransform.position + Vector3.up * distanceUp - rotateVector * distanceAway;
-        //newPos = playerTransform.position + rotation * dir;
-        //camMask = (playerTransform.position + rotation * dir);
+       // newPos = playerTransform.position + Vector3.up - rotateVector;
+        //camMask = playerTransform.position + Vector3.up - rotateVector;
+        newPos = playerTransform.position + rotation * dir;
+        camMask = (playerTransform.position + rotation * dir);
 
         CameraRayCollide(playerTransform.position);
 
@@ -112,9 +126,20 @@ public class Bourdelais_CameraController : MonoBehaviour
             rotateAround = (rotateAround + 360f);
         }
 
+        //if (rotateAroundVertical > 360)
+        //{
+        //    rotateAroundVertical = 0f;
+        //}
+        //else if (rotateAroundVertical < 0f)
+        //{
+        //    rotateAroundVertical = (rotateAroundVertical + 360f);
+        //}
+
         rotateAround += xMovement * lerpSpeed * Time.deltaTime;
-        distanceAway = Mathf.Clamp(distanceAway += yMovement, minDistance, maxDistance);
-        
+        rotateAroundVertical += yMovement * lerpSpeed * Time.deltaTime;
+        //distanceAway = Mathf.Clamp(distanceAway += yMovement, minDistance, maxDistance);
+        //distanceUp = Mathf.Clamp(distanceUp + yMovement, minDistance, maxDistance);
+
     }
 
     //Camera FILM TEMPORARY
@@ -135,8 +160,6 @@ public class Bourdelais_CameraController : MonoBehaviour
 
         if (Physics.Linecast(offset, camMask, out wallHit, cameraCollideMask))
         {
-
-            Debug.Log("Huh");
             newPos = new Vector3(wallHit.point.x + wallHit.normal.x * 0.5f, newPos.y, wallHit.point.z + wallHit.normal.z * 0.5f);
         }
     }

@@ -1216,13 +1216,14 @@ MonoBehaviour:
   ySpeed: 20
   lerpSpeed: 5
   rotateAround: 70
+  rotateAroundVertical: 45
   minimumClipDistance: 1
   cameraCollideMask:
     serializedVersion: 2
     m_Bits: 513
-  maxDistance: 7
-  minDistance: 3
-  distanceUp: 2
+  maxDistance: 3
+  minDistance: 1
+  distanceUp: 1
 --- !u!1001 &554349342
 Prefab:
   m_ObjectHideFlags: 0
@@ -2156,7 +2157,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 970187321}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 1987871917}
