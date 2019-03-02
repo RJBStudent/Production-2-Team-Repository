@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14cc90507e35f2f4188217643c65addf, type: 3}
   m_Name: 
@@ -1194,17 +1194,25 @@ MonoBehaviour:
   playerTransform: {fileID: 1987871917}
   heightRestrictMax: 70
   heightRestrictMin: 0
-  xSpeed: 3
-  ySpeed: 3
-  distance: 10
+  xSpeed: 20
+  ySpeed: 20
   lerpSpeed: 5
+  rotateAround: 70
+  rotateAroundVertical: 45
+  minimumClipDistance: 0
+  cameraCollideMask:
+    serializedVersion: 2
+    m_Bits: 0
+  maxDistance: 3
+  minDistance: 1
+  distanceUp: 3
 --- !u!114 &534669907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e444f0f723fb4a94693137a56365b588, type: 3}
   m_Name: 

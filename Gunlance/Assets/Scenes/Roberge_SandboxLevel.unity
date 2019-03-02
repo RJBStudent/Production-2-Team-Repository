@@ -2894,7 +2894,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: -0, y: 0.76730853, z: -0, w: 0.64127815}
-  m_LocalPosition: {x: -359.51, y: 25.86, z: 164.07}
+  m_LocalPosition: {x: -183.4, y: 25.86, z: 164.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2914,10 +2914,18 @@ MonoBehaviour:
   playerTransform: {fileID: 1170225228}
   heightRestrictMax: 70
   heightRestrictMin: 0
-  xSpeed: 3
-  ySpeed: 3
-  distance: 10
+  xSpeed: 20
+  ySpeed: 20
   lerpSpeed: 5
+  rotateAround: 70
+  rotateAroundVertical: 45
+  minimumClipDistance: 1
+  cameraCollideMask:
+    serializedVersion: 2
+    m_Bits: 513
+  maxDistance: 5
+  minDistance: 1
+  distanceAway: 7
 --- !u!1001 &550536840
 Prefab:
   m_ObjectHideFlags: 0
@@ -5978,6 +5986,16 @@ MonoBehaviour:
   fallSpeedGliding: 2
   jumpForce: 2000
   thisLight: {fileID: 893164252}
+  sliding: 0
+  startingToSlide: 0
+  slidingAngle: 45
+  slippery: {fileID: 13400000, guid: dba7b790714841f41a05eff33cfea629, type: 2}
+  collider: {fileID: 1170225225}
+  currentGroundAngle: 0
+  groundNormal: {x: 0, y: 0, z: 0}
+  slideFallOffTime: 1
+  slideFallOffVelocity: 5
+  slideMovementSpeed: 65
 --- !u!54 &1170225224
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6055,7 +6073,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1170225222}
   m_LocalRotation: {x: -0, y: 0.76730853, z: -0, w: 0.64127815}
-  m_LocalPosition: {x: -351.22748, y: 25.86, z: 162.66734}
+  m_LocalPosition: {x: -337.2, y: 25.86, z: 163.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 893164253}

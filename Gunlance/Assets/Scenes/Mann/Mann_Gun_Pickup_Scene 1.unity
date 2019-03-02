@@ -1279,10 +1279,18 @@ MonoBehaviour:
   playerTransform: {fileID: 1015034938}
   heightRestrictMax: 70
   heightRestrictMin: 0
-  xSpeed: 3
-  ySpeed: 3
-  distance: 10
+  xSpeed: 20
+  ySpeed: 20
   lerpSpeed: 5
+  rotateAround: 70
+  rotateAroundVertical: 45
+  minimumClipDistance: 1
+  cameraCollideMask:
+    serializedVersion: 2
+    m_Bits: 513
+  maxDistance: 3
+  minDistance: 1
+  distanceAway: 7
 --- !u!1001 &554349342
 Prefab:
   m_ObjectHideFlags: 0
@@ -2331,7 +2339,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1015034932}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb4401e8ad3284344997d9d0ebd62238, type: 3}
   m_Name: 
@@ -2365,6 +2373,16 @@ MonoBehaviour:
   fallSpeedGliding: 2
   jumpForce: 2000
   thisLight: {fileID: 52793133}
+  sliding: 0
+  startingToSlide: 0
+  slidingAngle: 45
+  slippery: {fileID: 13400000, guid: dba7b790714841f41a05eff33cfea629, type: 2}
+  collider: {fileID: 1015034935}
+  currentGroundAngle: 0
+  groundNormal: {x: 0, y: 0, z: 0}
+  slideFallOffTime: 1
+  slideFallOffVelocity: 5
+  slideMovementSpeed: 65
 --- !u!54 &1015034934
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2459,7 +2477,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1015034932}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 197584fe3cdd0804790af5c0c3369ab4, type: 3}
   m_Name: 
