@@ -72,7 +72,7 @@ public class CameraController : MonoBehaviour
       {
          yMovement = 0.0f;
       }
-      Debug.Log(yMovement / ySpeed);
+
       //Temporary Movement
       xPos = Input.GetAxis("Horizontal");
       zPos = Input.GetAxis("Vertical");
@@ -111,7 +111,7 @@ public class CameraController : MonoBehaviour
       pos = Vector3.Lerp(pos, newPos, Time.deltaTime * lerpSpeed);
 
 
-      transform.position = pos;
+      transform.position = newPos;
 
       transform.LookAt(playerTransform.position);
 
