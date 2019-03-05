@@ -6,7 +6,10 @@ using DG.Tweening;
 public class DavidScreenShakeScript : MonoBehaviour {
 
     Camera cam;
-
+    [SerializeField] float duration;
+    [SerializeField] float strength;
+    [SerializeField] int vibrato;
+    [SerializeField] float randomness;
 
 	// Use this for initialization
 	void Start () {
@@ -17,8 +20,8 @@ public class DavidScreenShakeScript : MonoBehaviour {
 	// Update is called once per frame
 	IEnumerator ShakeScreen() {
 
-        yield return new WaitForSeconds(1);
-        cam.DOShakePosition(1,3,10,90);
+        yield return new WaitForSeconds(3);
+        cam.DOShakePosition(duration,strength,vibrato,randomness);
 
 	}
 }

@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
    }
 
    // Update is called once per frame
-   void LateUpdate()
+   void FixedUpdate()
    {
 
       GetInput();
@@ -111,7 +111,7 @@ public class CameraController : MonoBehaviour
       pos = Vector3.Lerp(pos, newPos, Time.deltaTime * lerpSpeed);
 
 
-      transform.position = newPos;
+      transform.position = pos;
 
       transform.LookAt(playerTransform.position);
 

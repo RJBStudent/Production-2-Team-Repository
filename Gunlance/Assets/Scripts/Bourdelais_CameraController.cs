@@ -113,7 +113,7 @@ public class Bourdelais_CameraController : MonoBehaviour
         pos = Vector3.Lerp(pos, newPos, Time.deltaTime * lerpSpeed);
 
         
-        transform.position = pos;
+       // transform.position = pos;
         
         transform.LookAt(playerTransform.position);
 

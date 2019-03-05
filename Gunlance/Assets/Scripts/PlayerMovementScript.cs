@@ -123,15 +123,6 @@ public class PlayerMovementScript : MonoBehaviour
       }
    }
 
-   void Update()
-   {
-      /*
-      transform.localScale = transform.localScale;
-      transform.lossyScale.Set( 1 , 1 , 1 );
-      */
-      //ResetScale();
-   }
-
    //Input for controller
    void GetInput()
    {
@@ -331,7 +322,7 @@ public class PlayerMovementScript : MonoBehaviour
          if ((groundLayer & 1 << hitCollide[i].gameObject.layer) != 0)
          {
             scale = transform.localScale;
-            transform.parent = hitCollide[i].gameObject.transform.GetChild(0);
+            transform.parent = hitCollide[i].gameObject.transform;
             ResetScale();
             return;
          }
