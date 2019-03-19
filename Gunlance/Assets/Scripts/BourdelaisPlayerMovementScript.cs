@@ -84,6 +84,9 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
     [SerializeField] float cdeLength;
     bool cdeActive = false;
     Transform etherianInLevel;
+    [SerializeField]
+    float randomDistance;
+
 
 
 
@@ -466,11 +469,13 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
     IEnumerator CrystalDestroyEvent(float time)
     {
         cdeActive = true;
-        Vector3 forceDirection = transform.position - etherianInLevel.position;
-        forceDirection.Normalize();
+        Vector3 randomDir = RandomDirection();
+        randomDir.Normalize();
+        Vector3 forceDirection = transform.position - (etherianInLevel.position + randomDir * randomDistance);
+        //forceDirection.Normalize();
         forceDirection *= cdeForce;
         thisRB.AddForce(forceDirection);
-        Debug.Log("YEET");
+        
         yield return new WaitForSecondsRealtime(time);
         cdeActive = false;
     }
@@ -492,6 +497,16 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
         crystalsOnScene = crystalList.Length;
         etherianInLevel = GameObject.FindGameObjectWithTag("Beast").transform;
 
+    }
+
+    Vector3 RandomDirection()
+    {
+        float rand = Random.Range(0, 2 * Mathf.PI);
+        float x = Mathf.Sin(rand);
+        float y = Mathf.Cos(rand);
+        Debug.Log("YEET " + x + " " + y);
+        return new Vector3(x, 0, y);
+        
     }
 
     void ResetScale()
