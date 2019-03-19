@@ -64,17 +64,17 @@ public class Bourdelais_CameraController : MonoBehaviour
         yMovement = -Input.GetAxis("Mouse Y") * ySpeed;
        
 
-        if(xMovement < 0.1f && xMovement > -0.1f)
+        if(xMovement < 0.2f && xMovement > -0.2f)
         {
             xMovement = 0.0f;
         }
 
 
-        if (yMovement < 0.1f && yMovement > -0.1f)
+        if (yMovement < 0.2f && yMovement > -0.2f)
         {
             yMovement = 0.0f;
         }
-        Debug.Log(yMovement / ySpeed);
+        Debug.Log(xMovement / xSpeed);
         //Temporary Movement
         xPos = Input.GetAxis("Horizontal");
         zPos = Input.GetAxis("Vertical");
@@ -113,7 +113,7 @@ public class Bourdelais_CameraController : MonoBehaviour
         pos = Vector3.Lerp(pos, newPos, Time.deltaTime * lerpSpeed);
 
         
-        transform.position = pos;
+       // transform.position = pos;
         
         transform.LookAt(playerTransform.position);
 

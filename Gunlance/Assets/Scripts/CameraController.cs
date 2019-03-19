@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
    }
 
    // Update is called once per frame
-   void LateUpdate()
+   void FixedUpdate()
    {
 
       GetInput();
@@ -72,7 +72,7 @@ public class CameraController : MonoBehaviour
       {
          yMovement = 0.0f;
       }
-      Debug.Log(yMovement / ySpeed);
+
       //Temporary Movement
       xPos = Input.GetAxis("Horizontal");
       zPos = Input.GetAxis("Vertical");

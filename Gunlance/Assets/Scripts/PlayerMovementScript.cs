@@ -62,6 +62,9 @@ public class PlayerMovementScript : MonoBehaviour
    Transform lightTransform;
 
 
+   //Scale stuff
+   Vector3 scale;
+
    //**************** TOMMY STUFF ***********************
    [SerializeField] bool sliding;
    [SerializeField] bool startingToSlide;
@@ -97,6 +100,7 @@ public class PlayerMovementScript : MonoBehaviour
 
    void FixedUpdate()
    {
+      Debug.Log(currentShot);
       Slide();
 
       GroundCheck();
@@ -118,7 +122,6 @@ public class PlayerMovementScript : MonoBehaviour
          Debug.Log("WIN");
       }
    }
-
 
    //Input for controller
    void GetInput()
@@ -303,7 +306,10 @@ public class PlayerMovementScript : MonoBehaviour
       if (hitCollide.Length > 0)
       {
          inAir = false;
-         currentShot = 0;
+         if (!addedForce)
+         {
+            currentShot = 0;
+         }
       }
       else
       {
@@ -315,7 +321,9 @@ public class PlayerMovementScript : MonoBehaviour
       {
          if ((groundLayer & 1 << hitCollide[i].gameObject.layer) != 0)
          {
+            scale = transform.localScale;
             transform.parent = hitCollide[i].gameObject.transform;
+            ResetScale();
             return;
          }
       }
@@ -352,7 +360,7 @@ public class PlayerMovementScript : MonoBehaviour
    void ExplodeDirection()
    {
       //Dont do anything if the player is out of shots
-      if (currentShot >= maxShots - 1)
+      if (currentShot >= maxShots )
       {
          return;
       }
@@ -457,5 +465,20 @@ public class PlayerMovementScript : MonoBehaviour
       GameObject[] crystalList = GameObject.FindGameObjectsWithTag("Crystal");
       crystalsOnScene = crystalList.Length;
 
+   }
+
+   void ResetScale()
+   {
+      //var worldMat = transform.worldToLocalMatrix;
+      //worldMat.SetColumn(3, new Vector4(0.0f, 0.0f, 0.0f, 1.0f));
+ //     transform.localScale = Vector3.one;
+      transform.lossyScale.Set( 1, 1, 1 );
+      //transform.localScale = worldMat.MultiplyPoint( SCALE);
+      //transform.localScale = new Vector3(transform.parent.parent.lossyScale.x, transform.parent.parent.lossyScale.y, transform.parent.parent.lossyScale.z);
+      // transform.localScale = new Vector3(transform.parent.parent.localScale.x, )
+      //transform.localScale = 1/transform.parent.lossyScale;
+      Debug.Log(transform.lossyScale);
+      //transform.localScale = new Vector3(1,1,1);
+      //transform.localScale.
    }
 }
