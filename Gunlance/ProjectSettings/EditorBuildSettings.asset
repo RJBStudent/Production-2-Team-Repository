@@ -6,19 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Title_Film_Scene.unity
+    path: Assets/Scenes/FilmScenes/Title_Film_Scene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
-    path: Assets/Scenes/Glider_Film_Scene.unity
+    path: Assets/Scenes/FilmScenes/Glider_Film_Scene.unity
     guid: 7479f473ff383b241b238d1f8babccec
   - enabled: 0
-    path: Assets/Scenes/Gun_Zoom_Scene.unity
+    path: Assets/Scenes/FilmScenes/Gun_Zoom_Scene.unity
     guid: 72d43b949975c30448197ecacf5111cf
   - enabled: 0
-    path: Assets/Scenes/Gun_Pickup_Scene.unity
+    path: Assets/Scenes/FilmScenes/Gun_Pickup_Scene.unity
     guid: ef8274a875b06f54895e1a01b8528450
   - enabled: 0
-    path: Assets/Scenes/Desert_Film_Scene.unity
+    path: Assets/Scenes/FilmScenes/Desert_Film_Scene.unity
     guid: 8910a8ea306d20b4886bf51a72f397ff
   - enabled: 1
     path: Assets/Scenes/Carey_SandboxLevel 1.unity
