@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementScript : MonoBehaviour
+public class PlayerMovementScriptAudioScript : MonoBehaviour
 {
 
 
@@ -168,7 +168,8 @@ public class PlayerMovementScript : MonoBehaviour
       {
          Debug.Log("OUCH");
          clip.SetTrigger("Anim");
-      }
+           // Mann_AudioManagerScript.instance.PlaySound("oof");
+        }
 
       //Temporary Camera remove control from player
       if (Input.GetKey(KeyCode.C))
@@ -375,7 +376,7 @@ public class PlayerMovementScript : MonoBehaviour
          StartCoroutine(ExplodeTime(explodeTime));
 
          // ***************************** TOMMMYMMYMYMYMYMYM **************************
-         Mann_AudioManagerScript.instance.PlaySound("GunLance2");
+         //Mann_AudioManagerScript.instance.PlaySound("GunLance2");
 
       }
 
@@ -387,7 +388,8 @@ public class PlayerMovementScript : MonoBehaviour
       if (jumpInput != 0.0f && !inAir)
       {
          thisRB.AddForce(new Vector3(0, jumpForce, 0));
-      }
+            //Mann_AudioManagerScript.instance.PlaySound("Jump");
+        }
    }
 
    //Glide while button held
