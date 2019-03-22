@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementScriptAudioScript : MonoBehaviour
+public class PlayerMovementWithAudioScript : MonoBehaviour
 {
 
 

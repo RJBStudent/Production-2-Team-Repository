@@ -2399,6 +2399,7 @@ GameObject:
   - component: {fileID: 1015034933}
   - component: {fileID: 1015034939}
   - component: {fileID: 1015034940}
+  - component: {fileID: 1015034941}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2413,7 +2414,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015034932}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb4401e8ad3284344997d9d0ebd62238, type: 3}
   m_Name: 
@@ -2699,6 +2700,57 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1015034941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015034932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4640df23676c5c64d84c42e85892df32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 534669905}
+  playerSpeed: 5
+  airMovementSpeed: 10
+  FOVSpeed: 30
+  minFOV: 60
+  maxFOV: 70
+  sideExplosion: {fileID: 885889738}
+  sideForce: 125
+  explodeRadius: 1
+  explodeTime: 0.5
+  upwardsSideForce: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  beastLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  crystalLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  groundCheck: {fileID: 465447550}
+  maxShots: 3
+  clip: {fileID: 0}
+  basedGlideSpeed: 0.5
+  incrementedGlideSpeed: 1
+  gliderTemp: {fileID: 0}
+  fallSpeedGliding: 0
+  jumpForce: 0
+  thisLight: {fileID: 0}
+  sliding: 0
+  startingToSlide: 0
+  slidingAngle: 45
+  slippery: {fileID: 13400000, guid: dba7b790714841f41a05eff33cfea629, type: 2}
+  collider: {fileID: 1015034935}
+  currentGroundAngle: 0
+  groundNormal: {x: 0, y: 0, z: 0}
+  slideFallOffTime: 1
+  slideFallOffVelocity: 5
+  slideMovementSpeed: 65.4
 --- !u!1 &1031797950
 GameObject:
   m_ObjectHideFlags: 0
