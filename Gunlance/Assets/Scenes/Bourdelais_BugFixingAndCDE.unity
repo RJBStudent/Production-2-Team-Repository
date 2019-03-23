@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6086046, g: 0.5568767, b: 0.5364058, a: 1}
+  m_IndirectSpecularColor: {r: 0.6086049, g: 0.5568767, b: 0.5364047, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3923,7 +3923,7 @@ MonoBehaviour:
   maxFOV: 75
   sideExplosion: {fileID: 1094429979}
   sideForce: 125
-  explodeRadius: 1
+  explodeRadius: 3
   explodeTime: 0.5
   upwardsSideForce: 0.5
   groundLayer:

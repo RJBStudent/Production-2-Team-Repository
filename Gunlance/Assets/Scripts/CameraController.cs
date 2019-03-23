@@ -62,13 +62,13 @@ public class CameraController : MonoBehaviour
       yMovement = -Input.GetAxis("Mouse Y") * ySpeed;
 
 
-      if (xMovement < 0.1f && xMovement > -0.1f)
+      if (xMovement/xSpeed < 0.3f && xMovement / xSpeed > -0.3f)
       {
          xMovement = 0.0f;
       }
 
 
-      if (yMovement < 0.1f && yMovement > -0.1f)
+      if (yMovement / ySpeed < 0.3f && yMovement / ySpeed > -0.3f)
       {
          yMovement = 0.0f;
       }
