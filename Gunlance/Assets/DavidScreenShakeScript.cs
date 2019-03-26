@@ -14,14 +14,13 @@ public class DavidScreenShakeScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         cam = GetComponent<Camera>();
-        StartCoroutine(ShakeScreen());
+        
 	}
 	
 	// Update is called once per frame
-	IEnumerator ShakeScreen() {
-
-        yield return new WaitForSeconds(3);
+	public void ScreenShake() {
         cam.DOShakePosition(duration,strength,vibrato,randomness);
-
+        GetComponent<CareyCameraController>().CanShake = false;
+        Debug.Log("Screen SHOOK");
 	}
 }
