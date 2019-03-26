@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -19,5 +20,8 @@ MonoBehaviour:
   - {x: -14.5, y: 14, z: 63.5}
   nodeRadius: 1
   nodeRotateRadius: 2
-  speed: 2
+  speed: 20
   rotationSpeed: 0.5
+  etheriansEvents:
+  - nodeLocation: 1
+    lengthOfEvent: 5

@@ -14,6 +14,9 @@ public class BeastControlScript : MonoBehaviour {
     Vector3 targetLookDirection;
     Vector3 lookAheadDirection;
 
+    bool inEvent = false;
+    float eventTimer = 0f;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -27,7 +30,14 @@ public class BeastControlScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        MoveBeast();
+        if (!inEvent)
+        {
+            MoveBeast();
+        }
+        else
+        {
+            EtherianEventFunction();
+        }
 	}
 
     void MoveBeast()
@@ -53,6 +63,7 @@ public class BeastControlScript : MonoBehaviour {
             //Change target position within range
             targetNode = (targetNode + 1) % beastValues.movementNodes.Length;
             targetPosition = beastValues.movementNodes[targetNode];
+            CheckEventNode();
         }
         else
         {
@@ -64,5 +75,28 @@ public class BeastControlScript : MonoBehaviour {
             transform.rotation = Quaternion.Lerp(transform.rotation, toDirection, Time.deltaTime * beastValues.rotationSpeed);
         }
 
+    }
+
+    void EtherianEventFunction()
+    {
+
+        if (eventTimer >= beastValues.etheriansEvents[targetNode-1].lengthOfEvent)
+        { inEvent = false; eventTimer = 0; return; }
+
+        eventTimer += Time.deltaTime;
+
+    }
+
+    //Check whether the current target node and compare it with target node 
+    void CheckEventNode()
+    {
+        for (int i = 0; i < beastValues.etheriansEvents.Length; i++)
+        {
+            if(beastValues.etheriansEvents[i].nodeLocation == targetNode)
+            {
+                inEvent = true;
+                return;
+            }
+        }
     }
 }
