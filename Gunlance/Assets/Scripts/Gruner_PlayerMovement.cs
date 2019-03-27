@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Gruner_PlayerMovement : MonoBehaviour 
 {
-
-    string os; //check OS so that Mac users can play/test
+    //store OS info
+    string os;
 
     [SerializeField] Transform cameraTransform;
     [SerializeField] float playerSpeed;
@@ -22,6 +22,7 @@ public class Gruner_PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask crystalLayer;
     [SerializeField] Transform groundCheck;
     [SerializeField] int maxShots;
+    [SerializeField] GameObject thisExplosion;
 
     Collider[] hitCollide;
 
@@ -62,6 +63,23 @@ public class Gruner_PlayerMovement : MonoBehaviour
     [SerializeField] GameObject thisLight;
     Transform lightTransform;
 
+
+    //Scale stuff
+    Vector3 scale;
+
+    //**************** TOMMY STUFF ***********************
+    [SerializeField] bool sliding;
+    [SerializeField] bool startingToSlide;
+    [SerializeField] float slidingAngle;
+    [SerializeField] PhysicMaterial slippery;
+    [SerializeField] CapsuleCollider collider;
+    [SerializeField] float currentGroundAngle;
+    [SerializeField] Vector3 groundNormal;
+    public float slideFallOffTime;
+    public float slideFallOffVelocity;
+    public float slideMovementSpeed;
+
+
     // Use this for initialization
     void Start()
     {
@@ -76,13 +94,34 @@ public class Gruner_PlayerMovement : MonoBehaviour
         //Load crystals into scene
         LoadLevel();
 
-        //Check operating system for controller input
         GetOS();
     }
 
+    //check operating system and define string os to be added to axis name for win/mac support
+    void GetOS()
+    {
+        os = SystemInfo.operatingSystem;
+
+        if (os.Contains("Mac"))
+        {
+            os = "_Mac";
+        }
+        else
+        {
+            os = null;
+        }
+    }
+
     // Update is called once per frame
+    // *************************** TOMMY STUFF ****************************
+    // *************************** SLIDE FUNCTION ADDED 
+    // *************************** RETURNS IF SLIDING
+
     void FixedUpdate()
     {
+        Debug.Log(currentShot);
+        Slide();
+
         GroundCheck();
 
         GetInput();
@@ -103,7 +142,6 @@ public class Gruner_PlayerMovement : MonoBehaviour
         }
     }
 
-
     //Input for controller
     void GetInput()
     {
@@ -112,7 +150,7 @@ public class Gruner_PlayerMovement : MonoBehaviour
         zDirection = Input.GetAxis("Vertical");
 
         //On press Explode
-        if (Input.GetAxisRaw("ExplodeInput" + os) != lastExplodeInput)
+        if (Input.GetAxisRaw("ExplodeInput"+os) != lastExplodeInput)
         { explodeInput = Input.GetAxisRaw("ExplodeInput" + os); lastExplodeInput = explodeInput; }
         else
         { explodeInput = 0.0f; }
@@ -179,7 +217,8 @@ public class Gruner_PlayerMovement : MonoBehaviour
             //If gliding always have velocity forward of camera and make it faster if the left stick is being pushed forward, slower if backwards
             thisRB.velocity = Vector3.Lerp(thisRB.velocity, thisRB.velocity.normalized + camForward * ((zDirection < 0f) ? basedGlideSpeed : zDirection + incrementedGlideSpeed) * airMovementSpeed + jumpVelocity, Time.deltaTime);
         }
-        else if (!addedForce && !inAir)
+        // ****************************** ADDED "!sliding" TOMMY STUFF ********************************
+        else if (!addedForce && !inAir && !sliding)
         {
             //Ground Movement
             thisRB.velocity = camForward * zDirection * playerSpeed + camRight * xDirection * playerSpeed + jumpVelocity;
@@ -189,6 +228,12 @@ public class Gruner_PlayerMovement : MonoBehaviour
             //Falling velocity
             thisRB.velocity = Vector3.Lerp(thisRB.velocity, thisRB.velocity.normalized + camForward * zDirection * airMovementSpeed + camRight * xDirection * airMovementSpeed, Time.deltaTime);
 
+        }
+        // ***************************** TOMMY STUFF *********************************
+        else if (sliding && !inAir && !addedForce)
+        {
+            //thisRB.velocity += camForward * zDirection * slideMovementSpeed + camRight * xDirection * slideMovementSpeed;
+            thisRB.AddForce(camForward * zDirection * slideMovementSpeed + camRight * xDirection * slideMovementSpeed, ForceMode.Force);
         }
 
 
@@ -260,8 +305,8 @@ public class Gruner_PlayerMovement : MonoBehaviour
         }
 
         //If the players velocity is greater than 10 increase the FOV or decrease it otherwise
-        thisCamera.fieldOfView = (thisRB.velocity.magnitude > 10) ? Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView + FOVSpeed, Time.deltaTime) : Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView - FOVSpeed, Time.deltaTime);
-        thisCamera.fieldOfView = Mathf.Clamp(thisCamera.fieldOfView, minFOV, maxFOV);
+        //thisCamera.fieldOfView = (thisRB.velocity.magnitude > 10) ? Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView + FOVSpeed, Time.deltaTime) : Mathf.Lerp(thisCamera.fieldOfView, thisCamera.fieldOfView - FOVSpeed, Time.deltaTime);
+        //thisCamera.fieldOfView = Mathf.Clamp(thisCamera.fieldOfView, minFOV, maxFOV);
 
         //If the players position is too low respawn at 1 1 1 TEMPORARY
         if (transform.position.y < -5f)
@@ -280,7 +325,10 @@ public class Gruner_PlayerMovement : MonoBehaviour
         if (hitCollide.Length > 0)
         {
             inAir = false;
-            currentShot = 0;
+            if (!addedForce)
+            {
+                currentShot = 0;
+            }
         }
         else
         {
@@ -292,11 +340,38 @@ public class Gruner_PlayerMovement : MonoBehaviour
         {
             if ((groundLayer & 1 << hitCollide[i].gameObject.layer) != 0)
             {
+                scale = transform.localScale;
                 transform.parent = hitCollide[i].gameObject.transform;
+                ResetScale();
                 return;
             }
         }
+        // *************************** TOMMY STUFF ****************************
 
+    }
+
+    // *************************** TOMMY STUFF ****************************
+    void Slide()
+    {
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position + new Vector3(0, 2, 0), Vector3.down, out hit, Mathf.Infinity, groundLayer))
+        {
+            groundNormal = hit.normal;
+            currentGroundAngle = Vector3.Angle(Vector3.up, hit.normal);
+            if (currentGroundAngle > slidingAngle && sliding == false)
+            {
+                collider.material = slippery;
+                sliding = true;
+                StartCoroutine(SlideTime(slideFallOffTime));
+            }
+            else if (sliding && currentGroundAngle < slidingAngle && thisRB.velocity.magnitude < slideFallOffVelocity && startingToSlide == false)
+            {
+
+                sliding = false;
+                collider.material = null;
+            }
+        }
 
     }
 
@@ -304,7 +379,7 @@ public class Gruner_PlayerMovement : MonoBehaviour
     void ExplodeDirection()
     {
         //Dont do anything if the player is out of shots
-        if (currentShot >= maxShots - 1)
+        if (currentShot >= maxShots)
         {
             return;
         }
@@ -317,6 +392,10 @@ public class Gruner_PlayerMovement : MonoBehaviour
             originalExplodePosition = sideExplosion.position;
             currentShot++;
             StartCoroutine(ExplodeTime(explodeTime));
+
+            // ***************************** TOMMMYMMYMYMYMYMYM **************************
+            Mann_AudioManagerScript.instance.PlaySound("GunLance2");
+
         }
 
     }
@@ -362,7 +441,10 @@ public class Gruner_PlayerMovement : MonoBehaviour
     IEnumerator ExplodeTime(float time)
     {
         addedForce = true;
-
+        // Activates Screenshake
+        thisCamera.GetComponent<CareyCameraController>().CanShake = true;
+        // Activates Explosion
+        Instantiate(thisExplosion, new Vector3(transform.position.x, transform.position.y, transform.position.z), new Quaternion(0, 0, 0, 0));
         //Set flash animation for explosion
         thisLight.SetActive(true);
         lightTransform.position = transform.position;
@@ -379,6 +461,14 @@ public class Gruner_PlayerMovement : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(time);
         addedForce = false;
+    }
+
+    IEnumerator SlideTime(float time)
+    {
+        startingToSlide = true;
+        yield return new WaitForSecondsRealtime(time);
+        startingToSlide = false;
+
     }
 
     //Debugging for where the explosion is 
@@ -399,18 +489,18 @@ public class Gruner_PlayerMovement : MonoBehaviour
 
     }
 
-    //Get operating system (mac or windows)
-    void GetOS()
+    void ResetScale()
     {
-        os = SystemInfo.operatingSystem;
-
-        if (os.Contains("Mac"))
-        { 
-            os = "_Mac";
-        }
-        else
-        {
-            os = null;
-        }
+        //var worldMat = transform.worldToLocalMatrix;
+        //worldMat.SetColumn(3, new Vector4(0.0f, 0.0f, 0.0f, 1.0f));
+        //     transform.localScale = Vector3.one;
+        transform.lossyScale.Set(1, 1, 1);
+        //transform.localScale = worldMat.MultiplyPoint( SCALE);
+        //transform.localScale = new Vector3(transform.parent.parent.lossyScale.x, transform.parent.parent.lossyScale.y, transform.parent.parent.lossyScale.z);
+        // transform.localScale = new Vector3(transform.parent.parent.localScale.x, )
+        //transform.localScale = 1/transform.parent.lossyScale;
+        Debug.Log(transform.lossyScale);
+        //transform.localScale = new Vector3(1,1,1);
+        //transform.localScale.
     }
 }
