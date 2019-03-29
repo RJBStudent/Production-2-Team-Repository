@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Gruner_CameraController : MonoBehaviour 
 {
@@ -32,7 +33,6 @@ public class Gruner_CameraController : MonoBehaviour
     //Temporary Debug Values
     bool removeCameraControl = false;
     float xPos, zPos;
-
 
     // Use this for initialization
     void Start()
@@ -102,7 +102,6 @@ public class Gruner_CameraController : MonoBehaviour
         }
 
     }
-
 
     void UpdatePosition()
     {

@@ -43,6 +43,8 @@ public class Gruner_PlayerMovement : MonoBehaviour
     int currentShot = 0;
     bool inAir = false;
     float distanceBelow;
+    //feedback
+    ShotFeedback shoot;
 
     float crystalsOnScene = 0;
 
@@ -62,7 +64,6 @@ public class Gruner_PlayerMovement : MonoBehaviour
     //Light Variables
     [SerializeField] GameObject thisLight;
     Transform lightTransform;
-
 
     //Scale stuff
     Vector3 scale;
@@ -85,6 +86,7 @@ public class Gruner_PlayerMovement : MonoBehaviour
     {
         thisRB = GetComponent<Rigidbody>();
         thisCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        shoot = GetComponent<ShotFeedback>();
 
         //Turn off light and glider for temporary animation
         thisLight.SetActive(false);
@@ -391,6 +393,9 @@ public class Gruner_PlayerMovement : MonoBehaviour
             thisRB.AddExplosionForce(sideForce, sideExplosion.position, explodeRadius, upwardsSideForce, ForceMode.Impulse);
             originalExplodePosition = sideExplosion.position;
             currentShot++;
+
+            shoot.Explode();
+
             StartCoroutine(ExplodeTime(explodeTime));
 
             // ***************************** TOMMMYMMYMYMYMYMYM **************************
