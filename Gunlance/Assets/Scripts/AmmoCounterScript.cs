@@ -37,12 +37,12 @@ public class AmmoCounterScript : MonoBehaviour
     {
         //update crystal color to charge level
         cubeMat.color = crystalColors.Evaluate(charge / maxAmmo);
+        cubeMat.SetColor("_EmissionColor", crystalColors.Evaluate(charge / maxAmmo));
 
         //update crystal light intensity to charge level
         crystalLight.intensity = (charge / maxAmmo);
 
         transform.Rotate(0, -charge * rotSpeed, 0);
-
     }
 
     void Recharge()
