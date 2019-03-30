@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.60860425, g: 0.55687606, b: 0.53640425, a: 1}
+  m_IndirectSpecularColor: {r: 0.6086046, g: 0.5568767, b: 0.5364058, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -523,6 +523,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1170225228}
     m_Modifications:
+    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
+        type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
+        type: 3}
+      propertyPath: m_SpotAngle
+      value: 139
+      objectReference: {fileID: 0}
+    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
+        type: 3}
+      propertyPath: m_Range
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4081768591853052, guid: adcd2aacbe79ceb41aab96523fa06d51, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.61
@@ -578,21 +593,6 @@ PrefabInstance:
         type: 3}
       propertyPath: rateOfIntensityPerFrame
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
-        type: 3}
-      propertyPath: m_Type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
-        type: 3}
-      propertyPath: m_SpotAngle
-      value: 139
-      objectReference: {fileID: 0}
-    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
-        type: 3}
-      propertyPath: m_Range
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adcd2aacbe79ceb41aab96523fa06d51, type: 3}
@@ -1053,7 +1053,7 @@ MonoBehaviour:
   smokeFX: {fileID: 4292460645169672814, guid: 06dea101ac0e248cb93bb879a6c2d663, type: 3}
   smokeDestroy: 1
   duration: 0.356
-  strength: 0.82
+  strength: 1.01
   vibrato: 14
   randomness: 70
 --- !u!1 &1318362396
