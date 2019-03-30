@@ -20,8 +20,12 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
     [SerializeField] LayerMask beastLayer;
     [SerializeField] LayerMask crystalLayer;
     [SerializeField] Transform groundCheck;
+    [Header("Charge Variables")]
     [SerializeField] int maxShots;
+    [SerializeField] float chargeRate;
+    [SerializeField] float maxChargePause;
 
+    [Space]
     Collider[] hitCollide;
 
     Camera thisCamera;
@@ -42,16 +46,24 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
     bool inAir = false;
     float distanceBelow;
 
+    //Recharge stuff
+    int shots;
+    float charge = 0;
+    float chargePauseTimer = 0;
+    bool chargePaused = false;
+
+
     float crystalsOnScene = 0;
 
     //Glide Variables
     float glideInput = 0;
     bool gliding = false;
     Vector3 velocityInfluence;
+    [Header("Gliding Variables")]
+    [SerializeField] float fallSpeedGliding;
     [SerializeField] float basedGlideSpeed, incrementedGlideSpeed;
     [SerializeField] GameObject gliderTemp;
-    [SerializeField] float fallSpeedGliding;
-
+    [Space]
     //Jump Variables
     [SerializeField] float jumpForce;
     float jumpInput = 0.0f;
@@ -66,6 +78,7 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
     Vector3 scale;
 
     //**************** TOMMY STUFF ***********************
+    [Header("Sliding Variables")]
     [SerializeField] bool sliding;
     [SerializeField] bool startingToSlide;
     [SerializeField] float slidingAngle;
@@ -76,7 +89,7 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
     public float slideFallOffTime;
     public float slideFallOffVelocity;
     public float slideMovementSpeed;
-
+    [Space]
     //******Crystal Destroy Event Variables******* RJ Bourdelais
     [Header("Crystal Destory Event")]
     [SerializeField]
@@ -93,6 +106,9 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        shots = maxShots;   //Recharge
+        charge = shots;
+
         thisRB = GetComponent<Rigidbody>();
         thisCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 
@@ -322,14 +338,15 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
         if (hitCollide.Length > 0)
         {
             inAir = false;
-            if (!addedForce)
+           /* if (!addedForce)
             {
                 currentShot = 0;
-            }
+            }*/ //Recharge
         }
         else
         {
             inAir = true;
+            transform.parent = null;
         }
 
         //check if the player should attach itself to the ground or beast
@@ -376,7 +393,29 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
     void ExplodeDirection()
     {
         //Dont do anything if the player is out of shots
-        if (currentShot >= maxShots)
+        /*if (currentShot >= maxShots)
+        {
+            return;
+        }*/
+
+        Debug.Log(chargePaused + " " + charge);
+        if (!chargePaused && charge <= maxShots)
+        {
+            charge += chargeRate;
+
+            shots = Mathf.FloorToInt(charge);
+        }
+        
+        if (chargePaused)
+        {
+            chargePauseTimer += Time.deltaTime;
+            if(chargePauseTimer >= maxChargePause)
+            {
+                chargePauseTimer = 0.0f;
+                chargePaused = false;
+            }
+        }
+        if (shots < 1)
         {
             return;
         }
@@ -387,12 +426,13 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
             thisRB.velocity = Vector3.zero;
             thisRB.AddExplosionForce(sideForce, sideExplosion.position, explodeRadius, upwardsSideForce, ForceMode.Impulse);
             originalExplodePosition = sideExplosion.position;
-            currentShot++;
+            //currentShot++;
+            charge--;
             StartCoroutine(ExplodeTime(explodeTime));
-
+            chargePaused = true;
             // ***************************** TOMMMYMMYMYMYMYMYM **************************
             Mann_AudioManagerScript.instance.PlaySound("GunLance2");
-
+           
         }
 
     }
@@ -438,7 +478,7 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
     IEnumerator ExplodeTime(float time)
     {
         addedForce = true;
-
+        
         //Set flash animation for explosion
         thisLight.SetActive(true);
         lightTransform.position = transform.position;
@@ -504,7 +544,6 @@ public class BourdelaisPlayerMovementScript : MonoBehaviour
         float rand = Random.Range(0, 2 * Mathf.PI);
         float x = Mathf.Sin(rand);
         float y = Mathf.Cos(rand);
-        Debug.Log("YEET " + x + " " + y);
         return new Vector3(x, 0, y);
         
     }
