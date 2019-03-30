@@ -1050,12 +1050,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679aecb3108b64d12ba3d185a713fa6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vibrationHitLength: 0.15
+  vibrationHitStrength: 1
+  vibrationFadeLength: 0.25
+  vibrationFadeStrength: 0.2
   smokeFX: {fileID: 4292460645169672814, guid: 06dea101ac0e248cb93bb879a6c2d663, type: 3}
   smokeDestroy: 1
-  duration: 0.356
-  strength: 1.01
+  duration: 0.367
+  strength: 1.18
   vibrato: 14
-  randomness: 70
+  randomness: 90
 --- !u!1 &1318362396
 GameObject:
   m_ObjectHideFlags: 0

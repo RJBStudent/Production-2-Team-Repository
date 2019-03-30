@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6086049, g: 0.5568767, b: 0.5364047, a: 1}
+  m_IndirectSpecularColor: {r: 0.6086046, g: 0.5568767, b: 0.5364058, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1928,7 +1928,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: -0, y: 0.76730853, z: -0, w: 0.64127815}
-  m_LocalPosition: {x: -183.4, y: 25.86, z: 164.06999}
+  m_LocalPosition: {x: -17, y: 25.86, z: 72.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2879,6 +2879,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1170225228}
     m_Modifications:
+    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
+        type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
+        type: 3}
+      propertyPath: m_SpotAngle
+      value: 139
+      objectReference: {fileID: 0}
+    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
+        type: 3}
+      propertyPath: m_Range
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4081768591853052, guid: adcd2aacbe79ceb41aab96523fa06d51, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.61
@@ -2934,21 +2949,6 @@ PrefabInstance:
         type: 3}
       propertyPath: rateOfIntensityPerFrame
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
-        type: 3}
-      propertyPath: m_Type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
-        type: 3}
-      propertyPath: m_SpotAngle
-      value: 139
-      objectReference: {fileID: 0}
-    - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
-        type: 3}
-      propertyPath: m_Range
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adcd2aacbe79ceb41aab96523fa06d51, type: 3}
@@ -3937,11 +3937,13 @@ MonoBehaviour:
     m_Bits: 2048
   groundCheck: {fileID: 268437380}
   maxShots: 3
+  chargeRate: 0.02
+  maxChargePause: 1
   clip: {fileID: 0}
+  fallSpeedGliding: 2
   basedGlideSpeed: 0.5
   incrementedGlideSpeed: 1
   gliderTemp: {fileID: 1106024574}
-  fallSpeedGliding: 2
   jumpForce: 2000
   thisLight: {fileID: 893164252}
   sliding: 0
