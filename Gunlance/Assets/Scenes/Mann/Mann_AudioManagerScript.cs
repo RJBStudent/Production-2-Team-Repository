@@ -41,11 +41,21 @@ public class Mann_AudioManagerScript : MonoBehaviour {
    {
       for(int i = 0; i < sounds.Length; i++)
       {
-         if(sounds[i].clip.name == clipName)
+         if(sounds[i].clip.name == clipName && sounds[i].isPlaying == false)
          {
             sounds[i].Play();
          }
       }
    }
 
+   public void StopSound(string clipName)
+   {
+      for (int i = 0; i < sounds.Length; i++)
+      {
+         if (sounds[i].clip.name == clipName && sounds[i].isPlaying == true)
+         {
+            sounds[i].Stop();
+         }
+      }
+   }
 }

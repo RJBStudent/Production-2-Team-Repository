@@ -15,7 +15,7 @@ public class Mann_DayNight : MonoBehaviour
    {
 
       //Rotate Sun with Speed
-      transform.RotateAround(Vector3.zero, Vector3.right, 10f * Time.deltaTime);
+      transform.RotateAround(Vector3.zero, Vector3.right, 5f * Time.deltaTime);
       transform.LookAt(Vector3.zero);
 
    }
