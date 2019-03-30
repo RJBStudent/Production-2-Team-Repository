@@ -31,9 +31,11 @@ public class ShotFeedback : MonoBehaviour
     [Range(0, 90)]
     [SerializeField] float randomness;
 
+    [SerializeField] Camera mainCamera;
+
     public void Explode()
     {
-        Camera.main.DOShakePosition(duration, strength, vibrato, randomness, true);
+        mainCamera.DOShakePosition(duration, strength, vibrato, randomness, true);
 
         GameObject smoke = Instantiate(smokeFX, gameObject.transform);
         Destroy(smoke, smokeDestroy);

@@ -860,7 +860,6 @@ GameObject:
   - component: {fileID: 198890096}
   - component: {fileID: 198890095}
   - component: {fileID: 198890094}
-  - component: {fileID: 198890097}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -916,19 +915,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &198890097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 198890093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0954a79809263284aa37dbb184e8155d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 0}
 --- !u!1 &214766529 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: ca82171457080904f8e7ba0b5e7c8e06,
@@ -1574,8 +1560,6 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
-  - component: {fileID: 534669906}
-  - component: {fileID: 534669907}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -1647,49 +1631,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 100.226006, z: 0}
---- !u!114 &534669906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14cc90507e35f2f4188217643c65addf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  heightRestrictMax: 70
-  heightRestrictMin: -25
-  xSpeed: 20
-  ySpeed: 20
-  lerpSpeed: 5
-  rotateAround: 70
-  rotateAroundVertical: 45
-  minimumClipDistance: 1
-  cameraCollideMask:
-    serializedVersion: 2
-    m_Bits: 513
-  maxDistance: 5
-  minDistance: 1
-  distanceAway: 7
---- !u!114 &534669907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 392357ef0d51a184a8e3032ba3f38b83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 0.1
-  strength: 1
-  vibrato: 100
-  randomness: 10
 --- !u!1001 &550536840
 PrefabInstance:
   m_ObjectHideFlags: 0
