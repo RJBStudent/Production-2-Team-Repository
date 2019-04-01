@@ -33,14 +33,21 @@ public class ShotFeedback : MonoBehaviour
 
     [SerializeField] Camera mainCamera;
 
-    public void Explode()
+	 AmmoCounterScript ammoScript;
+
+	 private void Start()
+	 {
+		  ammoScript = GetComponentInChildren<AmmoCounterScript>();
+	 }
+
+	 public void Explode()
     {
         mainCamera.DOShakePosition(duration, strength, vibrato, randomness, true);
 
         GameObject smoke = Instantiate(smokeFX, gameObject.transform);
         Destroy(smoke, smokeDestroy);
 
-        //GamePad.SetVibration(0, 1, 1);
+		  ammoScript.Shoot();
 
         vibration = vibrationHitStrength;
         Invoke("VibrationFade", vibrationHitLength);

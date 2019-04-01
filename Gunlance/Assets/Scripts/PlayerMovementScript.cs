@@ -21,7 +21,7 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] LayerMask crystalLayer;
     [SerializeField] Transform groundCheck;
     [Header("Charge Variables")]
-    [SerializeField] int maxShots;
+    public int maxShots;
     [SerializeField] float chargeRate;
     [SerializeField] float maxChargePause;
 
@@ -50,7 +50,8 @@ public class PlayerMovementScript : MonoBehaviour
 
     //Recharge stuff
     int shots;
-    float charge = 0;
+	 [HideInInspector]
+	 public float charge = 0;
     float chargePauseTimer = 0;
     bool chargePaused = false;
 

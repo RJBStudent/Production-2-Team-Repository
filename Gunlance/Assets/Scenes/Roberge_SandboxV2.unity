@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6086046, g: 0.5568767, b: 0.5364058, a: 1}
+  m_IndirectSpecularColor: {r: 0.6086043, g: 0.55687624, b: 0.5364047, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9438,6 +9438,7 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
+  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -9509,6 +9510,19 @@ Transform:
   m_Father: {fileID: 1693154095}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &534669906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 9b3f33a75d1b9443c8da1d15ba4deb4f, type: 2}
 --- !u!1001 &538534840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19465,6 +19479,7 @@ MonoBehaviour:
   chargeRate: 0.05
   maxChargePause: 2
   clip: {fileID: 0}
+  charge: 0
   fallSpeedGliding: 2
   basedGlideSpeed: 0.5
   incrementedGlideSpeed: 1
@@ -19578,6 +19593,7 @@ Transform:
   - {fileID: 268437380}
   - {fileID: 1106024575}
   - {fileID: 1680992817}
+  - {fileID: 1522503654}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 178.27802, z: 0}
@@ -19599,9 +19615,9 @@ MonoBehaviour:
   vibrationFadeStrength: 0.2
   smokeFX: {fileID: 4292460645169672814, guid: 06dea101ac0e248cb93bb879a6c2d663, type: 3}
   smokeDestroy: 1
-  duration: 0.367
-  strength: 1.18
-  vibrato: 14
+  duration: 0.4
+  strength: 1.7
+  vibrato: 15
   randomness: 90
   mainCamera: {fileID: 534669904}
 --- !u!1001 &1174031319
@@ -25273,6 +25289,142 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1513210504}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1522503653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1522503654}
+  - component: {fileID: 1522503657}
+  - component: {fileID: 1522503656}
+  - component: {fileID: 1522503655}
+  - component: {fileID: 1522503658}
+  m_Layer: 0
+  m_Name: Ammo_UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1522503654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522503653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.57, y: 0.535, z: -0.77}
+  m_LocalScale: {x: 0.29826185, y: 0.29826185, z: 0.29826185}
+  m_Children: []
+  m_Father: {fileID: 1170225228}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1522503655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522503653}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1522503656
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522503653}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d31fe3d5793e64f61a0e146f39420aa7, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1522503657
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522503653}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1522503658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522503653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1c4ba69bf2844d68b895b68e6d42168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crystalColors:
+    serializedVersion: 2
+    key0: {r: 0.00812122, g: 0.084905684, b: 0.003604485, a: 0.8235294}
+    key1: {r: 0.012548926, g: 0.8867924, b: 0.41809535, a: 0.74509805}
+    key2: {r: 0.012548926, g: 0.8867924, b: 0.41809535, a: 1}
+    key3: {r: 0.012548926, g: 0.8867924, b: 0.41809535, a: 0}
+    key4: {r: 0.012548926, g: 0.8867924, b: 0.41809535, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 65535
+    ctime3: 65535
+    ctime4: 65535
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  rotSpeed: 5
+  crystalFlash: {fileID: 4222217513838591276, guid: 2b52bc7fbec8b49dba0db7e29c596062,
+    type: 3}
 --- !u!1001 &1523633828
 PrefabInstance:
   m_ObjectHideFlags: 0
