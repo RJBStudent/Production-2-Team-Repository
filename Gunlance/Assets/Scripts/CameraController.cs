@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
+    //store OS info
+    string os;
 
-   [SerializeField] Transform playerTransform;
+
+    [SerializeField] Transform playerTransform;
    [SerializeField] float heightRestrictMax, heightRestrictMin;
    [SerializeField] float xSpeed, ySpeed;
    [SerializeField] float lerpSpeed;
@@ -36,7 +39,9 @@ public class CameraController : MonoBehaviour
    {
       rotateAround = playerTransform.eulerAngles.y - 45f;
       wallHit = new RaycastHit();
-   }
+
+        GetOS();
+    }
 
    // Update is called once per frame
    void FixedUpdate()
@@ -57,9 +62,9 @@ public class CameraController : MonoBehaviour
    void GetInput()
    {
       //Which direction to move in
-      xMovement = Input.GetAxis("Mouse X") * xSpeed;
+      xMovement = Input.GetAxis("Mouse X" + os) * xSpeed;
 
-      yMovement = -Input.GetAxis("Mouse Y") * ySpeed;
+      yMovement = -Input.GetAxis("Mouse Y" + os) * ySpeed;
 
 
       if (xMovement/xSpeed < 0.3f && xMovement / xSpeed > -0.3f)
@@ -161,4 +166,19 @@ public class CameraController : MonoBehaviour
          newPos = new Vector3(wallHit.point.x + wallHit.normal.x * 0.5f, newPos.y, wallHit.point.z + wallHit.normal.z * 0.5f);
       }
    }
+
+    void GetOS()
+    {
+        os = SystemInfo.operatingSystem;
+
+        if (os.Contains("Mac"))
+        {
+            os = "_Mac";
+        }
+        else
+        {
+            os = null;
+        }
+    }
 }
+

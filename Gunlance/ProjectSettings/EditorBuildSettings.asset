@@ -21,6 +21,12 @@ EditorBuildSettings:
     path: Assets/Scenes/FilmScenes/Desert_Film_Scene.unity
     guid: 8910a8ea306d20b4886bf51a72f397ff
   - enabled: 1
+    path: Assets/Scenes/Mann/Mann_MainMenu.unity
+    guid: f24410e05994df545b7e9a50a94266a5
+  - enabled: 0
     path: Assets/Scenes/Carey_SandboxLevel 1.unity
     guid: 1c3785efc738d1b4c9cd4f7658e87252
+  - enabled: 1
+    path: Assets/Scenes/Roberge_SandboxV2.unity
+    guid: 9e38874c310ccac4989f0c2f73fd5b43
   m_configObjects: {}
