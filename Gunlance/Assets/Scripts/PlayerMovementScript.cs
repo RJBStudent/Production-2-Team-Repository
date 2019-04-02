@@ -106,6 +106,17 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField]
     float randomDistance;
 
+    [Header("Downing Varables")]
+    [SerializeField]
+    float downTime;
+    float downCounter = 0f;
+
+    [SerializeField]
+    float downSpeed;
+
+
+    bool downed = false;
+    bool canGetBackUp;
 
     //store OS info
     string os;
@@ -156,10 +167,17 @@ public class PlayerMovementScript : MonoBehaviour
         {
             return;
         }
+        
 
         GroundCheck();
 
         GetInput();
+
+        if(downed)
+        {
+            DownedTime();
+            return;
+        }
 
         Slide();
 
@@ -265,6 +283,12 @@ public class PlayerMovementScript : MonoBehaviour
 
         //Current Y velocity
         Vector3 jumpVelocity = new Vector3(0, thisRB.velocity.y, 0);
+        
+        if(thisRB.velocity.y < downSpeed && !inAir)
+        {
+            downed = true;
+
+        }
 
         if (gliding)
         {
@@ -606,6 +630,21 @@ public class PlayerMovementScript : MonoBehaviour
         float y = Mathf.Cos(rand);
         return new Vector3(x, 0, y);
 
+    }
+
+    void DownedTime()
+    {
+        downCounter += Time.deltaTime;
+        transform.rotation = Quaternion.Euler(new Vector3(90, 0 , 0));
+        if (downCounter >= downTime)
+        {
+            if(jumpInput != 0.0f)
+            {
+                downed = false;
+                downCounter = 0.0f;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+        }
     }
 
     void ResetScale()
