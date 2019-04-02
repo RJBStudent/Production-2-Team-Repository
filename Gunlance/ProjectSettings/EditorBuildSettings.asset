@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Roberge_SandboxV2.unity
     guid: 9e38874c310ccac4989f0c2f73fd5b43
+  - enabled: 1
+    path: Assets/Scenes/Mann/Mann_EndScene.unity
+    guid: 6df2c4a8c3a74f84788a23428714da53
   m_configObjects: {}

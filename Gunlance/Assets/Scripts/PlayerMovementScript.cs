@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovementScript : MonoBehaviour
 {
@@ -194,6 +195,7 @@ public class PlayerMovementScript : MonoBehaviour
         if (crystalsOnScene <= 0)
         {
             Debug.Log("WIN");
+            SceneManager.LoadScene("Mann_EndScene");
         }
 
         if (!inAir && thisRB.velocity.magnitude > 1 && !sliding)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Mann_CreditsUI : MonoBehaviour
 {
@@ -23,7 +24,10 @@ public class Mann_CreditsUI : MonoBehaviour
       
       if(mRectTransform.position.y > endYPos)
       {
-
+            if(Input.GetButtonDown("Pause"))
+            {
+                SceneManager.LoadScene("Mann_MainMenu");
+            }
       }
       else
       {

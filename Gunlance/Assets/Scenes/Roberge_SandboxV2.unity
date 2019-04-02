@@ -31874,7 +31874,7 @@ MonoBehaviour:
   maxFOV: 75
   sideExplosion: {fileID: 1094429979}
   sideForce: 125
-  explodeRadius: 1
+  explodeRadius: 3
   explodeTime: 0.5
   upwardsSideForce: 0.5
   groundLayer:
