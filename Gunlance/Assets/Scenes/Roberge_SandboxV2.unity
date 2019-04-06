@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6086046, g: 0.5568767, b: 0.5364058, a: 1}
+  m_IndirectSpecularColor: {r: 0.6086049, g: 0.5568767, b: 0.5364047, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11658,7 +11658,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: e22c0c39d71aee4489b7a284cb5e2367, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 05820a3c7c294f047b7e4e259e6126a6, type: 2}
+      objectReference: {fileID: 2100000, guid: c2f98a25342432a4690c1c080c7a1c07, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e22c0c39d71aee4489b7a284cb5e2367, type: 3}
 --- !u!4 &650518611 stripped
@@ -19411,34 +19411,23 @@ MonoBehaviour:
     m_Bits: 2048
   groundCheck: {fileID: 268437380}
   maxShots: 3
-  chargeRate: 0.05
-  maxChargePause: 2
   clip: {fileID: 0}
-  charge: 0
-  fallSpeedGliding: 2
   basedGlideSpeed: 0.5
   incrementedGlideSpeed: 1
   gliderTemp: {fileID: 0}
+  fallSpeedGliding: 2
   jumpForce: 2000
   thisLight: {fileID: 893164252}
   sliding: 0
   startingToSlide: 0
-  stoppingToSlide: 0
   slidingAngle: 34
-  slidingFallOffAngle: 15
   slippery: {fileID: 13400000, guid: dba7b790714841f41a05eff33cfea629, type: 2}
   collider: {fileID: 1170225225}
   currentGroundAngle: 0
   groundNormal: {x: 0, y: 0, z: 0}
-  slideStartUpTime: 1
   slideFallOffTime: 0.3
   slideFallOffVelocity: 5
   slideMovementSpeed: 65
-  cdeForce: 100
-  cdeLength: 1
-  randomDistance: 50
-  downTime: 0
-  downSpeed: 0
 --- !u!54 &1170225224
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19540,17 +19529,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679aecb3108b64d12ba3d185a713fa6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vibrationHitLength: 0.15
-  vibrationHitStrength: 1
-  vibrationFadeLength: 0.25
-  vibrationFadeStrength: 0.2
   smokeFX: {fileID: 4292460645169672814, guid: 06dea101ac0e248cb93bb879a6c2d663, type: 3}
   smokeDestroy: 1
   duration: 0.4
   strength: 1.7
   vibrato: 15
   randomness: 90
-  mainCamera: {fileID: 534669904}
 --- !u!1001 &1174031319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25421,6 +25405,12 @@ MonoBehaviour:
   rotSpeed: 5
   crystalFlash: {fileID: 4222217513838591276, guid: 2b52bc7fbec8b49dba0db7e29c596062,
     type: 3}
+  crystalLight: {fileID: 0}
+  maxAmmo: 0
+  currentAmmo: 0
+  charge: 0
+  rechargeRate: 0
+  chargePause: 0
 --- !u!1001 &1523633828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27467,7 +27457,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: c4fdfaa3aa16ca34e8b9962865870b3d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 05820a3c7c294f047b7e4e259e6126a6, type: 2}
+      objectReference: {fileID: 2100000, guid: c2f98a25342432a4690c1c080c7a1c07, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4fdfaa3aa16ca34e8b9962865870b3d, type: 3}
 --- !u!4 &1700417353 stripped
@@ -31888,34 +31878,23 @@ MonoBehaviour:
     m_Bits: 2048
   groundCheck: {fileID: 268437380}
   maxShots: 3
-  chargeRate: 0.05
-  maxChargePause: 2
   clip: {fileID: 0}
-  charge: 0
-  fallSpeedGliding: 2
   basedGlideSpeed: 0.5
   incrementedGlideSpeed: 1
   gliderTemp: {fileID: 1012970840}
+  fallSpeedGliding: 2
   jumpForce: 2000
   thisLight: {fileID: 893164252}
   sliding: 0
   startingToSlide: 0
-  stoppingToSlide: 0
   slidingAngle: 34
-  slidingFallOffAngle: 15
   slippery: {fileID: 13400000, guid: dba7b790714841f41a05eff33cfea629, type: 2}
   collider: {fileID: 1170225225}
   currentGroundAngle: 0
   groundNormal: {x: 0, y: 0, z: 0}
-  slideStartUpTime: 1
   slideFallOffTime: 0.3
   slideFallOffVelocity: 5
   slideMovementSpeed: 65
-  cdeForce: 100
-  cdeLength: 1
-  randomDistance: 50
-  downTime: 0.2
-  downSpeed: -20
 --- !u!54 &2010041557
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31995,17 +31974,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679aecb3108b64d12ba3d185a713fa6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vibrationHitLength: 0.15
-  vibrationHitStrength: 1
-  vibrationFadeLength: 0.25
-  vibrationFadeStrength: 0.2
   smokeFX: {fileID: 4292460645169672814, guid: 06dea101ac0e248cb93bb879a6c2d663, type: 3}
   smokeDestroy: 1
   duration: 0.4
   strength: 1.7
   vibrato: 15
   randomness: 90
-  mainCamera: {fileID: 534669904}
 --- !u!1001 &2010628736
 PrefabInstance:
   m_ObjectHideFlags: 0
