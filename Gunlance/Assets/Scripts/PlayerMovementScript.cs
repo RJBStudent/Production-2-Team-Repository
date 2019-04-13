@@ -472,7 +472,7 @@ public class PlayerMovementScript : MonoBehaviour
             return;
         }*/
 
-        Debug.Log(chargePaused + " " + charge);
+
         if (!chargePaused && charge <= maxShots)
         {
             charge += chargeRate;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6086049, g: 0.5568767, b: 0.5364047, a: 1}
+  m_IndirectSpecularColor: {r: 0.6086046, g: 0.5568767, b: 0.5364058, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19411,23 +19411,34 @@ MonoBehaviour:
     m_Bits: 2048
   groundCheck: {fileID: 268437380}
   maxShots: 3
+  chargeRate: 0
+  maxChargePause: 0
   clip: {fileID: 0}
+  charge: 0
+  fallSpeedGliding: 2
   basedGlideSpeed: 0.5
   incrementedGlideSpeed: 1
   gliderTemp: {fileID: 0}
-  fallSpeedGliding: 2
   jumpForce: 2000
   thisLight: {fileID: 893164252}
   sliding: 0
   startingToSlide: 0
+  stoppingToSlide: 0
   slidingAngle: 34
+  slidingFallOffAngle: 0
   slippery: {fileID: 13400000, guid: dba7b790714841f41a05eff33cfea629, type: 2}
   collider: {fileID: 1170225225}
   currentGroundAngle: 0
   groundNormal: {x: 0, y: 0, z: 0}
+  slideStartUpTime: 0
   slideFallOffTime: 0.3
   slideFallOffVelocity: 5
   slideMovementSpeed: 65
+  cdeForce: 0
+  cdeLength: 0
+  randomDistance: 0
+  downTime: 0
+  downSpeed: 0
 --- !u!54 &1170225224
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19529,6 +19540,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679aecb3108b64d12ba3d185a713fa6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vibrationHitLength: 0
+  vibrationHitStrength: 0
+  vibrationFadeLength: 0
+  vibrationFadeStrength: 0
   smokeFX: {fileID: 4292460645169672814, guid: 06dea101ac0e248cb93bb879a6c2d663, type: 3}
   smokeDestroy: 1
   duration: 0.4
@@ -19717,6 +19732,31 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: e22c0c39d71aee4489b7a284cb5e2367, type: 3}
+--- !u!1 &1186886825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100120, guid: bedce35257140764dac980d20aebe3ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 1281082281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1186886829
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186886825}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: bedce35257140764dac980d20aebe3ed, type: 3}
+  m_Controller: {fileID: 9100000, guid: f49e1aacf0cc45f428d86ac7434365dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1198523219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21226,6 +21266,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 70f97e995c4862e478af551b014b3ce0, type: 2}
+    - target: {fileID: 9500000, guid: bedce35257140764dac980d20aebe3ed, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f49e1aacf0cc45f428d86ac7434365dd, type: 2}
+    - target: {fileID: 9500000, guid: bedce35257140764dac980d20aebe3ed, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: bedce35257140764dac980d20aebe3ed, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bedce35257140764dac980d20aebe3ed, type: 3}
 --- !u!1 &1281083771
@@ -25478,12 +25526,6 @@ MonoBehaviour:
   rotSpeed: 5
   crystalFlash: {fileID: 4222217513838591276, guid: 2b52bc7fbec8b49dba0db7e29c596062,
     type: 3}
-  crystalLight: {fileID: 0}
-  maxAmmo: 0
-  currentAmmo: 0
-  charge: 0
-  rechargeRate: 0
-  chargePause: 0
 --- !u!1001 &1523633828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26586,6 +26628,7 @@ GameObject:
   - component: {fileID: 1627709374}
   - component: {fileID: 1627709378}
   - component: {fileID: 1627709377}
+  - component: {fileID: 1627709379}
   m_Layer: 9
   m_Name: Tutorial_Level_Terrain
   m_TagString: Untagged
@@ -26705,6 +26748,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &1627709379
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627709373}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 948077a7b4eddf840b6d9a33e0fc9f40, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1628358901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27327,7 +27389,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693154094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -679.3, y: 29.3, z: 250.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 534669905}
@@ -31955,23 +32017,34 @@ MonoBehaviour:
     m_Bits: 2048
   groundCheck: {fileID: 268437380}
   maxShots: 3
+  chargeRate: 0.01
+  maxChargePause: 0.1
   clip: {fileID: 0}
+  charge: 0
+  fallSpeedGliding: 2
   basedGlideSpeed: 0.5
   incrementedGlideSpeed: 1
   gliderTemp: {fileID: 1012970840}
-  fallSpeedGliding: 2
   jumpForce: 2000
   thisLight: {fileID: 893164252}
   sliding: 0
   startingToSlide: 0
+  stoppingToSlide: 0
   slidingAngle: 34
+  slidingFallOffAngle: 0
   slippery: {fileID: 13400000, guid: dba7b790714841f41a05eff33cfea629, type: 2}
   collider: {fileID: 1170225225}
   currentGroundAngle: 0
   groundNormal: {x: 0, y: 0, z: 0}
+  slideStartUpTime: 0.5
   slideFallOffTime: 0.3
   slideFallOffVelocity: 5
   slideMovementSpeed: 65
+  cdeForce: 100
+  cdeLength: 0.5
+  randomDistance: 100
+  downTime: 0.2
+  downSpeed: -15
 --- !u!54 &2010041557
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32051,12 +32124,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679aecb3108b64d12ba3d185a713fa6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vibrationHitLength: 0.521
+  vibrationHitStrength: 0.724
+  vibrationFadeLength: 0.888
+  vibrationFadeStrength: 1
   smokeFX: {fileID: 4292460645169672814, guid: 06dea101ac0e248cb93bb879a6c2d663, type: 3}
   smokeDestroy: 1
-  duration: 0.4
-  strength: 1.7
-  vibrato: 15
-  randomness: 90
+  duration: 0.711
+  strength: 2.45
+  vibrato: 11
+  randomness: 70.6
 --- !u!1001 &2010628736
 PrefabInstance:
   m_ObjectHideFlags: 0
