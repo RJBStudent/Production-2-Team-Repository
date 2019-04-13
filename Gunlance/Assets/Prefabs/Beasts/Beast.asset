@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Beast
   m_EditorClassIdentifier: 
   movementNodes:
-  - {x: -98.4, y: 14, z: 112.2}
-  - {x: -275.4, y: 14, z: 70.3}
-  - {x: -216, y: 14, z: -46.1}
-  - {x: -67.3, y: 14, z: -46.1}
-  - {x: -14.5, y: 14, z: 63.5}
+  - {x: -98.4, y: 0, z: 112.2}
+  - {x: -275.4, y: 0, z: 70.3}
+  - {x: -216, y: 0, z: -46.1}
+  - {x: -67.3, y: 0, z: -46.1}
+  - {x: -14.5, y: 0, z: 63.5}
   nodeRadius: 1
   nodeRotateRadius: 2
   speed: 5

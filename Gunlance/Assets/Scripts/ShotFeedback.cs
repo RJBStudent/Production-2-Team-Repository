@@ -30,14 +30,13 @@ public class ShotFeedback : MonoBehaviour
     [SerializeField] int vibrato;
     [Range(0, 90)]
     [SerializeField] float randomness;
-
+    [SerializeField]
     Camera mainCamera;
 
 	 AmmoCounterScript ammoScript;
 
 	 private void Start()
-	 {
-		  mainCamera = Camera.main;		  
+	 {		  
 		  ammoScript = GetComponentInChildren<AmmoCounterScript>();
 	 }
 
