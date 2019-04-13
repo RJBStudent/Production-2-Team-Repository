@@ -21,10 +21,13 @@ public class Gruner_PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask beastLayer;
     [SerializeField] LayerMask crystalLayer;
     [SerializeField] Transform groundCheck;
-    [SerializeField] int maxShots;
-    [SerializeField] GameObject thisExplosion;
+	 [Header("Charge Variables")]
+	 public int maxShots;
+	 [SerializeField] float chargeRate;
+	 [SerializeField] float maxChargePause;
 
-    Collider[] hitCollide;
+	 [Space]
+	 Collider[] hitCollide;
 
     Camera thisCamera;
     Rigidbody thisRB;
@@ -32,8 +35,7 @@ public class Gruner_PlayerMovement : MonoBehaviour
     [SerializeField] Animator clip; //TEMPORARY FOR TRAILER
     bool removeControl = false; // TEMPORARY FOR TRAILER
 
-
-    //Explode variables
+	 //Explode variables
     float explodeInput = 0;
     float lastExplodeInput = 0.0f;
     float xDirection, zDirection;
@@ -46,13 +48,21 @@ public class Gruner_PlayerMovement : MonoBehaviour
     //feedback
     ShotFeedback shoot;
 
-    float crystalsOnScene = 0;
+	 //Recharge stuff
+	 int shots;
+	 [HideInInspector]
+	 public float charge = 0;
+	 float chargePauseTimer = 0;
+	 bool chargePaused = false;
+
+	float crystalsOnScene = 0;
 
     //Glide Variables
     float glideInput = 0;
     bool gliding = false;
     Vector3 velocityInfluence;
-    [SerializeField] float basedGlideSpeed, incrementedGlideSpeed;
+	 [Header("Gliding Variables")]
+	 [SerializeField] float basedGlideSpeed, incrementedGlideSpeed;
     [SerializeField] GameObject gliderTemp;
     [SerializeField] float fallSpeedGliding;
 
@@ -84,7 +94,10 @@ public class Gruner_PlayerMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        thisRB = GetComponent<Rigidbody>();
+		  shots = maxShots;   //Recharge
+		  charge = shots;
+
+		  thisRB = GetComponent<Rigidbody>();
         thisCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         shoot = GetComponent<ShotFeedback>();
 
@@ -121,7 +134,6 @@ public class Gruner_PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(currentShot);
         Slide();
 
         GroundCheck();
@@ -327,14 +339,15 @@ public class Gruner_PlayerMovement : MonoBehaviour
         if (hitCollide.Length > 0)
         {
             inAir = false;
-            if (!addedForce)
+            /* if (!addedForce)
             {
                 currentShot = 0;
-            }
+            } */ //Recharge
         }
         else
         {
             inAir = true;
+			   transform.parent = null;
         }
 
         //check if the player should attach itself to the ground or beast
@@ -380,24 +393,47 @@ public class Gruner_PlayerMovement : MonoBehaviour
     //When the input is received for explode propell with motion
     void ExplodeDirection()
     {
-        //Dont do anything if the player is out of shots
-        if (currentShot >= maxShots)
-        {
-            return;
-        }
+			//Dont do anything if the player is out of shots
+			/*if (currentShot >= maxShots)
+			{
+				return;
+			}*/
 
-        //Create explosion where the sidePosition is
-        if (explodeInput == 1.0 && !addedForce && !gliding)
-        {
+			Debug.Log(chargePaused + " " + charge);
+			if (!chargePaused && charge <= maxShots)
+			{
+				charge += chargeRate;
+
+				shots = Mathf.FloorToInt(charge);
+			}
+
+			if (chargePaused)
+			{
+				chargePauseTimer += Time.deltaTime;
+				if (chargePauseTimer >= maxChargePause)
+				{
+					chargePauseTimer = 0.0f;
+					chargePaused = false;
+				}
+			}
+			if (shots < 1)
+			{
+				return;
+			}
+
+			//Create explosion where the sidePosition is
+			if (explodeInput == 1.0 && !addedForce && !gliding)
+			{
             thisRB.velocity = Vector3.zero;
             thisRB.AddExplosionForce(sideForce, sideExplosion.position, explodeRadius, upwardsSideForce, ForceMode.Impulse);
             originalExplodePosition = sideExplosion.position;
-            currentShot++;
+			   //currentShot++;
+			   charge--;
 
             shoot.Explode();
 
             StartCoroutine(ExplodeTime(explodeTime));
-
+			   chargePaused = true;
             // ***************************** TOMMMYMMYMYMYMYMYM **************************
             Mann_AudioManagerScript.instance.PlaySound("GunLance2");
 
@@ -445,28 +481,25 @@ public class Gruner_PlayerMovement : MonoBehaviour
     //How long does the force get added
     IEnumerator ExplodeTime(float time)
     {
-        addedForce = true;
-        // Activates Screenshake
-        thisCamera.GetComponent<CareyCameraController>().CanShake = true;
-        // Activates Explosion
-        Instantiate(thisExplosion, new Vector3(transform.position.x, transform.position.y, transform.position.z), new Quaternion(0, 0, 0, 0));
-        //Set flash animation for explosion
-        thisLight.SetActive(true);
-        lightTransform.position = transform.position;
+		  addedForce = true;
 
-        //Check if the explosion hits any crystals nearby
-        hitCollide = null;
-        hitCollide = Physics.OverlapSphere(originalExplodePosition, explodeRadius, crystalLayer);
+		  //Set flash animation for explosion
+		  thisLight.SetActive(true);
+		  lightTransform.position = transform.position;
 
-        //Destroy any crystals hit
-        for (int i = 0; i < hitCollide.Length; i++)
-        {
-            Destroy(hitCollide[i].gameObject);
-            crystalsOnScene--;
-        }
-        yield return new WaitForSecondsRealtime(time);
-        addedForce = false;
-    }
+		  //Check if the explosion hits any crystals nearby
+		  hitCollide = null;
+		  hitCollide = Physics.OverlapSphere(originalExplodePosition, explodeRadius, crystalLayer);
+
+		  //Destroy any crystals hit
+		  for (int i = 0; i < hitCollide.Length; i++)
+		  {
+			   Destroy(hitCollide[i].gameObject);
+			   crystalsOnScene--;
+		  }
+		  yield return new WaitForSecondsRealtime(time);
+		  addedForce = false;
+	}
 
     IEnumerator SlideTime(float time)
     {
