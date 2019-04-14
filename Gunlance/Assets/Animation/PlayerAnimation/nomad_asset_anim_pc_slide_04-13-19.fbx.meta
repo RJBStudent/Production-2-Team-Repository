@@ -118,9 +118,10 @@ ModelImporter:
     2000004: nomad_asset_pc_rig_v16_04_06_19:persp2
     2100000: nomad_asset_pc_rig_v16_04_06_19_lambert5
     4300000: nomad_asset_pc_rig_v16_04_06_19:polySurface86
-    7400000: Take 001
+    7400000: Slide
     9500000: //RootNode
     13700000: nomad_asset_pc_rig_v16_04_06_19:polySurface86
+    2186277476908879412: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -146,7 +147,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -155,7 +156,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: Slide
       takeName: Take 001
       firstFrame: 1
       lastFrame: 11
@@ -221,7 +222,282 @@ ModelImporter:
   humanDescription:
     serializedVersion: 2
     human: []
-    skeleton: []
+    skeleton:
+    - name: nomad_asset_pc_04-13-19(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: persp1
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -2.5022159, y: -0.44559565, z: 2.531807}
+      rotation: {x: -0.068843484, y: 0.9175308, z: 0.18218899, w: 0.34670603}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: left
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: 1000.1, y: 0, z: 0}
+      rotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: persp2
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -2.1049178, y: 5.165166, z: 0.5575137}
+      rotation: {x: 0.23388092, y: 0.7612939, z: -0.37574542, w: 0.4738637}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: polySurface86
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -1.1472087, y: -89.26906, z: 0.06132635}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: ik_curve_spine
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -0.020499047, y: 1.365358, z: -0.06415642}
+      rotation: {x: -0.48910853, y: 0.5106593, z: -0.48910853, w: 0.5106593}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: curve_spine
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: nurbsCircle1
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -0.03170965, y: 0.007894242, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: ctrl_foot_l
+      parentName: nurbsCircle1
+      position: {x: -5.3916135, y: -0.48990318, z: 4.2142634}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_rps_leg_l
+      parentName: ctrl_foot_l
+      position: {x: -1.3112478, y: 4.629501, z: -9.0452}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_wrist_r
+      parentName: nurbsCircle1
+      position: {x: 49.32488, y: 92.44981, z: -3.5024476}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_rps_arm_r
+      parentName: ctrl_wrist_r
+      position: {x: 1.2516279, y: 0.325901, z: 0.68687516}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_foot_r
+      parentName: nurbsCircle1
+      position: {x: 6.821736, y: -0.6507649, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_rps_leg_r
+      parentName: ctrl_foot_r
+      position: {x: 3.1673656, y: 4.7903624, z: -4.8309364}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_wrist_l
+      parentName: nurbsCircle1
+      position: {x: -43.241768, y: 89.90437, z: -1.4534}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_rps_arm_l
+      parentName: ctrl_wrist_l
+      position: {x: -1.0359014, y: -0.61701524, z: -0.92373735}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_knee_l
+      parentName: nurbsCircle1
+      position: {x: -6.7028613, y: 55.28724, z: 75.90994}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_knee_r
+      parentName: nurbsCircle1
+      position: {x: 9.741424, y: 55.28724, z: 75.90994}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_elbow_r
+      parentName: nurbsCircle1
+      position: {x: 37.20348, y: 110.29022, z: -6.7880845}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_elbow_l
+      parentName: nurbsCircle1
+      position: {x: -29.810274, y: 108.80693, z: -6.613892}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_abs
+      parentName: nurbsCircle1
+      position: {x: 1.4000276, y: 93.39764, z: 0.85564345}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: grp_cluster_abs
+      parentName: ctrl_abs
+      position: {x: -0.5289674, y: -3.3059208, z: -3.8475251}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: group1
+      parentName: ctrl_abs
+      position: {x: -0.5289674, y: -3.3059208, z: -3.8475251}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cluster_abs
+      parentName: group1
+      position: {x: 0.25, y: -0.25, z: -0.25}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_chest
+      parentName: ctrl_abs
+      position: {x: 0.3925683, y: 24.159546, z: -0.85564345}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: grp_cluster_chest
+      parentName: ctrl_chest
+      position: {x: -0.9215357, y: -4.898896, z: -8.268635}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cluster_chest
+      parentName: grp_cluster_chest
+      position: {x: 0.25, y: -0.25, z: -0.25}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_neck
+      parentName: ctrl_abs
+      position: {x: 0.33680317, y: 44.49477, z: -0.85564345}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: grp_cluster_neck
+      parentName: ctrl_neck
+      position: {x: -0.8657705, y: -2.0889738, z: -6.1946135}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cluster_neck
+      parentName: grp_cluster_neck
+      position: {x: 0.25, y: -0.25, z: -0.25}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_head
+      parentName: ctrl_neck
+      position: {x: 0.30332243, y: 17.498466, z: -2.9828033}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.16735911, y: 0.16735911, z: 0.16735911}
+    - name: grp_head
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -0.018460127, y: 1.4236945, z: -0.032785546}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: skel_abs
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -0.02049905, y: 0.9063114, z: -0.03241881}
+      rotation: {x: 0.44805744, y: -0.5470325, z: -0.44805744, w: 0.5470325}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: skel_chest
+      parentName: skel_abs
+      position: {x: -21.53975, y: -3.552714e-15, z: -9.769963e-15}
+      rotation: {x: 0.99272585, y: -0.12039695, z: 1.1652594e-13, w: 1.4193849e-14}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_neck
+      parentName: skel_chest
+      position: {x: -24.80996, y: 5.329071e-15, z: 1.065814e-14}
+      rotation: {x: 0.48207545, y: -0.5173038, z: 0.48207545, w: 0.5173038}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_head
+      parentName: skel_neck
+      position: {x: 0.2038919, y: 5.74562, z: 3.29554}
+      rotation: {x: -0.47597358, y: 0.52292365, z: -0.47597358, w: 0.52292365}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint2
+      parentName: skel_head
+      position: {x: -7.82547, y: 0, z: 0}
+      rotation: {x: 0.4830841, y: -0.516362, z: 0.4830841, w: 0.516362}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_bicep_l
+      parentName: skel_chest
+      position: {x: -23.05969, y: -2.495918, z: -15.26549}
+      rotation: {x: -0.17907648, y: 0.6840227, z: -0.67505765, w: -0.21057475}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_forearm_l
+      parentName: skel_bicep_l
+      position: {x: -29.56607, y: 0, z: -2.698454}
+      rotation: {x: 0.0000055368596, y: -0.00046452292, z: -0.03953794, w: 0.999218}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_hand_l
+      parentName: skel_forearm_l
+      position: {x: -24.30368, y: 7.105427e-15, z: 4.195297}
+      rotation: {x: 0, y: -0, z: -0.009490277, w: 0.999955}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_handend_l
+      parentName: skel_hand_l
+      position: {x: -8.513911, y: 1.865175e-14, z: 0}
+      rotation: {x: 0, y: -0, z: -0.44130045, w: 0.89735943}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_bicep_r
+      parentName: skel_chest
+      position: {x: -24.70569, y: -2.719818, z: 15.5426}
+      rotation: {x: -0.22249371, y: 0.67108166, z: 0.6611219, w: 0.2511251}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_forearm_r
+      parentName: skel_bicep_r
+      position: {x: -32.53732, y: 1.421085e-14, z: 3.085392}
+      rotation: {x: 1.1516412e-16, y: 2.4886575e-14, z: 0.015487333, w: 0.9998801}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_hand_r
+      parentName: skel_forearm_r
+      position: {x: -22.03622, y: -1.421085e-14, z: -3.972664}
+      rotation: {x: 0, y: -0, z: -0.08204402, w: 0.9966287}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_handend_r
+      parentName: skel_hand_r
+      position: {x: -9.067234, y: -6.217249e-15, z: -1.100566e-15}
+      rotation: {x: 0.36829662, y: 0.92970836, z: -3.4376554e-17, w: -7.947988e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_thigh_l
+      parentName: skel_abs
+      position: {x: 4.084616, y: -0.7385151, z: 7.823921}
+      rotation: {x: 0.022281757, y: 0.99975175, z: -5.985277e-17, w: -6.25815e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_shin_l
+      parentName: skel_thigh_l
+      position: {x: -30.34026, y: -2.75543, z: 5.329071e-15}
+      rotation: {x: 0.9937448, y: 0.11167514, z: 6.83813e-18, w: 6.084932e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_foot_l
+      parentName: skel_shin_l
+      position: {x: -51.27361, y: -1.776357e-15, z: 7.105427e-15}
+      rotation: {x: 0.76511496, y: 0.6438938, z: 3.9427124e-17, w: 4.684978e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_toe_l
+      parentName: skel_foot_l
+      position: {x: -10.80227, y: -2.708944e-14, z: -1.776357e-15}
+      rotation: {x: -2.556881e-31, y: -3.3148985e-32, z: -0.11257348, w: 0.9936434}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_toeend_l
+      parentName: skel_toe_l
+      position: {x: -8.908894, y: 3.552714e-15, z: -8.881784e-15}
+      rotation: {x: -0.005701918, y: -0.7070838, z: -0.005701918, w: 0.7070838}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_thigh_r
+      parentName: skel_abs
+      position: {x: 4.084616, y: -0.7385151, z: -8.868041}
+      rotation: {x: 0.02228172, y: 0.99975055, z: 0.0015244021, w: 0.00030342076}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_shin_r
+      parentName: skel_thigh_r
+      position: {x: -30.34026, y: -2.75543, z: -5.329071e-15}
+      rotation: {x: 0.9937448, y: 0.11167514, z: 6.83813e-18, w: 6.084932e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_foot_r
+      parentName: skel_shin_r
+      position: {x: -51.27361, y: 2.664535e-15, z: 1.687539e-14}
+      rotation: {x: 0.76511496, y: 0.6438938, z: 3.9427124e-17, w: 4.684978e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_toe_l 1
+      parentName: skel_foot_r
+      position: {x: -10.80227, y: -1.421085e-14, z: -6.217249e-15}
+      rotation: {x: -2.556881e-31, y: -3.3148985e-32, z: -0.11257348, w: 0.9936434}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_toeend_l 1
+      parentName: skel_toe_l 1
+      position: {x: -8.908894, y: -4.440892e-16, z: -4.440892e-15}
+      rotation: {x: -0.005701918, y: -0.7070838, z: -0.005701918, w: 0.7070838}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -231,9 +507,9 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: bedce35257140764dac980d20aebe3ed,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 61df84daff83cd9498576d99d843efb7,
     type: 3}
   animationType: 2
   humanoidOversampling: 1

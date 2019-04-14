@@ -1,0 +1,519 @@
+fileFormatVersion: 2
+guid: 6779d0c88523d4c43a56e3b1cce9d871
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: nomad_asset_pc_rig_v16_04_06_19___1_:cluster_abs
+    100004: nomad_asset_pc_rig_v16_04_06_19___1_:cluster_chest
+    100006: nomad_asset_pc_rig_v16_04_06_19___1_:cluster_neck
+    100008: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_abs
+    100010: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_chest
+    100012: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_elbow_l
+    100014: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_elbow_r
+    100016: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_foot_l
+    100018: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_foot_r
+    100020: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_head
+    100022: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_knee_l
+    100024: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_knee_r
+    100026: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_neck
+    100028: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_wrist_l
+    100030: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_wrist_r
+    100032: nomad_asset_pc_rig_v16_04_06_19___1_:curve_spine
+    100034: nomad_asset_pc_rig_v16_04_06_19___1_:group1
+    100036: nomad_asset_pc_rig_v16_04_06_19___1_:grp_cluster_abs
+    100038: nomad_asset_pc_rig_v16_04_06_19___1_:grp_cluster_chest
+    100040: nomad_asset_pc_rig_v16_04_06_19___1_:grp_cluster_neck
+    100042: nomad_asset_pc_rig_v16_04_06_19___1_:grp_head
+    100044: nomad_asset_pc_rig_v16_04_06_19___1_:ik_curve_spine
+    100046: nomad_asset_pc_rig_v16_04_06_19___1_:ik_rps_arm_l
+    100048: nomad_asset_pc_rig_v16_04_06_19___1_:ik_rps_arm_r
+    100050: nomad_asset_pc_rig_v16_04_06_19___1_:ik_rps_leg_l
+    100052: nomad_asset_pc_rig_v16_04_06_19___1_:ik_rps_leg_r
+    100054: nomad_asset_pc_rig_v16_04_06_19___1_:joint2
+    100056: nomad_asset_pc_rig_v16_04_06_19___1_:left
+    100058: nomad_asset_pc_rig_v16_04_06_19___1_:nurbsCircle1
+    100060: nomad_asset_pc_rig_v16_04_06_19___1_:persp1
+    100062: nomad_asset_pc_rig_v16_04_06_19___1_:persp2
+    100064: nomad_asset_pc_rig_v16_04_06_19___1_:polySurface86
+    100066: nomad_asset_pc_rig_v16_04_06_19___1_:skel_abs
+    100068: nomad_asset_pc_rig_v16_04_06_19___1_:skel_bicep_l
+    100070: nomad_asset_pc_rig_v16_04_06_19___1_:skel_bicep_r
+    100072: nomad_asset_pc_rig_v16_04_06_19___1_:skel_chest
+    100074: nomad_asset_pc_rig_v16_04_06_19___1_:skel_foot_l
+    100076: nomad_asset_pc_rig_v16_04_06_19___1_:skel_foot_r
+    100078: nomad_asset_pc_rig_v16_04_06_19___1_:skel_forearm_l
+    100080: nomad_asset_pc_rig_v16_04_06_19___1_:skel_forearm_r
+    100082: nomad_asset_pc_rig_v16_04_06_19___1_:skel_hand_l
+    100084: nomad_asset_pc_rig_v16_04_06_19___1_:skel_hand_r
+    100086: nomad_asset_pc_rig_v16_04_06_19___1_:skel_handend_l
+    100088: nomad_asset_pc_rig_v16_04_06_19___1_:skel_handend_r
+    100090: nomad_asset_pc_rig_v16_04_06_19___1_:skel_head
+    100092: nomad_asset_pc_rig_v16_04_06_19___1_:skel_neck
+    100094: nomad_asset_pc_rig_v16_04_06_19___1_:skel_shin_l
+    100096: nomad_asset_pc_rig_v16_04_06_19___1_:skel_shin_r
+    100098: nomad_asset_pc_rig_v16_04_06_19___1_:skel_thigh_l
+    100100: nomad_asset_pc_rig_v16_04_06_19___1_:skel_thigh_r
+    100102: nomad_asset_pc_rig_v16_04_06_19___1_:skel_toe_l
+    100104: nomad_asset_pc_rig_v16_04_06_19___1_:skel_toe_l 1
+    100106: nomad_asset_pc_rig_v16_04_06_19___1_:skel_toeend_l
+    100108: nomad_asset_pc_rig_v16_04_06_19___1_:skel_toeend_l 1
+    400000: //RootNode
+    400002: nomad_asset_pc_rig_v16_04_06_19___1_:cluster_abs
+    400004: nomad_asset_pc_rig_v16_04_06_19___1_:cluster_chest
+    400006: nomad_asset_pc_rig_v16_04_06_19___1_:cluster_neck
+    400008: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_abs
+    400010: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_chest
+    400012: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_elbow_l
+    400014: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_elbow_r
+    400016: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_foot_l
+    400018: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_foot_r
+    400020: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_head
+    400022: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_knee_l
+    400024: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_knee_r
+    400026: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_neck
+    400028: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_wrist_l
+    400030: nomad_asset_pc_rig_v16_04_06_19___1_:ctrl_wrist_r
+    400032: nomad_asset_pc_rig_v16_04_06_19___1_:curve_spine
+    400034: nomad_asset_pc_rig_v16_04_06_19___1_:group1
+    400036: nomad_asset_pc_rig_v16_04_06_19___1_:grp_cluster_abs
+    400038: nomad_asset_pc_rig_v16_04_06_19___1_:grp_cluster_chest
+    400040: nomad_asset_pc_rig_v16_04_06_19___1_:grp_cluster_neck
+    400042: nomad_asset_pc_rig_v16_04_06_19___1_:grp_head
+    400044: nomad_asset_pc_rig_v16_04_06_19___1_:ik_curve_spine
+    400046: nomad_asset_pc_rig_v16_04_06_19___1_:ik_rps_arm_l
+    400048: nomad_asset_pc_rig_v16_04_06_19___1_:ik_rps_arm_r
+    400050: nomad_asset_pc_rig_v16_04_06_19___1_:ik_rps_leg_l
+    400052: nomad_asset_pc_rig_v16_04_06_19___1_:ik_rps_leg_r
+    400054: nomad_asset_pc_rig_v16_04_06_19___1_:joint2
+    400056: nomad_asset_pc_rig_v16_04_06_19___1_:left
+    400058: nomad_asset_pc_rig_v16_04_06_19___1_:nurbsCircle1
+    400060: nomad_asset_pc_rig_v16_04_06_19___1_:persp1
+    400062: nomad_asset_pc_rig_v16_04_06_19___1_:persp2
+    400064: nomad_asset_pc_rig_v16_04_06_19___1_:polySurface86
+    400066: nomad_asset_pc_rig_v16_04_06_19___1_:skel_abs
+    400068: nomad_asset_pc_rig_v16_04_06_19___1_:skel_bicep_l
+    400070: nomad_asset_pc_rig_v16_04_06_19___1_:skel_bicep_r
+    400072: nomad_asset_pc_rig_v16_04_06_19___1_:skel_chest
+    400074: nomad_asset_pc_rig_v16_04_06_19___1_:skel_foot_l
+    400076: nomad_asset_pc_rig_v16_04_06_19___1_:skel_foot_r
+    400078: nomad_asset_pc_rig_v16_04_06_19___1_:skel_forearm_l
+    400080: nomad_asset_pc_rig_v16_04_06_19___1_:skel_forearm_r
+    400082: nomad_asset_pc_rig_v16_04_06_19___1_:skel_hand_l
+    400084: nomad_asset_pc_rig_v16_04_06_19___1_:skel_hand_r
+    400086: nomad_asset_pc_rig_v16_04_06_19___1_:skel_handend_l
+    400088: nomad_asset_pc_rig_v16_04_06_19___1_:skel_handend_r
+    400090: nomad_asset_pc_rig_v16_04_06_19___1_:skel_head
+    400092: nomad_asset_pc_rig_v16_04_06_19___1_:skel_neck
+    400094: nomad_asset_pc_rig_v16_04_06_19___1_:skel_shin_l
+    400096: nomad_asset_pc_rig_v16_04_06_19___1_:skel_shin_r
+    400098: nomad_asset_pc_rig_v16_04_06_19___1_:skel_thigh_l
+    400100: nomad_asset_pc_rig_v16_04_06_19___1_:skel_thigh_r
+    400102: nomad_asset_pc_rig_v16_04_06_19___1_:skel_toe_l
+    400104: nomad_asset_pc_rig_v16_04_06_19___1_:skel_toe_l 1
+    400106: nomad_asset_pc_rig_v16_04_06_19___1_:skel_toeend_l
+    400108: nomad_asset_pc_rig_v16_04_06_19___1_:skel_toeend_l 1
+    2000000: nomad_asset_pc_rig_v16_04_06_19___1_:left
+    2000002: nomad_asset_pc_rig_v16_04_06_19___1_:persp1
+    2000004: nomad_asset_pc_rig_v16_04_06_19___1_:persp2
+    2100000: nomad_asset_pc_rig_v16_04_06_19___1__lambert5
+    4300000: nomad_asset_pc_rig_v16_04_06_19___1_:polySurface86
+    7400000: Idle
+    9500000: //RootNode
+    13700000: nomad_asset_pc_rig_v16_04_06_19___1_:polySurface86
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nomad_asset_pc_rig_v16_04_06_19___1__lambert5
+    second: {fileID: 2100000, guid: 70f97e995c4862e478af551b014b3ce0, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 154
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 1
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton:
+    - name: nomad_asset_pc_04-13-19(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: persp1
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -2.5022159, y: -0.44559565, z: 2.531807}
+      rotation: {x: -0.068843484, y: 0.9175308, z: 0.18218899, w: 0.34670603}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: left
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: 1000.1, y: 0, z: 0}
+      rotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: persp2
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -2.1049178, y: 5.165166, z: 0.5575137}
+      rotation: {x: 0.23388092, y: 0.7612939, z: -0.37574542, w: 0.4738637}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: polySurface86
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -1.1472087, y: -89.26906, z: 0.06132635}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: ik_curve_spine
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -0.020499047, y: 1.365358, z: -0.06415642}
+      rotation: {x: -0.48910853, y: 0.5106593, z: -0.48910853, w: 0.5106593}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: curve_spine
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: nurbsCircle1
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -0.03170965, y: 0.007894242, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: ctrl_foot_l
+      parentName: nurbsCircle1
+      position: {x: -5.3916135, y: -0.48990318, z: 4.2142634}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_rps_leg_l
+      parentName: ctrl_foot_l
+      position: {x: -1.3112478, y: 4.629501, z: -9.0452}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_wrist_r
+      parentName: nurbsCircle1
+      position: {x: 49.32488, y: 92.44981, z: -3.5024476}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_rps_arm_r
+      parentName: ctrl_wrist_r
+      position: {x: 1.2516279, y: 0.325901, z: 0.68687516}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_foot_r
+      parentName: nurbsCircle1
+      position: {x: 6.821736, y: -0.6507649, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_rps_leg_r
+      parentName: ctrl_foot_r
+      position: {x: 3.1673656, y: 4.7903624, z: -4.8309364}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_wrist_l
+      parentName: nurbsCircle1
+      position: {x: -43.241768, y: 89.90437, z: -1.4534}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_rps_arm_l
+      parentName: ctrl_wrist_l
+      position: {x: -1.0359014, y: -0.61701524, z: -0.92373735}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_knee_l
+      parentName: nurbsCircle1
+      position: {x: -6.7028613, y: 55.28724, z: 75.90994}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_knee_r
+      parentName: nurbsCircle1
+      position: {x: 9.741424, y: 55.28724, z: 75.90994}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_elbow_r
+      parentName: nurbsCircle1
+      position: {x: 37.20348, y: 110.29022, z: -6.7880845}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_elbow_l
+      parentName: nurbsCircle1
+      position: {x: -29.810274, y: 108.80693, z: -6.613892}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_abs
+      parentName: nurbsCircle1
+      position: {x: 1.4000276, y: 93.39764, z: 0.85564345}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: grp_cluster_abs
+      parentName: ctrl_abs
+      position: {x: -0.5289674, y: -3.3059208, z: -3.8475251}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: group1
+      parentName: ctrl_abs
+      position: {x: -0.5289674, y: -3.3059208, z: -3.8475251}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cluster_abs
+      parentName: group1
+      position: {x: 0.25, y: -0.25, z: -0.25}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_chest
+      parentName: ctrl_abs
+      position: {x: 0.3925683, y: 24.159546, z: -0.85564345}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: grp_cluster_chest
+      parentName: ctrl_chest
+      position: {x: -0.9215357, y: -4.898896, z: -8.268635}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cluster_chest
+      parentName: grp_cluster_chest
+      position: {x: 0.25, y: -0.25, z: -0.25}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_neck
+      parentName: ctrl_abs
+      position: {x: 0.33680317, y: 44.49477, z: -0.85564345}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: grp_cluster_neck
+      parentName: ctrl_neck
+      position: {x: -0.8657705, y: -2.0889738, z: -6.1946135}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cluster_neck
+      parentName: grp_cluster_neck
+      position: {x: 0.25, y: -0.25, z: -0.25}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ctrl_head
+      parentName: ctrl_neck
+      position: {x: 0.30332243, y: 17.498466, z: -2.9828033}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.16735911, y: 0.16735911, z: 0.16735911}
+    - name: grp_head
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -0.018460127, y: 1.4236945, z: -0.032785546}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: skel_abs
+      parentName: nomad_asset_pc_04-13-19(Clone)
+      position: {x: -0.02049905, y: 0.9063114, z: -0.03241881}
+      rotation: {x: 0.44805744, y: -0.5470325, z: -0.44805744, w: 0.5470325}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: skel_chest
+      parentName: skel_abs
+      position: {x: -21.53975, y: -3.552714e-15, z: -9.769963e-15}
+      rotation: {x: 0.99272585, y: -0.12039695, z: 1.1652594e-13, w: 1.4193849e-14}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_neck
+      parentName: skel_chest
+      position: {x: -24.80996, y: 5.329071e-15, z: 1.065814e-14}
+      rotation: {x: 0.48207545, y: -0.5173038, z: 0.48207545, w: 0.5173038}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_head
+      parentName: skel_neck
+      position: {x: 0.2038919, y: 5.74562, z: 3.29554}
+      rotation: {x: -0.47597358, y: 0.52292365, z: -0.47597358, w: 0.52292365}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint2
+      parentName: skel_head
+      position: {x: -7.82547, y: 0, z: 0}
+      rotation: {x: 0.4830841, y: -0.516362, z: 0.4830841, w: 0.516362}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_bicep_l
+      parentName: skel_chest
+      position: {x: -23.05969, y: -2.495918, z: -15.26549}
+      rotation: {x: -0.17907648, y: 0.6840227, z: -0.67505765, w: -0.21057475}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_forearm_l
+      parentName: skel_bicep_l
+      position: {x: -29.56607, y: 0, z: -2.698454}
+      rotation: {x: 0.0000055368596, y: -0.00046452292, z: -0.03953794, w: 0.999218}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_hand_l
+      parentName: skel_forearm_l
+      position: {x: -24.30368, y: 7.105427e-15, z: 4.195297}
+      rotation: {x: 0, y: -0, z: -0.009490277, w: 0.999955}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_handend_l
+      parentName: skel_hand_l
+      position: {x: -8.513911, y: 1.865175e-14, z: 0}
+      rotation: {x: 0, y: -0, z: -0.44130045, w: 0.89735943}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_bicep_r
+      parentName: skel_chest
+      position: {x: -24.70569, y: -2.719818, z: 15.5426}
+      rotation: {x: -0.22249371, y: 0.67108166, z: 0.6611219, w: 0.2511251}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_forearm_r
+      parentName: skel_bicep_r
+      position: {x: -32.53732, y: 1.421085e-14, z: 3.085392}
+      rotation: {x: 1.1516412e-16, y: 2.4886575e-14, z: 0.015487333, w: 0.9998801}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_hand_r
+      parentName: skel_forearm_r
+      position: {x: -22.03622, y: -1.421085e-14, z: -3.972664}
+      rotation: {x: 0, y: -0, z: -0.08204402, w: 0.9966287}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_handend_r
+      parentName: skel_hand_r
+      position: {x: -9.067234, y: -6.217249e-15, z: -1.100566e-15}
+      rotation: {x: 0.36829662, y: 0.92970836, z: -3.4376554e-17, w: -7.947988e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_thigh_l
+      parentName: skel_abs
+      position: {x: 4.084616, y: -0.7385151, z: 7.823921}
+      rotation: {x: 0.022281757, y: 0.99975175, z: -5.985277e-17, w: -6.25815e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_shin_l
+      parentName: skel_thigh_l
+      position: {x: -30.34026, y: -2.75543, z: 5.329071e-15}
+      rotation: {x: 0.9937448, y: 0.11167514, z: 6.83813e-18, w: 6.084932e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_foot_l
+      parentName: skel_shin_l
+      position: {x: -51.27361, y: -1.776357e-15, z: 7.105427e-15}
+      rotation: {x: 0.76511496, y: 0.6438938, z: 3.9427124e-17, w: 4.684978e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_toe_l
+      parentName: skel_foot_l
+      position: {x: -10.80227, y: -2.708944e-14, z: -1.776357e-15}
+      rotation: {x: -2.556881e-31, y: -3.3148985e-32, z: -0.11257348, w: 0.9936434}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_toeend_l
+      parentName: skel_toe_l
+      position: {x: -8.908894, y: 3.552714e-15, z: -8.881784e-15}
+      rotation: {x: -0.005701918, y: -0.7070838, z: -0.005701918, w: 0.7070838}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_thigh_r
+      parentName: skel_abs
+      position: {x: 4.084616, y: -0.7385151, z: -8.868041}
+      rotation: {x: 0.02228172, y: 0.99975055, z: 0.0015244021, w: 0.00030342076}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_shin_r
+      parentName: skel_thigh_r
+      position: {x: -30.34026, y: -2.75543, z: -5.329071e-15}
+      rotation: {x: 0.9937448, y: 0.11167514, z: 6.83813e-18, w: 6.084932e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_foot_r
+      parentName: skel_shin_r
+      position: {x: -51.27361, y: 2.664535e-15, z: 1.687539e-14}
+      rotation: {x: 0.76511496, y: 0.6438938, z: 3.9427124e-17, w: 4.684978e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_toe_l 1
+      parentName: skel_foot_r
+      position: {x: -10.80227, y: -1.421085e-14, z: -6.217249e-15}
+      rotation: {x: -2.556881e-31, y: -3.3148985e-32, z: -0.11257348, w: 0.9936434}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skel_toeend_l 1
+      parentName: skel_toe_l 1
+      position: {x: -8.908894, y: -4.440892e-16, z: -4.440892e-15}
+      rotation: {x: -0.005701918, y: -0.7070838, z: -0.005701918, w: 0.7070838}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 61df84daff83cd9498576d99d843efb7,
+    type: 3}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
