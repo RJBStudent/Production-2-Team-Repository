@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour
    // Use this for initialization
    void Start()
    {
-      rotateAround = playerTransform.eulerAngles.y - 45f;
+		rotateAround = playerTransform.eulerAngles.y;// - 45f;
       wallHit = new RaycastHit();
 
         GetOS();
