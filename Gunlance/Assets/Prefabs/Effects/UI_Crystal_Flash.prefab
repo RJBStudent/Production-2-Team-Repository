@@ -1362,7 +1362,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.3254717, g: 1, b: 0.59012336, a: 0.08235294}
-        key1: {r: 0.008899991, g: 0.89, b: 0.42008, a: 0}
+        key1: {r: 0.008899991, g: 0.89, b: 0.42008, a: 0.003051214}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1378,8 +1378,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 964
-        atime1: 32768
-        atime2: 0
+        atime1: 36044
+        atime2: 39899
         atime3: 0
         atime4: 0
         atime5: 0
@@ -4712,7 +4712,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2971bbfc8785f1449a569dc56058d2be, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
