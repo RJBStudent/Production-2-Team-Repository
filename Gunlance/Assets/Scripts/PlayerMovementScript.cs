@@ -121,8 +121,16 @@ public class PlayerMovementScript : MonoBehaviour
 
     //store OS info
     string os;
-    //check operating system and define string os to be added to axis name for win/mac support
-    void GetOS()
+
+	//Feet Audio
+	[Header("Running Audio")]
+	public AudioClip[] sandClips;
+	public AudioClip[] rockClips;
+	public Mann_FootAudio[] feetAudio;
+	int currentFoot = 0;
+	public float footTimer;
+	//check operating system and define string os to be added to axis name for win/mac support
+	void GetOS()
     {
         os = SystemInfo.operatingSystem;
 
@@ -139,7 +147,8 @@ public class PlayerMovementScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        shots = maxShots;   //Recharge
+
+		shots = maxShots;   //Recharge
         charge = shots;
 
         thisRB = GetComponent<Rigidbody>();
@@ -156,6 +165,11 @@ public class PlayerMovementScript : MonoBehaviour
 
         GetOS();
     }
+
+	void Update()
+	{
+		footTimer += Time.deltaTime;
+	}
 
     // Update is called once per frame
     // *************************** TOMMY STUFF ****************************
@@ -198,22 +212,33 @@ public class PlayerMovementScript : MonoBehaviour
             SceneManager.LoadScene("Mann_EndScene");
         }
 
-        if (!inAir && thisRB.velocity.magnitude > 1 && !sliding)
+        if (!inAir && new Vector3(thisRB.velocity.x, 0 , thisRB.velocity.z).magnitude > 1 && !sliding && footTimer > .5)
         {
-            if (transform.parent.name == "Terrain")
+			
+			int foot1 = Random.Range(1, 10);
+			int foot2 = Random.Range(1, 10);
+
+			if (transform.parent.name == "Terrain")
             {
-                Mann_AudioManagerScript.instance.PlaySound("Player_Sand_Run");
-            }
+				feetAudio[0].setAudioClip(sandClips[foot1 - 1]);
+				feetAudio[1].setAudioClip(sandClips[foot2 - 1]);
+			}
             else
             {
-                Mann_AudioManagerScript.instance.PlaySound("Player_Rock_Run");
-            }
-        }
-        else
-        {
-            Mann_AudioManagerScript.instance.StopSound("Player_Sand_Run");
-            Mann_AudioManagerScript.instance.StopSound("Player_Rock_Run");
-        }
+				feetAudio[0].setAudioClip(rockClips[foot1 - 1]);
+				feetAudio[1].setAudioClip(rockClips[foot2 - 1]);
+			}
+
+			currentFoot++;
+			currentFoot %= 2;
+
+			feetAudio[currentFoot].playAudioClip();
+
+			if(footTimer > .5)
+			{
+				footTimer = 0;
+			}
+		}
     }
 
     //Input for controller
