@@ -1,0 +1,214 @@
+fileFormatVersion: 2
+guid: 0c24b95885fa5b74b9cae84587c472c4
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: nomad_asset_pc_rig_v16_04_06_19:cluster_abs
+    100004: nomad_asset_pc_rig_v16_04_06_19:cluster_chest
+    100006: nomad_asset_pc_rig_v16_04_06_19:cluster_neck
+    100008: nomad_asset_pc_rig_v16_04_06_19:ctrl_abs
+    100010: nomad_asset_pc_rig_v16_04_06_19:ctrl_chest
+    100012: nomad_asset_pc_rig_v16_04_06_19:ctrl_elbow_l
+    100014: nomad_asset_pc_rig_v16_04_06_19:ctrl_elbow_r
+    100016: nomad_asset_pc_rig_v16_04_06_19:ctrl_foot_l
+    100018: nomad_asset_pc_rig_v16_04_06_19:ctrl_foot_r
+    100020: nomad_asset_pc_rig_v16_04_06_19:ctrl_head
+    100022: nomad_asset_pc_rig_v16_04_06_19:ctrl_knee_l
+    100024: nomad_asset_pc_rig_v16_04_06_19:ctrl_knee_r
+    100026: nomad_asset_pc_rig_v16_04_06_19:ctrl_neck
+    100028: nomad_asset_pc_rig_v16_04_06_19:ctrl_wrist_l
+    100030: nomad_asset_pc_rig_v16_04_06_19:ctrl_wrist_r
+    100032: nomad_asset_pc_rig_v16_04_06_19:curve_spine
+    100034: nomad_asset_pc_rig_v16_04_06_19:group1
+    100036: nomad_asset_pc_rig_v16_04_06_19:grp_cluster_abs
+    100038: nomad_asset_pc_rig_v16_04_06_19:grp_cluster_chest
+    100040: nomad_asset_pc_rig_v16_04_06_19:grp_cluster_neck
+    100042: nomad_asset_pc_rig_v16_04_06_19:grp_head
+    100044: nomad_asset_pc_rig_v16_04_06_19:ik_curve_spine
+    100046: nomad_asset_pc_rig_v16_04_06_19:ik_rps_arm_l
+    100048: nomad_asset_pc_rig_v16_04_06_19:ik_rps_arm_r
+    100050: nomad_asset_pc_rig_v16_04_06_19:ik_rps_leg_l
+    100052: nomad_asset_pc_rig_v16_04_06_19:ik_rps_leg_r
+    100054: nomad_asset_pc_rig_v16_04_06_19:joint2
+    100056: nomad_asset_pc_rig_v16_04_06_19:left
+    100058: nomad_asset_pc_rig_v16_04_06_19:nurbsCircle1
+    100060: nomad_asset_pc_rig_v16_04_06_19:persp1
+    100062: nomad_asset_pc_rig_v16_04_06_19:persp2
+    100064: nomad_asset_pc_rig_v16_04_06_19:polySurface86
+    100066: nomad_asset_pc_rig_v16_04_06_19:skel_abs
+    100068: nomad_asset_pc_rig_v16_04_06_19:skel_bicep_l
+    100070: nomad_asset_pc_rig_v16_04_06_19:skel_bicep_r
+    100072: nomad_asset_pc_rig_v16_04_06_19:skel_chest
+    100074: nomad_asset_pc_rig_v16_04_06_19:skel_foot_l
+    100076: nomad_asset_pc_rig_v16_04_06_19:skel_foot_r
+    100078: nomad_asset_pc_rig_v16_04_06_19:skel_forearm_l
+    100080: nomad_asset_pc_rig_v16_04_06_19:skel_forearm_r
+    100082: nomad_asset_pc_rig_v16_04_06_19:skel_hand_l
+    100084: nomad_asset_pc_rig_v16_04_06_19:skel_hand_r
+    100086: nomad_asset_pc_rig_v16_04_06_19:skel_handend_l
+    100088: nomad_asset_pc_rig_v16_04_06_19:skel_handend_r
+    100090: nomad_asset_pc_rig_v16_04_06_19:skel_head
+    100092: nomad_asset_pc_rig_v16_04_06_19:skel_neck
+    100094: nomad_asset_pc_rig_v16_04_06_19:skel_shin_l
+    100096: nomad_asset_pc_rig_v16_04_06_19:skel_shin_r
+    100098: nomad_asset_pc_rig_v16_04_06_19:skel_thigh_l
+    100100: nomad_asset_pc_rig_v16_04_06_19:skel_thigh_r
+    100102: nomad_asset_pc_rig_v16_04_06_19:skel_toe_l
+    100104: nomad_asset_pc_rig_v16_04_06_19:skel_toe_l 1
+    100106: nomad_asset_pc_rig_v16_04_06_19:skel_toeend_l
+    100108: nomad_asset_pc_rig_v16_04_06_19:skel_toeend_l 1
+    400000: //RootNode
+    400002: nomad_asset_pc_rig_v16_04_06_19:cluster_abs
+    400004: nomad_asset_pc_rig_v16_04_06_19:cluster_chest
+    400006: nomad_asset_pc_rig_v16_04_06_19:cluster_neck
+    400008: nomad_asset_pc_rig_v16_04_06_19:ctrl_abs
+    400010: nomad_asset_pc_rig_v16_04_06_19:ctrl_chest
+    400012: nomad_asset_pc_rig_v16_04_06_19:ctrl_elbow_l
+    400014: nomad_asset_pc_rig_v16_04_06_19:ctrl_elbow_r
+    400016: nomad_asset_pc_rig_v16_04_06_19:ctrl_foot_l
+    400018: nomad_asset_pc_rig_v16_04_06_19:ctrl_foot_r
+    400020: nomad_asset_pc_rig_v16_04_06_19:ctrl_head
+    400022: nomad_asset_pc_rig_v16_04_06_19:ctrl_knee_l
+    400024: nomad_asset_pc_rig_v16_04_06_19:ctrl_knee_r
+    400026: nomad_asset_pc_rig_v16_04_06_19:ctrl_neck
+    400028: nomad_asset_pc_rig_v16_04_06_19:ctrl_wrist_l
+    400030: nomad_asset_pc_rig_v16_04_06_19:ctrl_wrist_r
+    400032: nomad_asset_pc_rig_v16_04_06_19:curve_spine
+    400034: nomad_asset_pc_rig_v16_04_06_19:group1
+    400036: nomad_asset_pc_rig_v16_04_06_19:grp_cluster_abs
+    400038: nomad_asset_pc_rig_v16_04_06_19:grp_cluster_chest
+    400040: nomad_asset_pc_rig_v16_04_06_19:grp_cluster_neck
+    400042: nomad_asset_pc_rig_v16_04_06_19:grp_head
+    400044: nomad_asset_pc_rig_v16_04_06_19:ik_curve_spine
+    400046: nomad_asset_pc_rig_v16_04_06_19:ik_rps_arm_l
+    400048: nomad_asset_pc_rig_v16_04_06_19:ik_rps_arm_r
+    400050: nomad_asset_pc_rig_v16_04_06_19:ik_rps_leg_l
+    400052: nomad_asset_pc_rig_v16_04_06_19:ik_rps_leg_r
+    400054: nomad_asset_pc_rig_v16_04_06_19:joint2
+    400056: nomad_asset_pc_rig_v16_04_06_19:left
+    400058: nomad_asset_pc_rig_v16_04_06_19:nurbsCircle1
+    400060: nomad_asset_pc_rig_v16_04_06_19:persp1
+    400062: nomad_asset_pc_rig_v16_04_06_19:persp2
+    400064: nomad_asset_pc_rig_v16_04_06_19:polySurface86
+    400066: nomad_asset_pc_rig_v16_04_06_19:skel_abs
+    400068: nomad_asset_pc_rig_v16_04_06_19:skel_bicep_l
+    400070: nomad_asset_pc_rig_v16_04_06_19:skel_bicep_r
+    400072: nomad_asset_pc_rig_v16_04_06_19:skel_chest
+    400074: nomad_asset_pc_rig_v16_04_06_19:skel_foot_l
+    400076: nomad_asset_pc_rig_v16_04_06_19:skel_foot_r
+    400078: nomad_asset_pc_rig_v16_04_06_19:skel_forearm_l
+    400080: nomad_asset_pc_rig_v16_04_06_19:skel_forearm_r
+    400082: nomad_asset_pc_rig_v16_04_06_19:skel_hand_l
+    400084: nomad_asset_pc_rig_v16_04_06_19:skel_hand_r
+    400086: nomad_asset_pc_rig_v16_04_06_19:skel_handend_l
+    400088: nomad_asset_pc_rig_v16_04_06_19:skel_handend_r
+    400090: nomad_asset_pc_rig_v16_04_06_19:skel_head
+    400092: nomad_asset_pc_rig_v16_04_06_19:skel_neck
+    400094: nomad_asset_pc_rig_v16_04_06_19:skel_shin_l
+    400096: nomad_asset_pc_rig_v16_04_06_19:skel_shin_r
+    400098: nomad_asset_pc_rig_v16_04_06_19:skel_thigh_l
+    400100: nomad_asset_pc_rig_v16_04_06_19:skel_thigh_r
+    400102: nomad_asset_pc_rig_v16_04_06_19:skel_toe_l
+    400104: nomad_asset_pc_rig_v16_04_06_19:skel_toe_l 1
+    400106: nomad_asset_pc_rig_v16_04_06_19:skel_toeend_l
+    400108: nomad_asset_pc_rig_v16_04_06_19:skel_toeend_l 1
+    2000000: nomad_asset_pc_rig_v16_04_06_19:left
+    2000002: nomad_asset_pc_rig_v16_04_06_19:persp1
+    2000004: nomad_asset_pc_rig_v16_04_06_19:persp2
+    2100000: nomad_asset_pc_rig_v16_04_06_19_lambert5
+    4300000: nomad_asset_pc_rig_v16_04_06_19:polySurface86
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: nomad_asset_pc_rig_v16_04_06_19:polySurface86
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nomad_asset_pc_rig_v16_04_06_19_lambert5
+    second: {fileID: 2100000, guid: 70f97e995c4862e478af551b014b3ce0, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
