@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6086046, g: 0.5568767, b: 0.5364058, a: 1}
+  m_IndirectSpecularColor: {r: 0.6086043, g: 0.55687624, b: 0.5364047, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13747,13 +13747,13 @@ Transform:
   - {fileID: 841012694}
   - {fileID: 802719765}
   - {fileID: 1770705459}
+  - {fileID: 426901295}
   - {fileID: 78741870}
   - {fileID: 1646616291}
   - {fileID: 1195155045}
   - {fileID: 660867011}
-  - {fileID: 426901295}
-  - {fileID: 739014611}
   - {fileID: 239073671}
+  - {fileID: 739014611}
   - {fileID: 1846764933}
   - {fileID: 1548531991}
   - {fileID: 434195449}
@@ -13769,10 +13769,10 @@ Transform:
   - {fileID: 392451802}
   - {fileID: 1837446373}
   - {fileID: 1425570105}
-  - {fileID: 502887449}
-  - {fileID: 564598850}
-  - {fileID: 1640992776}
   - {fileID: 616719883}
+  - {fileID: 502887449}
+  - {fileID: 1640992776}
+  - {fileID: 564598850}
   - {fileID: 877073171}
   - {fileID: 874425305}
   - {fileID: 982759833}
@@ -35374,6 +35374,20 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1563812297}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1012970843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012970840}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb2fd6d853d47e4b8a1f88719e40337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftTrail: {fileID: 1386139121}
+  rightTrail: {fileID: 1600852661}
 --- !u!1001 &1015368417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40398,6 +40412,8 @@ MonoBehaviour:
   basedGlideSpeed: 0.5
   incrementedGlideSpeed: 1
   gliderTemp: {fileID: 0}
+  leftTrail: {fileID: 0}
+  rightTrail: {fileID: 0}
   jumpForce: 2000
   thisLight: {fileID: 893164252}
   sliding: 0
@@ -40418,6 +40434,10 @@ MonoBehaviour:
   randomDistance: 50
   downTime: 0
   downSpeed: 0
+  sandClips: []
+  rockClips: []
+  feetAudio: []
+  footTimer: 0
 --- !u!54 &1170225224
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49672,7 +49692,7 @@ GameObject:
   - component: {fileID: 1386139120}
   - component: {fileID: 1386139121}
   m_Layer: 0
-  m_Name: Stream_Trail_1
+  m_Name: Stream_Trail_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49686,7 +49706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386139119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.37854, y: 0.2858429, z: -0.17209965}
+  m_LocalPosition: {x: -1.386, y: 0.3, z: -0.181}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1012970841}
@@ -49730,7 +49750,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.45
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.04
@@ -49748,19 +49768,19 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.48165277
-        inSlope: -1.3016801
-        outSlope: -1.3016801
+        value: 0.7339451
+        inSlope: -0.7706412
+        outSlope: -0.7706412
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.10947373
+        inWeight: 0.107142866
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 0.7058824}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -49787,13 +49807,13 @@ TrailRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 6
+    numCornerVertices: 10
     numCapVertices: 0
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.5
   m_Autodestruct: 0
   m_Emitting: 1
 --- !u!1001 &1397099676
@@ -56018,7 +56038,7 @@ GameObject:
   - component: {fileID: 1600852660}
   - component: {fileID: 1600852661}
   m_Layer: 0
-  m_Name: Stream_Trail_2
+  m_Name: Stream_Trail_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56032,7 +56052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600852659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.37854, y: 0.2858429, z: -0.17209965}
+  m_LocalPosition: {x: 1.386, y: 0.3, z: -0.181}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1012970841}
@@ -56076,7 +56096,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.45
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.04
@@ -56094,19 +56114,19 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.48165277
-        inSlope: -1.3016801
-        outSlope: -1.3016801
+        value: 0.7339451
+        inSlope: -0.7706412
+        outSlope: -0.7706412
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.10947373
+        inWeight: 0.107142866
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 0.7058824}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -56133,13 +56153,13 @@ TrailRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 6
+    numCornerVertices: 10
     numCapVertices: 0
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.5
   m_Autodestruct: 0
   m_Emitting: 1
 --- !u!1001 &1611725805
@@ -68198,6 +68218,8 @@ MonoBehaviour:
   basedGlideSpeed: 0.5
   incrementedGlideSpeed: 1
   gliderTemp: {fileID: 1012970840}
+  leftTrail: {fileID: 1386139121}
+  rightTrail: {fileID: 1600852661}
   jumpForce: 4000
   thisLight: {fileID: 893164252}
   sliding: 0
@@ -68218,6 +68240,10 @@ MonoBehaviour:
   randomDistance: 50
   downTime: 0.2
   downSpeed: -20
+  sandClips: []
+  rockClips: []
+  feetAudio: []
+  footTimer: 0
 --- !u!54 &2010041557
 Rigidbody:
   m_ObjectHideFlags: 0

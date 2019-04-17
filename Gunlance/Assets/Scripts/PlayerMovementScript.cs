@@ -67,6 +67,8 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] float fallSpeedGliding;
     [SerializeField] float basedGlideSpeed, incrementedGlideSpeed;
     [SerializeField] GameObject gliderTemp;
+	 [SerializeField] TrailRenderer leftTrail;
+	 [SerializeField] TrailRenderer rightTrail;
     [Space]
     //Jump Variables
     [SerializeField] float jumpForce;
@@ -569,12 +571,31 @@ public class PlayerMovementScript : MonoBehaviour
         if (gliding)
         {
             gliderTemp.SetActive(true);
+				leftTrail.time = .01f;
+				rightTrail.time = .01f;
+				Invoke("ActivateTrails", .1f);
         }
         else
         {
             gliderTemp.SetActive(false);
+				leftTrail.emitting = false;
+				rightTrail.emitting = false;
         }
     }
+
+	 void ActivateTrails()
+	 {
+		  leftTrail.emitting = true;
+		  rightTrail.emitting = true;
+
+		  Invoke("ExtendTrails", .1f);
+	 }
+
+	 void ExtendTrails()
+	 {
+		  leftTrail.time = .45f;
+		  rightTrail.time = .45f;
+	 }
 
     //How long does the force get added
     IEnumerator ExplodeTime(float time)
