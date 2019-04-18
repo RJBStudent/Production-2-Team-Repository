@@ -121,6 +121,8 @@ public class PlayerMovementScript : MonoBehaviour
     bool downed = false;
     bool canGetBackUp;
 
+    Animator thisAnimator;
+
     //store OS info
     string os;
 
@@ -157,6 +159,8 @@ public class PlayerMovementScript : MonoBehaviour
         thisCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         shoot = GetComponent<ShotFeedback>();
 
+        thisAnimator = gameObject.GetComponent<Animator>();
+
         //Turn off light and glider for temporary animation
         thisLight.SetActive(false);
         lightTransform = thisLight.transform;
@@ -180,6 +184,8 @@ public class PlayerMovementScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        ResetAnimations();
+
         if (cdeActive)
         {
             return;
@@ -329,6 +335,14 @@ public class PlayerMovementScript : MonoBehaviour
         {
             //Ground Movement
             thisRB.velocity = camForward * zDirection * playerSpeed + camRight * xDirection * playerSpeed + jumpVelocity;
+            if(xDirection > 0.1 || zDirection > 0.1)
+            {
+                thisAnimator.SetTrigger("Run");
+            }
+            else
+            {
+                thisAnimator.SetTrigger("Idle");
+            }
         }
         else if (addedForce || inAir)
         {
@@ -472,6 +486,7 @@ public class PlayerMovementScript : MonoBehaviour
             {
                 collider.material = slippery;
                 sliding = true;
+                thisAnimator.SetTrigger("Slide");
                 StartCoroutine(SlideTime(slideStartUpTime));
             }
             else if (sliding && currentGroundAngle < slidingAngle && thisRB.velocity.magnitude < slideFallOffVelocity && startingToSlide == false)
@@ -561,6 +576,7 @@ public class PlayerMovementScript : MonoBehaviour
             thisRB.velocity = new Vector3(thisRB.velocity.x, thisRB.velocity.y / fallSpeedGliding, thisRB.velocity.z);
 
             gliding = true;
+            thisAnimator.SetTrigger("Glide");
         }
         else
         {
@@ -693,6 +709,15 @@ public class PlayerMovementScript : MonoBehaviour
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
         }
+    }
+
+    void ResetAnimations()
+    {
+        thisAnimator.ResetTrigger("Run");
+        thisAnimator.ResetTrigger("Glide");
+        thisAnimator.ResetTrigger("Idle");
+        thisAnimator.ResetTrigger("Slide");
+        thisAnimator.ResetTrigger("Jump");
     }
 
     void ResetScale()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6086046, g: 0.5568767, b: 0.5364058, a: 1}
+  m_IndirectSpecularColor: {r: 0.6086049, g: 0.5568767, b: 0.5364047, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3292,6 +3292,8 @@ MonoBehaviour:
   basedGlideSpeed: 0.5
   incrementedGlideSpeed: 1
   gliderTemp: {fileID: 226050001}
+  leftTrail: {fileID: 1116191010}
+  rightTrail: {fileID: 1086818508}
   jumpForce: 4000
   thisLight: {fileID: 1648497106}
   sliding: 0
