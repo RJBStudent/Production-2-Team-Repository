@@ -51,6 +51,17 @@ public class Mann_AudioManagerScript : MonoBehaviour
 		}
 	}
 
+	public void PlayInterruptedSound(string clipName)
+	{
+		for (int i = 0; i < sounds.Length; i++)
+		{
+			if (sounds[i].clip.name == clipName)
+			{
+				sounds[i].Play();
+			}
+		}
+	}
+
 	public void StopSound(string clipName)
 	{
 		for (int i = 0; i < sounds.Length; i++)

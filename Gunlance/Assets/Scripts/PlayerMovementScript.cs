@@ -132,7 +132,8 @@ public class PlayerMovementScript : MonoBehaviour
 	public AudioClip[] rockClips;
 	public Mann_FootAudio[] feetAudio;
 	int currentFoot = 0;
-	public float footTimer;
+	float footTimer;
+	public float soundInterval;
 	//check operating system and define string os to be added to axis name for win/mac support
 	void GetOS()
     {
@@ -220,19 +221,18 @@ public class PlayerMovementScript : MonoBehaviour
             SceneManager.LoadScene("Mann_EndScene");
         }
 
-        if (!inAir && new Vector3(thisRB.velocity.x, 0 , thisRB.velocity.z).magnitude > 1 && !sliding && footTimer > .5)
+        if (!inAir && new Vector3(thisRB.velocity.x, 0 , thisRB.velocity.z).magnitude > 1 && !sliding && footTimer > soundInterval)
         {
-			
 			int foot1 = Random.Range(1, 10);
 			int foot2 = Random.Range(1, 10);
 
 			if (transform.parent.name == "Terrain")
-            {
+			{
 				feetAudio[0].setAudioClip(sandClips[foot1 - 1]);
 				feetAudio[1].setAudioClip(sandClips[foot2 - 1]);
 			}
-            else
-            {
+			else
+			{
 				feetAudio[0].setAudioClip(rockClips[foot1 - 1]);
 				feetAudio[1].setAudioClip(rockClips[foot2 - 1]);
 			}
@@ -242,10 +242,7 @@ public class PlayerMovementScript : MonoBehaviour
 
 			feetAudio[currentFoot].playAudioClip();
 
-			if(footTimer > .5)
-			{
-				footTimer = 0;
-			}
+			footTimer = 0;
 		}
     }
 
@@ -550,8 +547,7 @@ public class PlayerMovementScript : MonoBehaviour
             StartCoroutine(ExplodeTime(explodeTime));
             chargePaused = true;
             // ***************************** TOMMMYMMYMYMYMYMYM **************************
-            Mann_AudioManagerScript.instance.PlaySound("GunLance2");
-
+            Mann_AudioManagerScript.instance.PlayInterruptedSound("Player_Lancer_Explosion");
         }
 
     }
@@ -562,6 +558,7 @@ public class PlayerMovementScript : MonoBehaviour
         if (jumpInput != 0.0f && !inAir)
         {
             thisRB.AddForce(new Vector3(0, jumpForce, 0));
+			thisAnimator.SetTrigger("Jump");
         }
     }
 
@@ -719,6 +716,11 @@ public class PlayerMovementScript : MonoBehaviour
         thisAnimator.ResetTrigger("Slide");
         thisAnimator.ResetTrigger("Jump");
     }
+
+	public void playFootSound()
+	{
+		
+	}
 
     void ResetScale()
     {
