@@ -199,7 +199,8 @@ public class PlayerMovementScript : MonoBehaviour
 
         GetInput();
 
-        if(downed)
+        Debug.Log(thisRB.velocity);
+        if (downed)
         {
             DownedTime();
             return;
@@ -245,6 +246,7 @@ public class PlayerMovementScript : MonoBehaviour
 
 			footTimer = 0;
 		}
+
     }
 
     //Input for controller
@@ -320,7 +322,8 @@ public class PlayerMovementScript : MonoBehaviour
         if(thisRB.velocity.y < downSpeed && !inAir)
         {
             downed = true;
-
+            thisRB.velocity = Vector3.zero;
+            return;
         }
 
         if (gliding)
@@ -712,6 +715,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         downCounter += Time.deltaTime;
         transform.rotation = Quaternion.Euler(new Vector3(90, 0 , 0));
+        thisRB.velocity = Vector3.zero;
         if (downCounter >= downTime)
         {
             if(jumpInput != 0.0f)
