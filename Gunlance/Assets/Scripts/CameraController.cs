@@ -163,7 +163,7 @@ public class CameraController : MonoBehaviour
 
       if (Physics.Linecast(offset, camMask, out wallHit, cameraCollideMask))
       {
-         newPos = new Vector3(wallHit.point.x + wallHit.normal.x * 0.5f, newPos.y, wallHit.point.z + wallHit.normal.z * 0.5f);
+         newPos = new Vector3(wallHit.point.x + wallHit.normal.x * 0.5f, wallHit.point.y + wallHit.normal.y * 0.5f, wallHit.point.z + wallHit.normal.z * 0.5f);
       }
    }
 
