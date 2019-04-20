@@ -134,6 +134,8 @@ public class PlayerMovementScript : MonoBehaviour
 	int currentFoot = 0;
 	float footTimer;
 	public float soundInterval;
+
+	private bool startedSceneTrans = false;
 	//check operating system and define string os to be added to axis name for win/mac support
 	void GetOS()
     {
@@ -197,7 +199,8 @@ public class PlayerMovementScript : MonoBehaviour
 
         GetInput();
 
-        if(downed)
+        Debug.Log(thisRB.velocity);
+        if (downed)
         {
             DownedTime();
             return;
@@ -215,13 +218,12 @@ public class PlayerMovementScript : MonoBehaviour
         Glide();
 
         //Temporary win condition
-        if (crystalsOnScene <= 0)
+        if (crystalsOnScene <= 0 && startedSceneTrans == false)
         {
-            Debug.Log("WIN");
-            SceneManager.LoadScene("Mann_EndScene");
-        }
+			StartCoroutine(SceneTransitionTime(4));
+		}
 
-        if (!inAir && new Vector3(thisRB.velocity.x, 0 , thisRB.velocity.z).magnitude > 1 && !sliding && footTimer > soundInterval)
+		if (!inAir && new Vector3(thisRB.velocity.x, 0 , thisRB.velocity.z).magnitude > 1 && !sliding && footTimer > soundInterval)
         {
 			int foot1 = Random.Range(1, 10);
 			int foot2 = Random.Range(1, 10);
@@ -244,6 +246,7 @@ public class PlayerMovementScript : MonoBehaviour
 
 			footTimer = 0;
 		}
+
     }
 
     //Input for controller
@@ -319,7 +322,8 @@ public class PlayerMovementScript : MonoBehaviour
         if(thisRB.velocity.y < downSpeed && !inAir)
         {
             downed = true;
-
+            thisRB.velocity = Vector3.zero;
+            return;
         }
 
         if (gliding)
@@ -547,7 +551,7 @@ public class PlayerMovementScript : MonoBehaviour
             StartCoroutine(ExplodeTime(explodeTime));
             chargePaused = true;
             // ***************************** TOMMMYMMYMYMYMYMYM **************************
-            Mann_AudioManagerScript.instance.PlayInterruptedSound("Player_Lancer_Explosion");
+            Mann_AudioManagerScript.instance.PlayInterruptedSound("LancerExplosiveJump");
         }
 
     }
@@ -591,8 +595,8 @@ public class PlayerMovementScript : MonoBehaviour
         else
         {
             gliderTemp.SetActive(false);
-				leftTrail.emitting = false;
-				rightTrail.emitting = false;
+			leftTrail.emitting = false;
+			rightTrail.emitting = false;
         }
     }
 
@@ -635,7 +639,7 @@ public class PlayerMovementScript : MonoBehaviour
         addedForce = false;
     }
 
-    IEnumerator SlideTime(float time)
+	IEnumerator SlideTime(float time)
     {
         startingToSlide = true;
         yield return new WaitForSecondsRealtime(time);
@@ -666,8 +670,21 @@ public class PlayerMovementScript : MonoBehaviour
         cdeActive = false;
     }
 
-    //Debugging for where the explosion is 
-    private void OnDrawGizmos()
+	IEnumerator SceneTransitionTime(float time)
+	{
+		
+
+		yield return new WaitForSecondsRealtime(time);
+		WhiteSceneTransition sceneTrans = GameObject.Find("Transition_Start").GetComponent<WhiteSceneTransition>();
+		sceneTrans.setTransitionScene("Mann_EndScene");
+		sceneTrans.endOpacity = 1;
+		sceneTrans.switchScenes = true;
+		sceneTrans.startTransition();
+		startedSceneTrans = true;
+	}
+
+	//Debugging for where the explosion is 
+	private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         if (addedForce)
@@ -698,6 +715,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         downCounter += Time.deltaTime;
         transform.rotation = Quaternion.Euler(new Vector3(90, 0 , 0));
+        thisRB.velocity = Vector3.zero;
         if (downCounter >= downTime)
         {
             if(jumpInput != 0.0f)

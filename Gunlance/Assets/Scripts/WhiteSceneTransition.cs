@@ -33,6 +33,10 @@ public class WhiteSceneTransition : MonoBehaviour
 			{
 				SceneManager.LoadScene(transitionScene);
 			}
+			if (!switchScenes && overlay.color.a < endOffSet)
+			{
+				transitioning = false;
+			}
 		}
     }
 
