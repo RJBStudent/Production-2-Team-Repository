@@ -17,9 +17,17 @@ public class ShotFeedback : MonoBehaviour
     [SerializeField] float vibrationFadeStrength;
     float vibration; //vibrate amount
 
-    [Header("Smoke")]
-    [SerializeField] GameObject smokeFX;
-    [SerializeField] float smokeDestroy;
+	 [Header("Blast")]
+	 [SerializeField] Transform shotPos;
+	 [SerializeField] GameObject lanceShot;
+	 [SerializeField] float shotDestroy;
+	 [SerializeField] float kickUpDist;
+	 [SerializeField] float closeDist;
+	 [SerializeField] float kickUpRadScale;
+	 [SerializeField] float kickUpVelScale;
+	 [SerializeField] float maxVel;
+	 [SerializeField] LayerMask ground;
+	 [SerializeField] ParticleSystem dustKickUp;
 
     [Header("Screen Shake")]
     [Range(0, 1)]
@@ -30,8 +38,7 @@ public class ShotFeedback : MonoBehaviour
     [SerializeField] int vibrato;
     [Range(0, 90)]
     [SerializeField] float randomness;
-    [SerializeField]
-    Camera mainCamera;
+    [SerializeField] Camera mainCamera;
 
 	 AmmoCounterScript ammoScript;
 
@@ -44,8 +51,26 @@ public class ShotFeedback : MonoBehaviour
     {
         mainCamera.DOShakePosition(duration, strength, vibrato, randomness, true);
 
-        GameObject smoke = Instantiate(smokeFX, gameObject.transform);
-        Destroy(smoke, smokeDestroy);
+        GameObject shot = Instantiate(lanceShot, shotPos);
+		  Destroy(shot, shotDestroy);
+
+		  //sand kick-up
+		  RaycastHit hit;
+		  if (Physics.Raycast(shotPos.position, shotPos.TransformDirection(Vector3.forward), out hit, kickUpDist, ground))
+		  {
+				ParticleSystem dust = Instantiate(dustKickUp);
+				dust.transform.position = hit.point;
+
+				//get dust kickUp emission shape and set radius relative to hit distance of the ray
+				var dustDonut = dust.shape;
+				dustDonut.radius += kickUpRadScale * (Mathf.Clamp(hit.distance - closeDist, 0, kickUpDist) / kickUpDist);
+
+				var dustVel = dust.velocityOverLifetime; //get velocity over lifetime module of dust kickUp
+				var radialVel = maxVel - (kickUpVelScale * (Mathf.Clamp(hit.distance - closeDist, 0, kickUpDist) / kickUpDist)); //set velocity relative to hit distance
+				dustVel.radial = new ParticleSystem.MinMaxCurve(radialVel);
+
+				Destroy(dust, shotDestroy);
+		  }
 
 		  ammoScript.Shoot();
 
