@@ -630,7 +630,7 @@ public class PlayerMovementScript : MonoBehaviour
         //Destroy any crystals hit
         for (int i = 0; i < hitCollide.Length; i++)
         {
-			Mann_AudioManagerScript.instance.PlayInterruptedSound("Crystal_Break");
+			Mann_AudioManagerScript.instance.PlayInterruptedSound("CrystalBreakMixed");
 			Destroy(hitCollide[i].gameObject);
             crystalsOnScene--;
             StartCoroutine(CrystalDestroyEvent(cdeLength));

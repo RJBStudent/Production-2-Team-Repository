@@ -7,7 +7,7 @@ public class Mann_AudioManagerScript : MonoBehaviour
 
 	public static Mann_AudioManagerScript instance;
 
-	AudioSource[] sounds;
+	public AudioSource[] sounds;
 	void Awake()
 	{
 		//Check if instance already exists
@@ -26,14 +26,16 @@ public class Mann_AudioManagerScript : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 
 		sounds = Resources.FindObjectsOfTypeAll<AudioSource>();
-	}
 
+	}
 	// Use this for initialization
 	void Start()
 	{
-
 	}
-
+	void OnLevelWasLoaded()
+	{
+		sounds = Resources.FindObjectsOfTypeAll<AudioSource>();
+	}
 	// Update is called once per frame
 	void Update()
 	{
