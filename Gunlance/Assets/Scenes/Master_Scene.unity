@@ -21537,6 +21537,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 586498430}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &586831215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 586831216}
+  m_Layer: 0
+  m_Name: Shot_Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &586831216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586831215}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.301}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1678980045}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &588963057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59580,7 +59610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 075606635e751b942a485fbd737b2262, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 075606635e751b942a485fbd737b2262, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -59596,6 +59626,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 075606635e751b942a485fbd737b2262, type: 3}
+--- !u!4 &1678980045 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 075606635e751b942a485fbd737b2262,
+    type: 3}
+  m_PrefabInstance: {fileID: 1678980044}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1680382161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59969,8 +60005,20 @@ MonoBehaviour:
   vibrationHitStrength: 1
   vibrationFadeLength: 0.25
   vibrationFadeStrength: 0.2
-  smokeFX: {fileID: 4292460645169672814, guid: 06dea101ac0e248cb93bb879a6c2d663, type: 3}
-  smokeDestroy: 1
+  shotPos: {fileID: 586831216}
+  lanceShot: {fileID: 7388224569285587958, guid: 9d64d4e9caec3e1419d910ac10823581,
+    type: 3}
+  shotDestroy: 4
+  kickUpDist: 12
+  closeDist: 2
+  kickUpRadScale: 10
+  kickUpVelScale: 12
+  maxVel: 15
+  ground:
+    serializedVersion: 2
+    m_Bits: 512
+  dustKickUp: {fileID: 5420075688260282448, guid: 9e6cf42b6a380d64da408e831a0b00a1,
+    type: 3}
   duration: 0.4
   strength: 1.7
   vibrato: 15
