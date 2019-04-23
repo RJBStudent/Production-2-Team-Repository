@@ -24,6 +24,7 @@ public class PlayerMovementScript : MonoBehaviour
     [Header("Charge Variables")]
     public int maxShots;
     [SerializeField] float chargeRate;
+    [SerializeField] float chargeRateInAir;
     [SerializeField] float maxChargePause;
 
     [Space]
@@ -55,7 +56,7 @@ public class PlayerMovementScript : MonoBehaviour
 	 public float charge = 0;
     float chargePauseTimer = 0;
     bool chargePaused = false;
-
+    
 
     float crystalsOnScene = 0;
 
@@ -518,7 +519,14 @@ public class PlayerMovementScript : MonoBehaviour
 
         if (!chargePaused && charge <= maxShots)
         {
-            charge += chargeRate;
+            if (!inAir)
+            {
+                charge += chargeRate;
+            }
+            else
+            {
+                charge += chargeRateInAir;
+            }
 
             shots = Mathf.FloorToInt(charge);
         }
