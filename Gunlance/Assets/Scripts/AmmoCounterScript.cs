@@ -12,7 +12,7 @@ public class AmmoCounterScript : MonoBehaviour
 	 [SerializeField] GameObject flashNewCharge;
 
 	 PlayerMovementScript movementScript;
-	 float lastCharge;
+	 int lastCharge;
 
 	private void Start()
     {
@@ -34,17 +34,20 @@ public class AmmoCounterScript : MonoBehaviour
 
         transform.Rotate(0, -movementScript.charge * rotSpeed, 0);
 
-		  if (lastCharge < movementScript.charge % 1 && movementScript.charge >= movementScript.charge % 1)
+		  var chargeInt = Mathf.FloorToInt(movementScript.charge);
+
+		  if (chargeInt > lastCharge)
 		  {
 				NewShot();
 		  }
-		  lastCharge = movementScript.charge;
+		  lastCharge = Mathf.FloorToInt(movementScript.charge);
     }
 
 	 //flash crystal when reaching new shot charge
 	 void NewShot()
 	 {
 		  GameObject flash = Instantiate(flashNewCharge, transform);
+		Debug.Log(flash.transform.position);
 		  Destroy(flash, .7f);
 	 }
 

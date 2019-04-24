@@ -668,7 +668,9 @@ public class PlayerMovementScript : MonoBehaviour
         {
 				Mann_AudioManagerScript.instance.PlayInterruptedSound("CrystalBreakMixed");
 
-				Destroy(hitCollide[i].gameObject);
+			   hitCollide[i].gameObject.GetComponent<CrystalDestructionScript>().OnExplode();
+
+				//Destroy(hitCollide[i].gameObject);
             crystalsOnScene--;
             StartCoroutine(CrystalDestroyEvent(cdeLength));
         }

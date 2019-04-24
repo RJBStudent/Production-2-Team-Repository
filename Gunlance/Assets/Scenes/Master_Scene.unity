@@ -3963,6 +3963,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1371725170}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &111388892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111388890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8a26795acd2014cbbeca4f10ac100b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crystalShards: {fileID: 6095660162451494131, guid: 8191803e7b0b4a6498cea24edea7e312,
+    type: 3}
+  particleBurst: {fileID: 6137582177321983826, guid: 0579c4de2a8dfa7449063c502fd5e365,
+    type: 3}
+  burstLight: {fileID: 532604387084736064, guid: ffe613aedc2679f44b236a099040c42a,
+    type: 3}
+  lightLifetime: 1.2
+  lifetime: 18
+  exPos: {fileID: 338132359}
+  exForce: 75
+  exRadius: 1
+  upMod: 0.25
 --- !u!64 &111388894
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -27392,19 +27416,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eb9a95d3aef6c8648a698971d5e1530f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.205
+      value: -0.214
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eb9a95d3aef6c8648a698971d5e1530f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.284
+      value: 1.422
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eb9a95d3aef6c8648a698971d5e1530f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.253
+      value: -0.292
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eb9a95d3aef6c8648a698971d5e1530f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.06927014
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eb9a95d3aef6c8648a698971d5e1530f, type: 3}
       propertyPath: m_LocalRotation.y
@@ -27412,11 +27436,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eb9a95d3aef6c8648a698971d5e1530f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.0000000037252899
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eb9a95d3aef6c8648a698971d5e1530f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.997598
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eb9a95d3aef6c8648a698971d5e1530f, type: 3}
       propertyPath: m_RootOrder
@@ -27424,7 +27448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eb9a95d3aef6c8648a698971d5e1530f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 7.9440002
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eb9a95d3aef6c8648a698971d5e1530f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -35482,6 +35506,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1689338419}
     m_Modifications:
+    - target: {fileID: 1999350915836958, guid: adcd2aacbe79ceb41aab96523fa06d51, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
         type: 3}
       propertyPath: m_Type
@@ -35496,10 +35524,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Range
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1999350915836958, guid: adcd2aacbe79ceb41aab96523fa06d51, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4081768591853052, guid: adcd2aacbe79ceb41aab96523fa06d51, type: 3}
       propertyPath: m_LocalPosition.x
@@ -49626,30 +49650,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1371725170}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1242068192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1242068191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8a26795acd2014cbbeca4f10ac100b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crystalShards: {fileID: 6095660162451494131, guid: 8191803e7b0b4a6498cea24edea7e312,
-    type: 3}
-  particleBurst: {fileID: 6137582177321983826, guid: 0579c4de2a8dfa7449063c502fd5e365,
-    type: 3}
-  burstLight: {fileID: 532604387084736064, guid: ffe613aedc2679f44b236a099040c42a,
-    type: 3}
-  lightLifetime: 0.85
-  lifetime: 10
-  exPos: {fileID: 2084301176}
-  exForce: 40
-  exRadius: 1
-  upMod: 0.25
 --- !u!82 &1242068193
 AudioSource:
   m_ObjectHideFlags: 0
@@ -52362,6 +52362,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 144780516}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1298043987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298043985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8a26795acd2014cbbeca4f10ac100b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crystalShards: {fileID: 6095660162451494131, guid: 8191803e7b0b4a6498cea24edea7e312,
+    type: 3}
+  particleBurst: {fileID: 6137582177321983826, guid: 0579c4de2a8dfa7449063c502fd5e365,
+    type: 3}
+  burstLight: {fileID: 532604387084736064, guid: ffe613aedc2679f44b236a099040c42a,
+    type: 3}
+  lightLifetime: 1.2
+  lifetime: 18
+  exPos: {fileID: 338132359}
+  exForce: 75
+  exRadius: 1
+  upMod: 0.25
 --- !u!64 &1298043989
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -53369,30 +53393,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 144780516}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1326975509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326975508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8a26795acd2014cbbeca4f10ac100b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crystalShards: {fileID: 6095660162451494131, guid: 8191803e7b0b4a6498cea24edea7e312,
-    type: 3}
-  particleBurst: {fileID: 6137582177321983826, guid: 0579c4de2a8dfa7449063c502fd5e365,
-    type: 3}
-  burstLight: {fileID: 532604387084736064, guid: ffe613aedc2679f44b236a099040c42a,
-    type: 3}
-  lightLifetime: 0.85
-  lifetime: 10
-  exPos: {fileID: 1260509846}
-  exForce: 40
-  exRadius: 1
-  upMod: 0.25
 --- !u!82 &1326975510
 AudioSource:
   m_ObjectHideFlags: 0
@@ -54238,6 +54238,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 803676974}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1343253803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343253801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8a26795acd2014cbbeca4f10ac100b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crystalShards: {fileID: 6095660162451494131, guid: 8191803e7b0b4a6498cea24edea7e312,
+    type: 3}
+  particleBurst: {fileID: 6137582177321983826, guid: 0579c4de2a8dfa7449063c502fd5e365,
+    type: 3}
+  burstLight: {fileID: 532604387084736064, guid: ffe613aedc2679f44b236a099040c42a,
+    type: 3}
+  lightLifetime: 1.2
+  lifetime: 18
+  exPos: {fileID: 338132359}
+  exForce: 75
+  exRadius: 1
+  upMod: 0.25
 --- !u!64 &1343253805
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -60608,6 +60632,50 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 0dfcd80369c1f2b49b6925844d93268e, type: 3}
+--- !u!1 &1511920130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1511920132}
+  - component: {fileID: 1511920131}
+  m_Layer: 0
+  m_Name: Ceiling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1511920131
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511920130}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1511920132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511920130}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -390, y: 127, z: 44}
+  m_LocalScale: {x: 1112.4366, y: 14.982728, z: 567.12994}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1513919510 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 9eb73f75b4f7c8441aa04ad2b405f828,
@@ -63824,21 +63892,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crystalColors:
     serializedVersion: 2
-    key0: {r: 0.10074119, g: 0.203, b: 0.06459091, a: 1}
-    key1: {r: 0, g: 1, b: 0.6579592, a: 1}
-    key2: {r: 0.012548926, g: 0.8867924, b: 0.41809535, a: 1}
-    key3: {r: 0.012548926, g: 0.8867924, b: 0.41809535, a: 0}
-    key4: {r: 0.012548926, g: 0.8867924, b: 0.41809535, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0.075798005, g: 0.11320752, b: 0.06140974, a: 1}
+    key1: {r: 0.09309999, g: 0.35, b: 0.13934201, a: 1}
+    key2: {r: 0.06903735, g: 0.4538206, b: 0.2513274, a: 1}
+    key3: {r: 0.10194826, g: 0.65699995, b: 0.36248273, a: 0}
+    key4: {r: 0.06298597, g: 0.818, b: 0.3844991, a: 0}
+    key5: {r: 0.018734192, g: 0.888, b: 0.3886743, a: 0}
+    key6: {r: 0, g: 1, b: 0.6579592, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 65535
-    ctime3: 65535
-    ctime4: 65535
-    ctime5: 0
-    ctime6: 0
+    ctime0: 4626
+    ctime1: 17348
+    ctime2: 21843
+    ctime3: 38936
+    ctime4: 43686
+    ctime5: 54934
+    ctime6: 65535
     ctime7: 0
     atime0: 0
     atime1: 65535
@@ -63849,12 +63917,12 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 2
+    m_NumColorKeys: 7
     m_NumAlphaKeys: 2
   rotSpeed: 3.5
   crystalFlash: {fileID: 4222217513838591276, guid: 2b52bc7fbec8b49dba0db7e29c596062,
     type: 3}
-  flashNewCharge: {fileID: 4436214719831075952, guid: fada8009d7134c64c9b9c7f6aba19375,
+  flashNewCharge: {fileID: 2243516731359481531, guid: 205bdcac211114842b1bb8d335b6205e,
     type: 3}
 --- !u!1001 &1640992775
 PrefabInstance:
@@ -65075,30 +65143,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 803676974}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1677849550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1677849549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8a26795acd2014cbbeca4f10ac100b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crystalShards: {fileID: 6095660162451494131, guid: 8191803e7b0b4a6498cea24edea7e312,
-    type: 3}
-  particleBurst: {fileID: 6137582177321983826, guid: 0579c4de2a8dfa7449063c502fd5e365,
-    type: 3}
-  burstLight: {fileID: 532604387084736064, guid: ffe613aedc2679f44b236a099040c42a,
-    type: 3}
-  lightLifetime: 0.85
-  lifetime: 10
-  exPos: {fileID: 1116522760}
-  exForce: 40
-  exRadius: 1
-  upMod: 0.25
 --- !u!64 &1677849551
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -65797,7 +65841,7 @@ MonoBehaviour:
   cdeLength: 1
   randomDistance: 50
   downTime: 0.2
-  downSpeed: -15
+  downSpeed: -18
   sandClips:
   - {fileID: 8300000, guid: e84190cc4e0bff9419525d8a87b2324b, type: 3}
   - {fileID: 8300000, guid: 2ffe2d93a29c2904f95ff59ece299d88, type: 3}
@@ -67752,6 +67796,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1738145060}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1734998831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734998829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8a26795acd2014cbbeca4f10ac100b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crystalShards: {fileID: 6095660162451494131, guid: 8191803e7b0b4a6498cea24edea7e312,
+    type: 3}
+  particleBurst: {fileID: 6137582177321983826, guid: 0579c4de2a8dfa7449063c502fd5e365,
+    type: 3}
+  burstLight: {fileID: 532604387084736064, guid: ffe613aedc2679f44b236a099040c42a,
+    type: 3}
+  lightLifetime: 1.2
+  lifetime: 18
+  exPos: {fileID: 338132359}
+  exForce: 75
+  exRadius: 1
+  upMod: 0.25
 --- !u!64 &1734998833
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -72699,30 +72767,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1738145060}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1852568671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852568670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8a26795acd2014cbbeca4f10ac100b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crystalShards: {fileID: 6095660162451494131, guid: 8191803e7b0b4a6498cea24edea7e312,
-    type: 3}
-  particleBurst: {fileID: 6137582177321983826, guid: 0579c4de2a8dfa7449063c502fd5e365,
-    type: 3}
-  burstLight: {fileID: 532604387084736064, guid: ffe613aedc2679f44b236a099040c42a,
-    type: 3}
-  lightLifetime: 0.85
-  lifetime: 10
-  exPos: {fileID: 338132359}
-  exForce: 40
-  exRadius: 1
-  upMod: 0.25
 --- !u!82 &1852568672
 AudioSource:
   m_ObjectHideFlags: 0
