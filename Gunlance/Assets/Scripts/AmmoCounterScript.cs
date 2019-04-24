@@ -9,10 +9,12 @@ public class AmmoCounterScript : MonoBehaviour
     [SerializeField] Gradient crystalColors;
     [SerializeField] float rotSpeed;
     [SerializeField] GameObject crystalFlash;
+	 [SerializeField] GameObject flashNewCharge;
 
 	 PlayerMovementScript movementScript;
+	 float lastCharge;
 
-    private void Start()
+	private void Start()
     {
 		  cubeMat = GetComponent<Renderer>().material;
 
@@ -31,12 +33,25 @@ public class AmmoCounterScript : MonoBehaviour
         cubeMat.SetColor("_EmissionColor", crystalColors.Evaluate(movementScript.charge / movementScript.maxShots));
 
         transform.Rotate(0, -movementScript.charge * rotSpeed, 0);
+
+		  if (lastCharge < movementScript.charge % 1 && movementScript.charge >= movementScript.charge % 1)
+		  {
+				NewShot();
+		  }
+		  lastCharge = movementScript.charge;
     }
 
-    public void Shoot()
+	 //flash crystal when reaching new shot charge
+	 void NewShot()
+	 {
+		  GameObject flash = Instantiate(flashNewCharge, transform);
+		  Destroy(flash, .7f);
+	 }
+
+	 //flash crystal on firing
+	 public void Shoot()
     {
-		  //flash crystal
 		  GameObject flash = Instantiate(crystalFlash, transform);
-        Destroy(flash, .45f);
+        Destroy(flash, .7f);
     }
 }

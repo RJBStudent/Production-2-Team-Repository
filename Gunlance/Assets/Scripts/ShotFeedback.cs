@@ -71,14 +71,9 @@ public class ShotFeedback : MonoBehaviour
 		  burst.DOIntensity(0, lightLifetime);
 		  Destroy(burst.gameObject, lightLifetime);
 
-           Vector3 offsetPosition = shotPos.position + (shotPos.TransformDirection(Vector3.forward) * kickUpDist);
-        
-       // Debug.Log("HEc k " + shotPos.TransformPoint(0, 0, 0));
-        Debug.Log("HEc k " + offsetPosition + " " + shotPos.position);
 		  //sand kick-up
 		  RaycastHit hit;
-		  //if (Physics.Raycast(shotPos.position, offset, out hit, kickUpDist, ground))
-		 if (Physics.Linecast(shotPos.position, offsetPosition, out hit, ground))
+		  if (Physics.Raycast(shotPos.position, rot * Vector3.forward, out hit, kickUpDist, ground))
 		  {
 				ParticleSystem dust = Instantiate(dustKickUp);
 				dust.transform.position = hit.point;
@@ -91,8 +86,7 @@ public class ShotFeedback : MonoBehaviour
 				var radialVel = maxVel - (kickUpVelScale * (Mathf.Clamp(hit.distance - closeDist, 0, kickUpDist) / kickUpDist)); //set velocity relative to hit distance
 				dustVel.radial = new ParticleSystem.MinMaxCurve(radialVel);
 
-			   Destroy(dust.gameObject, shotDestroy);
-				Debug.Log("kickUp");
+				Destroy(dust.gameObject, shotDestroy);
 		  }
 
 		  if (ammoScript != null)

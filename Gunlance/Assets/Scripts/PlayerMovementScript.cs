@@ -99,6 +99,8 @@ public class PlayerMovementScript : MonoBehaviour
     public float slideFallOffTime;
     public float slideFallOffVelocity;
     public float slideMovementSpeed;
+	 [SerializeField] ParticleSystem slideFX;
+	 ParticleSystem.EmissionModule slideEmission;
     [Space]
     //******Crystal Destroy Event Variables******* RJ Bourdelais
     [Header("Crystal Destory Event")]
@@ -155,7 +157,6 @@ public class PlayerMovementScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
 		  shots = maxShots;   //Recharge
         charge = shots;
 
@@ -174,6 +175,8 @@ public class PlayerMovementScript : MonoBehaviour
         LoadLevel();
 
         GetOS();
+
+		  slideEmission = slideFX.emission;
     }
 
 	void Update()
@@ -371,7 +374,14 @@ public class PlayerMovementScript : MonoBehaviour
         {
             //thisRB.velocity += camForward * zDirection * slideMovementSpeed + camRight * xDirection * slideMovementSpeed;
             thisRB.AddForce(camForward * zDirection * slideMovementSpeed + camRight * xDirection * slideMovementSpeed, ForceMode.Force);
+
+				slideEmission.enabled = true;
         }
+
+		  if (!sliding || inAir || addedForce) //turn off slide effect
+		  {
+				slideEmission.enabled = false;
+		  }
 
 
         //Spooky if statement That clamps movement of the explosion position. If it is too close to zero it will explode up too much
