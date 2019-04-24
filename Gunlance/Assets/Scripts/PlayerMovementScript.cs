@@ -77,8 +77,8 @@ public class PlayerMovementScript : MonoBehaviour
     float lastJumpInput = 0.0f;
 
     //Light Variables
-    [SerializeField] GameObject thisLight;
-    Transform lightTransform;
+    //[SerializeField] GameObject thisLight;
+    //Transform lightTransform;
 
 
     //Scale stuff
@@ -156,7 +156,7 @@ public class PlayerMovementScript : MonoBehaviour
     void Start()
     {
 
-		shots = maxShots;   //Recharge
+		  shots = maxShots;   //Recharge
         charge = shots;
 
         thisRB = GetComponent<Rigidbody>();
@@ -166,8 +166,8 @@ public class PlayerMovementScript : MonoBehaviour
         thisAnimator = gameObject.GetComponent<Animator>();
 
         //Turn off light and glider for temporary animation
-        thisLight.SetActive(false);
-        lightTransform = thisLight.transform;
+        //thisLight.SetActive(false);
+        //lightTransform = thisLight.transform;
         gliderTemp.SetActive(false);
 
         //Load crystals into scene
@@ -218,11 +218,11 @@ public class PlayerMovementScript : MonoBehaviour
         ExplodeDirection();
         Glide();
 
-        //Temporary win condition
-        if (crystalsOnScene <= 0 && startedSceneTrans == false)
-        {
-			StartCoroutine(SceneTransitionTime(4));
-		}
+		  //Temporary win condition
+		  if (crystalsOnScene <= 0 && startedSceneTrans == false)
+		  {
+				StartCoroutine(SceneTransitionTime(4));
+		  }
 
 		if (!inAir && new Vector3(thisRB.velocity.x, 0 , thisRB.velocity.z).magnitude > 1 && !sliding && footTimer > soundInterval)
         {
@@ -568,7 +568,11 @@ public class PlayerMovementScript : MonoBehaviour
             //currentShot++;
             charge--;
 
-            shoot.Explode();
+            //get the direction (and then facing angle) of the explosion to point the shot effect
+				var dir = (sideExplosion.position - transform.position).normalized;
+				var rot = Quaternion.LookRotation(dir);
+
+            shoot.Explode(rot);
 
             StartCoroutine(ExplodeTime(explodeTime));
             chargePaused = true;
@@ -584,7 +588,7 @@ public class PlayerMovementScript : MonoBehaviour
         if (jumpInput != 0.0f && !inAir)
         {
             thisRB.AddForce(new Vector3(0, jumpForce, 0));
-			thisAnimator.SetTrigger("Jump");
+				thisAnimator.SetTrigger("Jump");
         }
     }
 
@@ -642,8 +646,8 @@ public class PlayerMovementScript : MonoBehaviour
         addedForce = true;
 
         //Set flash animation for explosion
-        thisLight.SetActive(true);
-        lightTransform.position = transform.position;
+        //thisLight.SetActive(true);
+        //lightTransform.position = transform.position;
 
         //Check if the explosion hits any crystals nearby
         hitCollide = null;
@@ -652,8 +656,9 @@ public class PlayerMovementScript : MonoBehaviour
         //Destroy any crystals hit
         for (int i = 0; i < hitCollide.Length; i++)
         {
-			Mann_AudioManagerScript.instance.PlayInterruptedSound("CrystalBreakMixed");
-			Destroy(hitCollide[i].gameObject);
+				Mann_AudioManagerScript.instance.PlayInterruptedSound("CrystalBreakMixed");
+
+				Destroy(hitCollide[i].gameObject);
             crystalsOnScene--;
             StartCoroutine(CrystalDestroyEvent(cdeLength));
         }

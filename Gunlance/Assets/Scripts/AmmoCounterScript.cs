@@ -35,9 +35,8 @@ public class AmmoCounterScript : MonoBehaviour
 
     public void Shoot()
     {
-        //flash crystal
-        GameObject flash = Instantiate(crystalFlash);
-        flash.transform.position = transform.position;
+		  //flash crystal
+		  GameObject flash = Instantiate(crystalFlash, transform);
         Destroy(flash, .45f);
     }
 }

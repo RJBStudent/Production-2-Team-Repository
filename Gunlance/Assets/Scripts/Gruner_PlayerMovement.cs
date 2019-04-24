@@ -430,7 +430,11 @@ public class Gruner_PlayerMovement : MonoBehaviour
 			   //currentShot++;
 			   charge--;
 
-            shoot.Explode();
+				//get the direction (and then facing angle) of the explosion to point the shot effect
+				var dir = (sideExplosion.position - transform.position).normalized;
+				var rot = Quaternion.LookRotation(dir);
+
+				shoot.Explode(rot);
 
             StartCoroutine(ExplodeTime(explodeTime));
 			   chargePaused = true;

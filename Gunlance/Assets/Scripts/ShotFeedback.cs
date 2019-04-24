@@ -29,6 +29,10 @@ public class ShotFeedback : MonoBehaviour
 	 [SerializeField] LayerMask ground;
 	 [SerializeField] ParticleSystem dustKickUp;
 
+	 [Header("Light Flash")]
+	 [SerializeField] Light burstLight;
+	 [SerializeField] float lightLifetime;
+
     [Header("Screen Shake")]
     [Range(0, 1)]
     [SerializeField] float duration;
@@ -47,12 +51,25 @@ public class ShotFeedback : MonoBehaviour
 		  ammoScript = GetComponentInChildren<AmmoCounterScript>();
 	 }
 
-	 public void Explode()
+	 public void TestingFire()
+	 {
+		  var dir = (transform.position - transform.parent.position).normalized;
+		  var rot = Quaternion.LookRotation(dir);
+
+		  Explode(rot);
+	 }
+
+	 public void Explode(Quaternion rot)
     {
         mainCamera.DOShakePosition(duration, strength, vibrato, randomness, true);
 
         GameObject shot = Instantiate(lanceShot, shotPos);
+		  shot.transform.rotation = rot;
 		  Destroy(shot, shotDestroy);
+
+		  Light burst = Instantiate(burstLight, shotPos);
+		  burst.DOIntensity(0, lightLifetime);
+		  Destroy(burst.gameObject, lightLifetime);
 
 		  //sand kick-up
 		  RaycastHit hit;
@@ -69,10 +86,12 @@ public class ShotFeedback : MonoBehaviour
 				var radialVel = maxVel - (kickUpVelScale * (Mathf.Clamp(hit.distance - closeDist, 0, kickUpDist) / kickUpDist)); //set velocity relative to hit distance
 				dustVel.radial = new ParticleSystem.MinMaxCurve(radialVel);
 
-				Destroy(dust, shotDestroy);
+			   Destroy(dust.gameObject, shotDestroy);
+				Debug.Log("kickUp");
 		  }
 
-		  ammoScript.Shoot();
+		  if (ammoScript != null)
+			   ammoScript.Shoot();
 
         vibration = vibrationHitStrength;
         Invoke("VibrationFade", vibrationHitLength);
