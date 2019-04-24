@@ -35482,10 +35482,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1689338419}
     m_Modifications:
-    - target: {fileID: 1999350915836958, guid: adcd2aacbe79ceb41aab96523fa06d51, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 108531085138144536, guid: adcd2aacbe79ceb41aab96523fa06d51,
         type: 3}
       propertyPath: m_Type
@@ -35500,6 +35496,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Range
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999350915836958, guid: adcd2aacbe79ceb41aab96523fa06d51, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4081768591853052, guid: adcd2aacbe79ceb41aab96523fa06d51, type: 3}
       propertyPath: m_LocalPosition.x
@@ -51219,7 +51219,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fbae8939056ab3146b17fe0a42ce7968, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -51230,7 +51230,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -51263,7 +51263,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -62970,7 +62970,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 611e765d7e8e44b40a9a8dd1b3b61ab9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.57
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -62981,7 +62981,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -63014,7 +63014,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -74201,7 +74201,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f45668aa81a1d664dbf572dc911a3db6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.14
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -74245,7 +74245,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.73
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -80065,6 +80065,8 @@ MonoBehaviour:
   switchScenes: 0
   transitionScene: MasterScene
   endOffSet: 0.01
+  mainmenu: 0
+  theme: {fileID: 0}
   transitioning: 1
 --- !u!1001 &2063477484
 PrefabInstance:

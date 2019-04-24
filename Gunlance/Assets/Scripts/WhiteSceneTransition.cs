@@ -11,6 +11,8 @@ public class WhiteSceneTransition : MonoBehaviour
 	public bool switchScenes;
 	public string transitionScene;
 	public float endOffSet;
+	public bool mainmenu;
+	public AudioSource theme;
 
 	public bool transitioning = false;
 	Image overlay;
@@ -29,6 +31,10 @@ public class WhiteSceneTransition : MonoBehaviour
 			Color transitionCol = overlay.color;
 			transitionCol.a = Mathf.Lerp(transitionCol.a, endOpacity, transitionSpeed);
 			overlay.color = transitionCol;
+			if(mainmenu)
+			{
+				theme.volume = Mathf.Lerp(theme.volume, 0, transitionSpeed);
+			}
 			if(switchScenes && overlay.color.a > endOpacity-endOffSet)
 			{
 				SceneManager.LoadScene(transitionScene);
