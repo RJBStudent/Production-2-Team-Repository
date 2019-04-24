@@ -75,6 +75,8 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] float jumpForce;
     float jumpInput = 0.0f;
     float lastJumpInput = 0.0f;
+	 [HideInInspector]
+	 public bool canJump = true;
 
     //Light Variables
     //[SerializeField] GameObject thisLight;
@@ -282,7 +284,7 @@ public class PlayerMovementScript : MonoBehaviour
 		glideInput = Input.GetAxisRaw("GlideInput" + os);
 		
         //On press jump
-        if (Input.GetAxisRaw("Jump") != lastJumpInput)
+        if (Input.GetAxisRaw("Jump") != lastJumpInput && canJump)
         { jumpInput = Input.GetAxisRaw("Jump"); lastJumpInput = jumpInput; }
         else { jumpInput = 0; }
 
