@@ -17,6 +17,11 @@ public class BeastControlScript : MonoBehaviour {
     bool inEvent = false;
     float eventTimer = 0f;
 
+	float groanTimer;
+	float targetGroanTime;
+	public float minGroanTime;
+	public float maxGroanTime;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -25,8 +30,21 @@ public class BeastControlScript : MonoBehaviour {
         //Set the start node and directions
         targetPosition = beastValues.movementNodes[targetNode];
         targetLookDirection = beastValues.movementNodes[targetRotateNode];
+
+		targetGroanTime = minGroanTime;
 	}
-	
+
+	void Update()
+	{
+		groanTimer += Time.deltaTime;
+		if (groanTimer > targetGroanTime)
+		{
+			Mann_AudioManagerScript.instance.PlaySound("Etherean_Passive_Groan");
+			targetGroanTime = Random.Range(minGroanTime, maxGroanTime);
+			groanTimer = 0;
+		}
+	}
+
 	// Update is called once per frame
 	void FixedUpdate ()
     {
@@ -99,4 +117,7 @@ public class BeastControlScript : MonoBehaviour {
             }
         }
     }
+
+	
+	
 }

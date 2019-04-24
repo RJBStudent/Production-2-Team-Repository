@@ -263,9 +263,21 @@ public class PlayerMovementScript : MonoBehaviour
         else
         { explodeInput = 0.0f; }
 
-        //On hold Glide
-        glideInput = Input.GetAxisRaw("GlideInput" + os);
+		if (Input.GetAxisRaw("GlideInput" + os) == 1 && glideInput < 1)
+		{
+			Mann_AudioManagerScript.instance.PlayInterruptedSound("GliderDeploy");
+			Mann_AudioManagerScript.instance.PlaySound("GliderGliding");
+		}
+		else if (Input.GetAxisRaw("GlideInput" + os) == 0 && glideInput > 0)
+		{
+			Mann_AudioManagerScript.instance.StopSound("GliderDeploy");
+			Mann_AudioManagerScript.instance.StopSound("GliderGliding");
+			Mann_AudioManagerScript.instance.PlayInterruptedSound("GliderPutAway");
+		}
 
+		//On hold Glide
+		glideInput = Input.GetAxisRaw("GlideInput" + os);
+		
         //On press jump
         if (Input.GetAxisRaw("Jump") != lastJumpInput)
         { jumpInput = Input.GetAxisRaw("Jump"); lastJumpInput = jumpInput; }
@@ -302,7 +314,9 @@ public class PlayerMovementScript : MonoBehaviour
         {
             removeControl = true;
         }
-    }
+
+		
+	}
 
     //Update player position
     void MovePlayer()
