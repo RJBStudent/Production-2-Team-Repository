@@ -200,7 +200,7 @@ public class PlayerMovementScript : MonoBehaviour
 
         GetInput();
 
-        Debug.Log(thisRB.velocity);
+
         if (downed)
         {
             DownedTime();

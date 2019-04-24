@@ -71,9 +71,14 @@ public class ShotFeedback : MonoBehaviour
 		  burst.DOIntensity(0, lightLifetime);
 		  Destroy(burst.gameObject, lightLifetime);
 
+           Vector3 offsetPosition = shotPos.position + (shotPos.TransformDirection(Vector3.forward) * kickUpDist);
+        
+       // Debug.Log("HEc k " + shotPos.TransformPoint(0, 0, 0));
+        Debug.Log("HEc k " + offsetPosition + " " + shotPos.position);
 		  //sand kick-up
 		  RaycastHit hit;
-		  if (Physics.Raycast(shotPos.position, shotPos.TransformDirection(Vector3.forward), out hit, kickUpDist, ground))
+		  //if (Physics.Raycast(shotPos.position, offset, out hit, kickUpDist, ground))
+		 if (Physics.Linecast(shotPos.position, offsetPosition, out hit, ground))
 		  {
 				ParticleSystem dust = Instantiate(dustKickUp);
 				dust.transform.position = hit.point;
