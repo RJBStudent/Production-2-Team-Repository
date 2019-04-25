@@ -26,7 +26,7 @@ public class WhiteSceneTransition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if(transitioning)
+		if(transitioning && Time.timeScale != 0)
 		{
 			Color transitionCol = overlay.color;
 			transitionCol.a = Mathf.Lerp(transitionCol.a, endOpacity, transitionSpeed);
