@@ -21,7 +21,7 @@ public class Mann_CreditsUI : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetButtonDown("Pause"))
+		if (Input.GetButtonDown("Jump"))
 		{
 			SceneManager.LoadScene("Mann_MainMenu");
 		}
