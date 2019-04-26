@@ -12,11 +12,17 @@ public class Mann_MainMenu : MonoBehaviour
 
     public bool transitionedToMenu = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+	 EventSystem es;
 
-    }
+	 [SerializeField] Transform selector;
+	 [Range(0, 1)]
+	 [SerializeField] float moveTime;
+
+	 // Start is called before the first frame update
+	 void Start()
+	 {
+	     es = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+	 }
 
     // Update is called once per frame
     void Update()
@@ -26,14 +32,18 @@ public class Mann_MainMenu : MonoBehaviour
             TransitionToMenu();
         }
 
-    }
+		  if (transitionedToMenu)
+		  {
+				var moveTo = new Vector3(selector.position.x, es.currentSelectedGameObject.transform.position.y, selector.position.z);
+				selector.position = Vector3.Lerp(selector.position, moveTo, moveTime);
+		  }
+	}
 
     public void TransitionToMenu()
     {
         transitionedToMenu = true;
         startUI.SetActive(false);
         mainMenuUI.SetActive(true);
-        EventSystem es = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         es.SetSelectedGameObject(null);
         es.SetSelectedGameObject(es.firstSelectedGameObject);
     }

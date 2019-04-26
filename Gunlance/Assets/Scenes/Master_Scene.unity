@@ -2362,6 +2362,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 422466270}
+  selector: {fileID: 3095185209844597096}
+  moveTime: 0.4
 --- !u!114 &63867278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2391,10 +2393,10 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -13544,36 +13546,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 63867277}
-    - target: {fileID: 3377146954683081264, guid: cb30f60bc71d76b4389c5ee8d0a1d70d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Resume
-      objectReference: {fileID: 0}
-    - target: {fileID: 3377146955230619847, guid: cb30f60bc71d76b4389c5ee8d0a1d70d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 63867277}
-    - target: {fileID: 3377146955230619847, guid: cb30f60bc71d76b4389c5ee8d0a1d70d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Options
-      objectReference: {fileID: 0}
     - target: {fileID: 3377146953947784166, guid: cb30f60bc71d76b4389c5ee8d0a1d70d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 63867277}
-    - target: {fileID: 3377146953947784166, guid: cb30f60bc71d76b4389c5ee8d0a1d70d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Quit
-      objectReference: {fileID: 0}
-    - target: {fileID: 3377146954683081263, guid: cb30f60bc71d76b4389c5ee8d0a1d70d,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 93.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb30f60bc71d76b4389c5ee8d0a1d70d, type: 3}
 --- !u!1001 &327881230
@@ -38430,7 +38407,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4b78cda849c46174a91924b9e3a5c934, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36b903dfcc7f67942b9d1e4631b8c289, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -83874,3 +83851,9 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 6332c91030a9a9a4fbfca79b167e5b66, type: 3}
+--- !u!224 &3095185209844597096 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3095185209844597096, guid: cb30f60bc71d76b4389c5ee8d0a1d70d,
+    type: 3}
+  m_PrefabInstance: {fileID: 326707683}
+  m_PrefabAsset: {fileID: 0}
